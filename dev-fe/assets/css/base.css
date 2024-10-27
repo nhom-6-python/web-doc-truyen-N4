@@ -290,3 +290,49 @@ a {
     }
     
     /* END NOTIFICATION */
+
+    /* User */
+    .user-wrap {
+      position: relative;
+      display: inline-block;
+  }
+  .user-icon {
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.1);
+      margin-right: 8px;
+  }
+  .user-icon:hover {
+      background-color: rgba(154, 150, 150, 1);
+  }
+  .dropdown-user {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+      width: fit-content;
+      right: -20px;
+  }
+  .dropdown-user.active {
+      display: block;
+  }
+  .dropdown-item {
+      padding: 8px;
+      border-bottom: 1px solid #dbdaff;
+  }
+  .dropdown-item:last-child {
+      border-bottom: none;
+  }
+  .dropdown-item a {
+      text-decoration: none;
+      color: black;
+  }
+    /* End User */
