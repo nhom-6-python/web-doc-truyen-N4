@@ -92,9 +92,6 @@ def list_thong_bao(request):
 				nguoidung=x
 		return nguoidung.thongbao.all()	
 
-        
-
-
 def home(request): # view trang home
 	top3 = top3_by_like()
 	list_new_update = new_update()
@@ -119,8 +116,9 @@ def home(request): # view trang home
 		'list_top_nhomdich_thang' : list_top_nhomdich_thang,
 		'list_top_nhomdich_moiluc' : list_top_nhomdich_moiluc,
 		'list_thong_baos' : list_thong_baos,
+		'checklogin': checklogin(request),
+		'ten_nguoidung': request.session.get('nguoidung', None)
 	}
-	
 	return render(request, 'home.html', context)
 
 def doctruyen(request, id): #view phan mota truyen
@@ -143,10 +141,12 @@ def doctruyen(request, id): #view phan mota truyen
 		'truyen_de_xuat' : truyen_de_xuat,
 		'list_the_loai' : list_the_loai,
 		'list_thong_baos' : list_thong_baos,
+		'checklogin': checklogin(request),
+		'ten_nguoidung': request.session.get('nguoidung', None)
 	}
 	return render(request, 'doctruyen.html', context)
 
-def theloai(request, theloai): # tìm truyện theo thể loại
+def theloai(request, theloai): # view tìm truyện theo thể loại
 	truyens = Truyen.objects.all()
 	truyens_theo_the_loai = list()
 	for x in truyens:
@@ -157,6 +157,8 @@ def theloai(request, theloai): # tìm truyện theo thể loại
 		'theloai': theloai,
 		'truyens_theo_the_loai': truyens_theo_the_loai,
 		'list_thong_baos' : list_thong_baos,
+		'checklogin': checklogin(request),
+		'ten_nguoidung': request.session.get('nguoidung', None)
 	}
 	return render(request, 'theloai.html', context)
 	

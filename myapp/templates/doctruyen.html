@@ -1,266 +1,158 @@
 {% extends "index.html" %}
 {% block content %}
 {% load humanize %}
- 
+
 <body>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="/home/">Trang chủ</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-            <li class="nav-item">
-              <a class="nav-link" href="suatruyen.html">Đăng truyện</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Thể loại
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <ul>
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Detective </a></li>
-                  <li><a class="dropdown-item" href="#">Huyền Huyễn</a></li>
-                  <li><a class="dropdown-item" href="#">Military</a></li>
-                  <li><a class="dropdown-item" href="#">Seinen</a></li>
-                  <li><a class="dropdown-item" href="#">Tragedy</a></li>
-
-                </ul>
-                <ul>
-                  <li><a class="dropdown-item" href="#">Adventure</a></li>
-                  <li><a class="dropdown-item" href="#">Doujinshi</a></li>
-                  <li><a class="dropdown-item" href="#">Isekai</a></li>
-                  <li><a class="dropdown-item" href="#">Mistery</a></li>
-                  <li><a class="dropdown-item" href="#">Shoujo</a></li>
-                  <li><a class="dropdown-item" href="#">Trọng sinh</a></li>
-
-                </ul>
-                <ul>
-                  <li><a class="dropdown-item" href="#">Anime</a></li>
-                  <li><a class="dropdown-item" href="#">Drama</a></li>
-                  <li><a class="dropdown-item" href="#">Josei</a></li>
-                  <li><a class="dropdown-item" href="#">Ngôn tình</a></li>
-                  <li><a class="dropdown-item" href="#">Shoujo Ai</a></li>
-                  <li><a class="dropdown-item" href="#">Truyện màu</a></li>
-                </ul>
-                <ul>
-                  <li><a class="dropdown-item" href="#">Chuyển sinh</a></li>
-                  <li><a class="dropdown-item" href="#">Fantasy</a></li>
-                  <li><a class="dropdown-item" href="#">Mafia</a></li>
-                  <li><a class="dropdown-item" href="#">One shot</a></li>
-                  <li><a class="dropdown-item" href="#">Shounen</a></li>
-                  <li><a class="dropdown-item" href="#">Webtoon</a></li>
-
-                </ul>
-                <ul>
-                  <li><a class="dropdown-item" href="#">Cổ đại</a></li>
-                  <li><a class="dropdown-item" href="#">Gender Bender</a></li>
-                  <li><a class="dropdown-item" href="#">Magic</a></li>
-                  <li><a class="dropdown-item" href="#">Psychological</a></li>
-                  <li><a class="dropdown-item" href="#">Shounen Ai</a></li>
-                  <li><a class="dropdown-item" href="#">Xuyên không</a></li>
-                </ul>
-                <ul>
-                  <li><a class="dropdown-item" href="#">Comedy</a></li>
-                  <li><a class="dropdown-item" href="#">Harem</a></li>
-                  <li><a class="dropdown-item" href="#">Manhua</a></li>
-                  <li><a class="dropdown-item" href="#">Romance</a></li>
-                  <li><a class="dropdown-item" href="#">Slice of life</a></li>
-
-                </ul>
-                <ul>
-                  <li><a class="dropdown-item" href="#">Comic</a></li>
-                  <li><a class="dropdown-item" href="#">Historical</a></li>
-                  <li><a class="dropdown-item" href="#">Manhwa</a></li>
-                  <li><a class="dropdown-item" href="#">School Life</a></li>
-                  <li><a class="dropdown-item" href="#">Sports</a></li>
-                </ul>
-                <ul>
-                  <li><a class="dropdown-item" href="#">Demons</a></li>
-                  <li><a class="dropdown-item" href="#">Horror</a></li>
-                  <li><a class="dropdown-item" href="#">Martial Arts</a></li>
-                  <li><a class="dropdown-item" href="#">Sci-fi</a></li>
-                  <li><a class="dropdown-item" href="#">Supernatural</a></li>
-                </ul>
-              </div>
-            </li>
-
-          </ul>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Nhập tên truyện..." aria-label="Search">
-            <button class="btn inner-button" type="submit">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </form>
-
-          <a class="inner-sign" href="login.html">Đăng nhập</a>
-        </div>
-      </div>
-    </nav>
-  </header>
-  <!-- END NAVBAR -->
-
   <main>
     <div class="doctruyen">
       <div class="container">
-    <div class="intro">
-      <div class="container">
-        <div class="anhnen" style="background-image: url('{{truyen.anhnen.url}}');">
-          <div class="row">
-            <div class="col-12">
-              <img src="{{truyen.anhbia.url}}" alt="anh1">
-              <h2>
-                <span style="font-size: medium; opacity:0.6;">{{ truyen.tacgia }}</span>
+        <div class="intro">
+          <div class="container">
+            <div class="anhnen" style="background-image: url('{{truyen.anhnen.url}}');">
+              <div class="row">
+                <div class="col-12">
+                  <img src="{{truyen.anhbia.url}}" alt="anh1">
+                  <h2>
+                    <span style="font-size: medium; opacity:0.6;">{{ truyen.tacgia }}</span>
+                    <br>
+                    {{ truyen.ten }}
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="info">
+              <div class="desc">
+                <div class="thoigian">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock"
+                    viewBox="0 0 16 16">
+                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
+                  </svg>
+                  <span> 22 phút trước</span>
+                </div>
+                <div class="cactheloai">
+                  {% for x in list_the_loai %}
+                  <a href="/theloai={{x}}/">
+                    <div class="theloai">
+                      <span style="font-weight: bold;">{{x}}</span>
+                    </div>
+                  </a>
+                  {% endfor %}
+                </div>
+
+                <div class="btn" style="text-align: unset;">
+                  <a href="#" class="btn btn-primary">Thêm vào yêu
+                    thích</a>
+                  <a href="#" class="btn btn-primary">Đọc chương mới
+                    nhất</a>
+                  <a href="#" class="btn btn-primary">Đọc từ đầu</a>
+                  <a href="#" class="btn btn-primary">Đọc tiếp</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="content">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-9 col-md-12 col-sm-12 col-12">
+                <div class="thongtin">
+                  <div class="row">
+                    <div>
+                      <a class="user" href="#">
+                        <div class="circle-icon">
+                          ND
+                        </div>
+                        <div>
+                          <h6>{{nhomdich.ten}}</h6>
+                          <p>{{nhomdich.sotruyendadang}} truyện đã đăng</p>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <p>{{truyen.mota}} </p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 ">
+                      <div class="trangchinhthuc">
+                        <h6>THÔNG TIN THÊM</h6>
+                        <p><span class="bold">{{sochuong}}</span> chương đã đăng</p>
+                        <p><span class="bold">{{truyen.luotxem|intcomma}}</span> lượt xem</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <br>
-                {{ truyen.ten }}
-              </h2>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="info">
-          <div class="desc">
-            <div class="thoigian">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock"
-                viewBox="0 0 16 16">
-                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
-                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
-              </svg>
-              <span> 22 phút trước</span>
-            </div>
-            <div class="cactheloai">
-              {% for x in list_the_loai %}
-              <a href="#">
-                <div class="theloai">
-                  <span style="font-weight: bold;">{{x}}</span>
-                </div>
-              </a>
-              {% endfor %}
-            </div>
-
-            <div class="btn" style="text-align: unset;">
-              <a href="#" class="btn btn-primary" >Thêm vào yêu
-                thích</a>
-              <a href="#" class="btn btn-primary" >Đọc chương mới
-                nhất</a>
-              <a href="#" class="btn btn-primary" >Đọc từ đầu</a>
-              <a href="#" class="btn btn-primary" >Đọc tiếp</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="content">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-9 col-md-12 col-sm-12 col-12">
-            <div class="thongtin">
-              <div class="row">
-                <div>
-                  <a class="user" href="#">
-                    <div class="circle-icon">
-                      ND
-                    </div>
-                    <div>
-                      <h6>{{nhomdich.ten}}</h6>
-                      <p>{{nhomdich.sotruyendadang}} truyện đã đăng</p>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12">
-                  <p>{{truyen.mota}} </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12 ">
-                  <div class="trangchinhthuc">
-                    <h6>THÔNG TIN THÊM</h6>
-                    <p><span class="bold">{{sochuong}}</span> chương đã đăng</p>
-                    <p><span class="bold">{{truyen.luotxem|intcomma}}</span> lượt xem</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <br>
-            <div class="allchuong ">
-              {% for x in allchuong %}
-              <a href="#">
-                <div class="chuong">
-                  <div class="chuongtrai">
-                    <div>
-
-                      <h4 class="tenchuong">Chương {{x.stt}}</h4>
-                    </div>
-                    <div style="padding-left:15px;">
-                      <p class="noidungchuong">{{x.ten}}</p>
-                      <p>{{x.thoigiandang|naturaltime}}</p>
-                    </div>
-                  </div>
-                    <div class="chuongphai">
-                      <button class="circular-btn">
-                        <i class="fa fa-download"></i>
-                      </button>
-                    </div>
-                  
-                    
-                </div>
-              </a>
-              
-              {% endfor %}
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-            <div class="dexuat">
-              <div class="row">
-                <div>
-                  <h6>CÙNG NHÓM DỊCH</h6>
-                  {% for x in truyen_cung_nhom_dich %}
+                <div class="allchuong ">
+                  {% for x in allchuong %}
                   <a href="#">
-                    <div class="truyendexuat">
-                      <img src="{{x.anhbia.url}}" alt="{{x.ten}}">
-                      <div class="detail">
-                        <div class="noidung" style="color:red">
-                          {{x.ten}}
-                        </div>
+                    <div class="chuong">
+                      <div class="chuongtrai">
                         <div>
-                          <span class="sochuong">C.{{x.chapmoinhat.stt}}</span>
-                          <span>{{x.chapmoinhat.thoigiandang|naturaltime}}</span>
+
+                          <h4 class="tenchuong">Chương {{x.stt}}</h4>
+                        </div>
+                        <div style="padding-left:15px;">
+                          <p class="noidungchuong">{{x.ten}}</p>
+                          <p>{{x.thoigiandang|naturaltime}}</p>
                         </div>
                       </div>
-
                     </div>
                   </a>
-                  {% endfor %}
-                  <h6>ĐỀ XUẤT</h6>
-                  {% for x in truyen_de_xuat %}
-                  <a href="#">
-                    <div class="truyendexuat">
-                      <img src="{{x.anhbia.url}}" alt="{{x.ten}}">
-                      <div class="detail">
-                        <div class="noidung" style="color:red;">
-                          {{x.ten}}
-                        </div>
-                        <div>
-                          <span class="sochuong">C.{{x.chapmoinhat.stt}}</span>
-                          <span>{{x.chapmoinhat.thoigiandang|naturaltime}}</span>
-                        </div>
-                      </div>
 
-                    </div>
-                  </a>
                   {% endfor %}
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                <div class="dexuat">
+                  <div class="row">
+                    <div>
+                      <h6>CÙNG NHÓM DỊCH</h6>
+                      {% for x in truyen_cung_nhom_dich %}
+                      <a href="/truyen_id={{x.id}}/">
+                        <div class="truyendexuat">
+                          <img src="{{x.anhbia.url}}" alt="{{x.ten}}">
+                          <div class="detail">
+                            <div class="noidung" style="color:red">
+                              {{x.ten}}
+                            </div>
+                            <div>
+                              <span class="sochuong">C.{{x.chapmoinhat.stt}}</span>
+                              <span>{{x.chapmoinhat.thoigiandang|naturaltime}}</span>
+                            </div>
+                          </div>
+
+                        </div>
+                      </a>
+                      {% endfor %}
+                      <h6>ĐỀ XUẤT</h6>
+                      {% for x in truyen_de_xuat %}
+                      <a href="/truyen_id={{x.id}}/">
+                        <div class="truyendexuat">
+                          <img src="{{x.anhbia.url}}" alt="{{x.ten}}">
+                          <div class="detail">
+                            <div class="noidung" style="color:red;">
+                              {{x.ten}}
+                            </div>
+                            <div>
+                              <span class="sochuong">C.{{x.chapmoinhat.stt}}</span>
+                              <span>{{x.chapmoinhat.thoigiandang|naturaltime}}</span>
+                            </div>
+                          </div>
+
+                        </div>
+                      </a>
+                      {% endfor %}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -268,8 +160,6 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
 
   </main>
   <!-- FOOTER -->

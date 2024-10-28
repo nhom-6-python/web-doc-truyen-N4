@@ -109,8 +109,40 @@
 
 					</div>
 				</div>
-				<a class="inner-sign" href="/logout/">Đăng nhập</a>
+				{% if checklogin == False %}
+				<a class="inner-sign" href="/login/">Đăng nhập</a>
+				{% else %}
+				<div class="user-wrap">
+					<div class="user-icon">
+						<i style="font-weight: 600;">{{ten_nguoidung|slice:":1"}}</i>
+					</div>
+					<div class="dropdown-user">
+						<div class="dropdown-item">
+							<a href="#" style="text-transform: uppercase;">Chào mừng quay trở lại: </a>
+							<br>
+							<a href="#"><strong>{{ten_nguoidung}}</strong></a>
+						</div>
+						<div class="dropdown-item">
+							<a href="/theodoi/">
+								<p>Danh sách theo dõi</p>
+							</a>
+							<a href="#">
+								<p>Lịch sử đọc truyện</p>
+							</a>
+							<a href="/logout/">
+								<p>Đăng xuất</p>
+							</a>
+						</div>
+					</div>
+				</div>
+				{% endif %}
 			</div>
 		</div>
 	</nav>
 </header>
+
+<script>
+	document.querySelector('.user-icon').addEventListener('click', function () {
+		document.querySelector('.dropdown-user').classList.toggle('active');
+	});
+</script>
