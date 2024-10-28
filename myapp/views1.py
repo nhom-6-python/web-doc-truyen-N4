@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.db.models import Sum,Q, Value
 from django.db.models.functions import Coalesce
 from .views2 import list_thong_bao
+from .views3 import checklogin
 
 # Create your views here.
 
@@ -82,14 +83,15 @@ def top_nhomdich(time):
 	
 	#code t lm
 def list_thong_bao(request):
-    ten_nguoi_dung=request.session.get('nguoidung',None)
-    nguoidung=Nguoidung()
-    nguoi_dungs= Nguoidung.objects.all()
-    for x in nguoi_dungs:
-        if x.ten==ten_nguoi_dung:
-            nguoidung=x
-    print(nguoidung)
-    return nguoidung.thongbao.all()
+	if checklogin(request):
+		ten_nguoi_dung=request.session.get('nguoidung',None)
+		nguoidung=Nguoidung()
+		nguoi_dungs= Nguoidung.objects.all()
+		for x in nguoi_dungs:
+			if x.ten==ten_nguoi_dung:
+				nguoidung=x
+		return nguoidung.thongbao.all()	
+
         
 
 
