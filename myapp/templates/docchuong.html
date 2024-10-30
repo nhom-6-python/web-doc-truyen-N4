@@ -1,0 +1,91 @@
+{% extends "index.html" %}
+{% block content %}
+{% load humanize %}
+
+<body>
+	<main>
+		<div class="docchuong">
+			<div class="container">
+				<div class="top">
+
+					<a class="chevron-left" style="color:black; margin-right:10px;" href="#"><i
+							class="fas fa-chevron-left"></i></a>
+					<div class="left">
+						<a href="/truyen_id={{truyen.id}}/">
+							<h3>{{truyen.ten}}</h3>
+						</a>
+					</div>
+
+
+				</div>
+				<div class="tenchuong">
+					<h2>Chương {{chap.stt}}: {{chap.ten}}</h2>
+				</div>
+				<div class="firstbtn">
+					<div class="container">
+						<div class="btn">
+							<a href="/truyen_id={{truyen.id}}/chuong={{chaptruoc.id}}/"><button>CHƯƠNG TRƯỚC</a>
+
+						</div>
+						<div class="btn">
+							{% if chapsau != 'none' %}
+							<a href="/truyen_id={{truyen.id}}/chuong={{chapsau.id}}/"><button>CHƯƠNG SAU</a>
+							{% else %}
+							<p href="#"><button>Bạn đã đọc chương mới nhất!</button>
+							</p>
+							{% endif %}
+						</div>
+					</div>
+
+				</div>
+				{% for x in alltrang %}
+				<div class="anh">
+					<img src="{{x.anh.url}}" alt="không thể tải">
+				</div>
+				{% endfor %}
+				<div class="lastbtn">
+					<div class="btn">
+						<button onclick="topFunction()">LÊN ĐẦU</button>
+
+					</div>
+					<div class="btn1">
+						<a href="#"><button>CHƯƠNG TRƯỚC</button></a>
+						<a href="#"><button>CHƯƠNG SAU</button></a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</main>
+	<!-- FOOTER -->
+	<footer class="footer">
+		<!-- <p class="float-end"><a href="#">Back to top</a></p> -->
+		<div class="container">
+			<div class="inner-text">
+				<div class="inner-contact">Link Github của nhóm 6:
+					<a href="github.com" target="_blank">github.com</a>
+				</div>
+				<div class="inner-contact">
+					Thành viên nhóm:
+				</div>
+				<div class="inner-member">B22DCCN261 - Hoàng Sơn Hải</div>
+				<div class="inner-member">B22DCKH131 - Hoàng Khánh Văn</div>
+				<div class="inner-member">B22DCKH129 - Nguyễn Hữu Trường</div>
+				<div class="inner-member">B22DCCN633 - Thái Hữu Phúc</div>
+				<div class="inner-member">B22DCCN371 - Trịnh Mạnh Hùng</div>
+			</div>
+		</div>
+
+	</footer>
+	<!-- END FOOTER -->
+
+
+	<script src="/docs/5.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+
+</body>
+
+{% endblock %}

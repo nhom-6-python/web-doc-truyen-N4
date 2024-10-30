@@ -28,7 +28,7 @@ class Chap(models.Model):
 
 class Trang(models.Model):
 	anh = models.FileField(upload_to='anhchap/')
-	chap = models.ForeignKey(Chap, on_delete=models.CASCADE, related_name='chap')
+	chap = models.ForeignKey(Chap, on_delete=models.CASCADE, related_name='trang')
 
 class Thongbao(models.Model):
 	theloai = models.CharField(max_length=255, default="Thông báo mới!!")

@@ -161,6 +161,32 @@ def theloai(request, theloai): # view tìm truyện theo thể loại
 		'ten_nguoidung': request.session.get('nguoidung', None)
 	}
 	return render(request, 'theloai.html', context)
+
+def view_docchuong(request, id_truyen, id_chap):
+	print("run")
+	truyen = Truyen.objects.get(id=id_truyen)
+	chap = Chap.objects.get(id=id_chap)
+	allchap = list(truyen.chap.all().order_by('stt'))
+	chap_index = allchap.index(chap)
+	try:
+		chaptruoc = allchap[chap_index - 1]
+	except:
+		chaptruoc = 'none'
+	try:
+		chapsau = allchap[chap_index + 1]
+	except:
+		chapsau = 'none'
+	alltrang = chap.trang.all().order_by('id')
+	print('chaptruoc ', chaptruoc)
+	print('chapsau ', chapsau)
+	context = {
+		'truyen': truyen,
+		'chap': chap,
+		'alltrang': alltrang,
+		'chaptruoc': chaptruoc,
+		'chapsau': chapsau,
+	}
+	return render(request, 'docchuong.html', context)
 	
 
 
