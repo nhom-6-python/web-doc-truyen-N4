@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEB TRUYỆN SIU CẤP V.I.P</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <link href="/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="assets/js/javascrip.js"></script>
+  <meta name="theme-color" content="#7952b3">
+
+
+  <!-- css -->
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/dangtheodoi.css">
+
+
+
+  <!-- font -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+  <!-- Custom styles for this template -->
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Trang chủ</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <li class="nav-item">
+              <a class="nav-link" href="suatruyen.html">Đăng truyện</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Thể loại
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <ul>
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Detective </a></li>
+                  <li><a class="dropdown-item" href="#">Huyền Huyễn</a></li>
+                  <li><a class="dropdown-item" href="#">Military</a></li>
+                  <li><a class="dropdown-item" href="#">Seinen</a></li>
+                  <li><a class="dropdown-item" href="#">Tragedy</a></li>
+
+                </ul>
+                <ul>
+                  <li><a class="dropdown-item" href="#">Adventure</a></li>
+                  <li><a class="dropdown-item" href="#">Doujinshi</a></li>
+                  <li><a class="dropdown-item" href="#">Isekai</a></li>
+                  <li><a class="dropdown-item" href="#">Mistery</a></li>
+                  <li><a class="dropdown-item" href="#">Shoujo</a></li>
+                  <li><a class="dropdown-item" href="#">Trọng sinh</a></li>
+
+                </ul>
+                <ul>
+                  <li><a class="dropdown-item" href="#">Anime</a></li>
+                  <li><a class="dropdown-item" href="#">Drama</a></li>
+                  <li><a class="dropdown-item" href="#">Josei</a></li>
+                  <li><a class="dropdown-item" href="#">Ngôn tình</a></li>
+                  <li><a class="dropdown-item" href="#">Shoujo Ai</a></li>
+                  <li><a class="dropdown-item" href="#">Truyện màu</a></li>
+                </ul>
+                <ul>
+                  <li><a class="dropdown-item" href="#">Chuyển sinh</a></li>
+                  <li><a class="dropdown-item" href="#">Fantasy</a></li>
+                  <li><a class="dropdown-item" href="#">Mafia</a></li>
+                  <li><a class="dropdown-item" href="#">One shot</a></li>
+                  <li><a class="dropdown-item" href="#">Shounen</a></li>
+                  <li><a class="dropdown-item" href="#">Webtoon</a></li>
+
+                </ul>
+                <ul>
+                  <li><a class="dropdown-item" href="#">Cổ đại</a></li>
+                  <li><a class="dropdown-item" href="#">Gender Bender</a></li>
+                  <li><a class="dropdown-item" href="#">Magic</a></li>
+                  <li><a class="dropdown-item" href="#">Psychological</a></li>
+                  <li><a class="dropdown-item" href="#">Shounen Ai</a></li>
+                  <li><a class="dropdown-item" href="#">Xuyên không</a></li>
+                </ul>
+                <ul>
+                  <li><a class="dropdown-item" href="#">Comedy</a></li>
+                  <li><a class="dropdown-item" href="#">Harem</a></li>
+                  <li><a class="dropdown-item" href="#">Manhua</a></li>
+                  <li><a class="dropdown-item" href="#">Romance</a></li>
+                  <li><a class="dropdown-item" href="#">Slice of life</a></li>
+
+                </ul>
+                <ul>
+                  <li><a class="dropdown-item" href="#">Comic</a></li>
+                  <li><a class="dropdown-item" href="#">Historical</a></li>
+                  <li><a class="dropdown-item" href="#">Manhwa</a></li>
+                  <li><a class="dropdown-item" href="#">School Life</a></li>
+                  <li><a class="dropdown-item" href="#">Sports</a></li>
+                </ul>
+                <ul>
+                  <li><a class="dropdown-item" href="#">Demons</a></li>
+                  <li><a class="dropdown-item" href="#">Horror</a></li>
+                  <li><a class="dropdown-item" href="#">Martial Arts</a></li>
+                  <li><a class="dropdown-item" href="#">Sci-fi</a></li>
+                  <li><a class="dropdown-item" href="#">Supernatural</a></li>
+                </ul>
+              </div>
+            </li>
+
+          </ul>
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Nhập tên truyện..." aria-label="Search">
+            <button class="btn inner-button" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+
+          <a class="inner-sign" href="login.html">Đăng nhập</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+
+
+  <main>
+    <section id="truyentheodoi">
+      <div class="container">
+        <div class="date-form">
+
+          <label for="start-date"> Tìm kiếm truyện theo ngày:</label>
+          <br>
+          <input type="date" id="start-date" name="start-date" class="date-picker" required>
+          <br>
+          <label for="end-date">tới ngày:</label>
+          <br>
+          <input type="date" id="end-date" name="end-date" class="date-picker" required>
+          <br>
+          <button class="btn search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <div class="inner-title font-bold">
+          Danh sách tìm kiếm
+        </div>
+        <div class="inner-list">
+          <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+              <div class="image-container">
+                <a href="#">
+                  <img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320" height="480">
+                </a>
+                <div class="inner-name">
+                  <a href="#">
+                    <h3>Centuria
+                    </h3>
+                  </a>
+                  <a href="">
+                    <h3 class="inner-chap">
+                      C. 22
+                    </h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+              <div class="image-container">
+                <a href="#">
+                  <img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320" height="480">
+                </a>
+                <div class="inner-name">
+                  <a href="#">
+                    <h3>Centuria
+                    </h3>
+                  </a>
+                  <a href="">
+                    <h3 class="inner-chap">
+                      C. 22
+                    </h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+              <div class="image-container">
+                <a href="#">
+                  <img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320" height="480">
+                </a>
+                <div class="inner-name">
+                  <a href="#">
+                    <h3>Centuria
+                    </h3>
+                  </a>
+                  <a href="">
+                    <h3 class="inner-chap">
+                      C. 22
+                    </h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+              <div class="image-container">
+                <a href="#">
+                  <img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320" height="480">
+                </a>
+                <div class="inner-name">
+                  <a href="#">
+                    <h3>Centuria
+                    </h3>
+                  </a>
+                  <a href="">
+                    <h3 class="inner-chap">
+                      C. 22
+                    </h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+              <div class="image-container">
+                <a href="#">
+                  <img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320" height="480">
+                </a>
+                <div class="inner-name">
+                  <a href="#">
+                    <h3>Centuria
+                    </h3>
+                  </a>
+                  <a href="">
+                    <h3 class="inner-chap">
+                      C. 22
+                    </h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+              <div class="image-container">
+                <a href="#">
+                  <img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320" height="480">
+                </a>
+                <div class="inner-name">
+                  <a href="#">
+                    <h3>Centuria
+                    </h3>
+                  </a>
+                  <a href="">
+                    <h3 class="inner-chap">
+                      C. 22
+                    </h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+        <div class="chuyentrang">
+          <div class="row">
+            <div class="col-6">
+              <a href="#" class="button trangtruoc">
+                <i class="fa-solid fa-chevron-left"></i> Trang trước
+              </a>
+            </div>
+            <div class="col-6">
+              <a href="#" class="button trangsau">
+                Trang sau <i class="fa-solid fa-chevron-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <!-- <p class="float-end"><a href="#">Back to top</a></p> -->
+    <div class="container">
+      <div class="inner-text">
+        <div class="inner-contact">Link Github của nhóm 6:
+          <a href="github.com" target="_blank">github.com</a>
+        </div>
+        <div class="inner-contact">
+          Thành viên nhóm:
+        </div>
+        <div class="inner-member">B22DCCN261 - Hoàng Sơn Hải</div>
+        <div class="inner-member">B22DCKH131 - Hoàng Khánh Văn</div>
+        <div class="inner-member">B22DCKH129 - Nguyễn Hữu Trường</div>
+        <div class="inner-member">B22DCCN633 - Thái Hữu Phúc</div>
+        <div class="inner-member">B22DCCN371 - Trịnh Mạnh Hùng</div>
+      </div>
+    </div>
+
+  </footer>
+  <!-- END FOOTER -->
+
+
+  <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+
+</body>
+
+
+
+</html>
