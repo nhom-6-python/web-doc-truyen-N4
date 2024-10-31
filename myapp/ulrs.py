@@ -13,4 +13,5 @@ urlpatterns = [
     path('logout/', views3.dang_xuat, name = 'logout'),
     path('theloai=<str:theloai>/', views1.theloai, name='theloai'),
     path('theodoi/', views3.get_truyen_yeuthich, name = 'theodoi'),
+    path('test/', views1.test, name='test'),
 ]

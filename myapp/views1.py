@@ -204,9 +204,8 @@ def view_docchuong(request, id_truyen, id_chap):
 	}
 	return render(request, 'docchuong.html', context)
 	
-
-
-
+def test(request):
+	return render(request, 'lichsu.html')
 
 
 
