@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Truyen, Chap, Trang, Thongbao, Nguoidung
+from .models import Truyen, Chap, Trang, Thongbao, Nguoidung, Lichsu
 # Register your models here.
 
 class TruyenAdmin(admin.ModelAdmin):
@@ -16,10 +16,14 @@ class ThongbaoAdmin(admin.ModelAdmin):
 
 class NguoidungAdmin(admin.ModelAdmin):
 	list_display = ('id','ten', 'matkhau', 'vaitro', 'luotxem')
-	filter_horizontal = ( 'lichsu', 'yeuthich', 'thongbao', 'truyendang', )
+	filter_horizontal = ('yeuthich', 'thongbao', 'truyendang', )
+
+class LichsuAdmin(admin.ModelAdmin):
+	list_display = ('id','idchap', 'idtruyen', 'stt', 'tentruyen', 'anhbia','thoigiandoc')
 
 admin.site.register(Truyen, TruyenAdmin)
 admin.site.register(Chap, ChapAdmin)
 admin.site.register(Trang, TrangAdmin)
 admin.site.register(Thongbao, ThongbaoAdmin)
 admin.site.register(Nguoidung, NguoidungAdmin)
+admin.site.register(Lichsu, LichsuAdmin)

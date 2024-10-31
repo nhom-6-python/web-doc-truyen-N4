@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from .forms import NguoidungForm
 from .models import Nguoidung
 from .views2 import list_thong_bao
-
+from .views import get_nguoidung, checklogin
 # Create your views here.
 
 def index(request):
@@ -68,5 +68,31 @@ def get_truyen_yeuthich(request):
     else:
         return redirect('login')
 
+def get_lichsu(request):
+    if checklogin(request) == False:
+        return redirect('login')
+    else:
+        nguoidung = get_nguoidung(request)
+        alllichsu = nguoidung.lichsu.all().order_by('-thoigiandoc')
+        dates = list() #luu tat ca ngay doc
+        for x in alllichsu:
+            if x.thoigiandoc.date() not in dates:
+                dates.append(x.thoigiandoc.date())
 
+        lichsu_theo_ngays = list() #luu tat ca cac truyen cua tung ngay
+        for i in dates:
+            history = []
+            for lsu in alllichsu:
+                if lsu.thoigiandoc.date() == i:
+                    history.append(lsu)
+            lichsu_theo_ngays.append(history)
+        for x in lichsu_theo_ngays:
+            for i in x:
+                print(i.tentruyen, end = ' ')
+            print()
+        context = {
+            'lichsu_theo_ngay' : lichsu_theo_ngays,
+        }
+        return render(request, 'lichsu.html', context)
+        
 
