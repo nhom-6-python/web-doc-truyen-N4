@@ -40,9 +40,7 @@ class Nguoidung(models.Model):
     matkhau = models.CharField(max_length=255)
     # Sử dụng choices đúng cấu trúc
     vaitro = models.CharField(max_length=255)
-    
     yeuthich = models.ManyToManyField(Truyen, related_name='yeuthich', blank=True)
-    lichsu = models.ManyToManyField(Truyen, related_name='lichsu', blank=True)
     thongbao = models.ManyToManyField(Thongbao, related_name='thongbao', blank=True)
     truyendang = models.ManyToManyField(Truyen, related_name='truyendang', blank=True)
 
@@ -56,4 +54,17 @@ class Nguoidung(models.Model):
     @property
     def luotxem(self):
         return sum(x.luotxem for x in self.truyendang.all())
+	
+class Lichsu(models.Model):
+	#get link
+	idchap = models.IntegerField()
+	idtruyen = models.IntegerField()
+	#display
+	stt = models.FloatField(default=0)
+	tentruyen = models.CharField(max_length=255)
+	anhbia = models.FileField(upload_to='anhbia/')
 
+	thoigiandoc = models.DateTimeField(auto_now_add=True)
+	nguoidoc = models.ForeignKey(Nguoidung, on_delete=models.CASCADE, related_name='lichsu')
+	def formatted_time(self):
+		return self.thoigiandoc.strftime('%d/%m/%Y')	

@@ -18,11 +18,13 @@
 				<input type="date" id="end-date" name="end-date" class="date-picker" required>
 				<button>lọc</button>
 			</form>
+			{% for date in lichsu_theo_ngay %}
 			<h2 class="font-bold" style="margin: 10px 0">
 				ngày 31/10/20224
 			</h2>
 			<div class="inner-list my-0">
 				<div class="row">
+					{% for x in date %}
 					<div class="col-lg-2 col-md-3 col-sm-4 col-6">
 						<div class="image-container">
 							<a href="#">
@@ -31,7 +33,7 @@
 							</a>
 							<div class="inner-name">
 								<a href="#">
-									<h3>Centuria
+									<h3>{{x.tentruyen}}
 									</h3>
 								</a>
 								<a href="">
@@ -42,227 +44,12 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-3 col-sm-4 col-6">
-						<div class="image-container">
-							<a href="#">
-								<img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320"
-									height="480">
-							</a>
-							<div class="inner-name">
-								<a href="#">
-									<h3>Centuria
-									</h3>
-								</a>
-								<a href="">
-									<h3 class="inner-chap">
-										C. 22
-									</h3>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-4 col-6">
-						<div class="image-container">
-							<a href="#">
-								<img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320"
-									height="480">
-							</a>
-							<div class="inner-name">
-								<a href="#">
-									<h3>Centuria
-									</h3>
-								</a>
-								<a href="">
-									<h3 class="inner-chap">
-										C. 22
-									</h3>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-4 col-6">
-						<div class="image-container">
-							<a href="#">
-								<img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320"
-									height="480">
-							</a>
-							<div class="inner-name">
-								<a href="#">
-									<h3>Centuria
-									</h3>
-								</a>
-								<a href="">
-									<h3 class="inner-chap">
-										C. 22
-									</h3>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-4 col-6">
-						<div class="image-container">
-							<a href="#">
-								<img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320"
-									height="480">
-							</a>
-							<div class="inner-name">
-								<a href="#">
-									<h3>Centuria
-									</h3>
-								</a>
-								<a href="">
-									<h3 class="inner-chap">
-										C. 22
-									</h3>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-4 col-6">
-						<div class="image-container">
-							<a href="#">
-								<img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320"
-									height="480">
-							</a>
-							<div class="inner-name">
-								<a href="#">
-									<h3>Centuria
-									</h3>
-								</a>
-								<a href="">
-									<h3 class="inner-chap">
-										C. 22
-									</h3>
-								</a>
-							</div>
-						</div>
-					</div>
-
+					{% endfor %}
 				</div>
+
 			</div>
 			<br>
-			<h2 class="font-bold" style="margin: 10px 0">
-				ngày 31/11/20224
-			</h2>
-			<div class="inner-list my-0">
-				<div class="row">
-					<div class="col-lg-2 col-md-3 col-sm-4 col-6">
-						<div class="image-container">
-							<a href="#">
-								<img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320"
-									height="480">
-							</a>
-							<div class="inner-name">
-								<a href="#">
-									<h3>Centuria
-									</h3>
-								</a>
-								<a href="">
-									<h3 class="inner-chap">
-										C. 22
-									</h3>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-4 col-6">
-						<div class="image-container">
-							<a href="#">
-								<img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320"
-									height="480">
-							</a>
-							<div class="inner-name">
-								<a href="#">
-									<h3>Centuria
-									</h3>
-								</a>
-								<a href="">
-									<h3 class="inner-chap">
-										C. 22
-									</h3>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-4 col-6">
-						<div class="image-container">
-							<a href="#">
-								<img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320"
-									height="480">
-							</a>
-							<div class="inner-name">
-								<a href="#">
-									<h3>Centuria
-									</h3>
-								</a>
-								<a href="">
-									<h3 class="inner-chap">
-										C. 22
-									</h3>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-4 col-6">
-						<div class="image-container">
-							<a href="#">
-								<img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320"
-									height="480">
-							</a>
-							<div class="inner-name">
-								<a href="#">
-									<h3>Centuria
-									</h3>
-								</a>
-								<a href="">
-									<h3 class="inner-chap">
-										C. 22
-									</h3>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-4 col-6">
-						<div class="image-container">
-							<a href="#">
-								<img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320"
-									height="480">
-							</a>
-							<div class="inner-name">
-								<a href="#">
-									<h3>Centuria
-									</h3>
-								</a>
-								<a href="">
-									<h3 class="inner-chap">
-										C. 22
-									</h3>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-4 col-6">
-						<div class="image-container">
-							<a href="#">
-								<img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320"
-									height="480">
-							</a>
-							<div class="inner-name">
-								<a href="#">
-									<h3>Centuria
-									</h3>
-								</a>
-								<a href="">
-									<h3 class="inner-chap">
-										C. 22
-									</h3>
-								</a>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
+			{% endfor %}
 		</div>
 	</section>
 
