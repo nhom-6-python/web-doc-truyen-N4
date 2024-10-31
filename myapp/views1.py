@@ -9,6 +9,7 @@ from django.db.models import Sum,Q, Value
 from django.db.models.functions import Coalesce
 from .views2 import list_thong_bao
 from .views import get_nguoidung, checklogin
+from .views3 import add_chap_to_lichsu
 # Create your views here.
 
 # chức năng trang home
@@ -182,6 +183,7 @@ def theloai(request, theloai): # view tìm truyện theo thể loại
 	return render(request, 'theloai.html', context)
 
 def view_docchuong(request, id_truyen, id_chap):
+	# hien thi
 	truyen = Truyen.objects.get(id=id_truyen)
 	chap = Chap.objects.get(id=id_chap)
 	allchap = list(truyen.chap.all().order_by('stt'))
@@ -195,6 +197,9 @@ def view_docchuong(request, id_truyen, id_chap):
 	except:
 		chapsau = 'none'
 	alltrang = chap.trang.all().order_by('id')
+	# thêm vào lịch sử
+	add_chap_to_lichsu(request, id_truyen, id_chap)
+
 	context = {
 		'truyen': truyen,
 		'chap': chap,

@@ -11,12 +11,13 @@
 			<h1 class="font-bold">
 				Lịch sử đọc truyện
 			</h1>
-			<form class="date-form">
+			<form class="date-form" method="post">
+				{% csrf_token %}
 				<label for="start-date"> duyệt theo ngày theo ngày:</label><br>
 				<span>từ: </span><input type="date" id="start-date" name="start-date" class="date-picker" required>
 				<label for="end-date">đến:</label>
 				<input type="date" id="end-date" name="end-date" class="date-picker" required>
-				<button>lọc</button>
+				<button type="submit" name="btn-loc-ngay">lọc</button>
 			</form>
 			{% for date in lichsu_theo_ngay %}
 			<h2 class="font-bold" style="margin: 10px 0">
@@ -37,7 +38,7 @@
 								</a>
 								<a href="/truyen_id={{x.idtruyen}}/chuong={{x.idchap}}/">
 									<h3 class="inner-chap">
-										{{x.stt}}
+										Chap: {{x.stt}}
 									</h3>
 								</a>
 							</div>

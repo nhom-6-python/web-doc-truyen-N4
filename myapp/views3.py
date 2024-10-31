@@ -1,9 +1,12 @@
 #Hung
 from django.shortcuts import render, redirect
 from .forms import NguoidungForm
-from .models import Nguoidung
+from .models import Nguoidung, Truyen, Chap, Lichsu
 from .views2 import list_thong_bao
 from .views import get_nguoidung, checklogin
+from django.utils import timezone
+
+
 # Create your views here.
 
 def index(request):
@@ -24,7 +27,7 @@ def registerPage(request):
     else:
         form = NguoidungForm()
     return render(request, 'register.html', {'form': form})
-
+ 
 def loginPage(request):
     if request.method == 'POST':
         form = NguoidungForm(request.POST)
@@ -69,15 +72,23 @@ def get_truyen_yeuthich(request):
         return redirect('login')
 
 def get_lichsu(request):
+    #kiểm tra xem đã đăng nhập chưa
     if checklogin(request) == False:
         return redirect('login')
-    else:
+    else: # hiển thị trang lịch sử
         nguoidung = get_nguoidung(request)
         alllichsu = nguoidung.lichsu.all().order_by('-thoigiandoc')
         dates = list() #luu tat ca ngay doc
-        for x in alllichsu:
-            if x.thoigiandoc.date() not in dates:
-                dates.append(x.thoigiandoc.date())
+        # xử lý theo lọc hoặc ko lọc
+        if request.method == 'POST':
+            if 'btn-loc-ngay' in request.POST:
+                for x in alllichsu:
+                    if x.thoigiandoc.date() not in dates and str(x.thoigiandoc.date()) >= request.POST['start-date'] and str(x.thoigiandoc.date()) <= request.POST['end-date']:
+                        dates.append(x.thoigiandoc.date())                
+        else:
+            for x in alllichsu:
+                if x.thoigiandoc.date() not in dates:
+                    dates.append(x.thoigiandoc.date())
 
         lichsu_theo_ngays = list() #luu tat ca cac truyen cua tung ngay
         for i in dates:
@@ -86,13 +97,31 @@ def get_lichsu(request):
                 if lsu.thoigiandoc.date() == i:
                     history.append(lsu)
             lichsu_theo_ngays.append(history)
-        for x in lichsu_theo_ngays:
-            for i in x:
-                print(i.tentruyen, end = ' ')
-            print()
+
         context = {
             'lichsu_theo_ngay' : lichsu_theo_ngays,
         }
         return render(request, 'lichsu.html', context)
         
+def add_chap_to_lichsu(request, id_truyen, id_chap): # thêm lịch sử chap khi đọc chap đó
+    idchap = id_chap
+    idtruyen = id_truyen
+    truyen = Truyen.objects.get(id=id_truyen)  
+    chap = Chap.objects.get(id=id_chap)
+    stt = chap.stt
+    tentruyen = truyen.ten
+    anhbia = truyen.anhbia
+    nguoidoc = get_nguoidung(request)
+    lichsu = Lichsu(
+        idchap = idchap,
+        idtruyen = idtruyen,
+        stt = stt,
+        tentruyen = tentruyen,
+        anhbia = anhbia,
+        nguoidoc = nguoidoc,
+    )
+    for x in Lichsu.objects.filter(idtruyen=idtruyen, idchap=idchap):
+        if x.thoigiandoc.date() == timezone.now().date():
+            x.delete()
+    lichsu.save()
 

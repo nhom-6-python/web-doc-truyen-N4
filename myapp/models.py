@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -21,7 +22,7 @@ class Chap(models.Model):
 	stt = models.FloatField(default=0)
 	ten = models.CharField(max_length=255)
 	luotxem = models.BigIntegerField(default=0)
-	thoigiandang = models.DateTimeField(auto_now_add=True)
+	thoigiandang = models.DateTimeField(default=timezone.now)
 	truyen = models.ForeignKey(Truyen, on_delete=models.CASCADE, related_name='chap')
 	def formatted_time(self):
 		return self.thoigiandang.strftime('%d/%m/%Y %H:%M')	
@@ -64,7 +65,7 @@ class Lichsu(models.Model):
 	tentruyen = models.CharField(max_length=255)
 	anhbia = models.FileField(upload_to='anhbia/')
 
-	thoigiandoc = models.DateTimeField(auto_now_add=True)
+	thoigiandoc = models.DateTimeField(default=timezone.now)
 	nguoidoc = models.ForeignKey(Nguoidung, on_delete=models.CASCADE, related_name='lichsu')
 	def formatted_time(self):
 		return self.thoigiandoc.strftime('%d/%m/%Y')	
