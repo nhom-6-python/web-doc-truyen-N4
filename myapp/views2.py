@@ -7,12 +7,10 @@ from django.utils.timezone import make_aware
 from django.utils import timezone
 from django.db.models import Sum,Q, Value
 from django.db.models.functions import Coalesce
+from .views import get_nguoidung, checklogin
 
 def list_thong_bao(request):
-    ten_nguoi_dung=request.session.get('nguoidung',None)
-    nguoidung=Nguoidung()
-    nguoi_dungs= Nguoidung.objects.all()
-    for x in nguoi_dungs:
-        if x.ten==ten_nguoi_dung:
-            nguoidung=x
-    return nguoidung.thongbao.all()
+    if checklogin(request):
+        nguoidung = get_nguoidung(request)
+        print(nguoidung)
+        return nguoidung.thongbao.all()

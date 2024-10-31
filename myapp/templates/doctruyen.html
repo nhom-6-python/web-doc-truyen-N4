@@ -43,11 +43,15 @@
                 </div>
 
                 <div class="btn" style="text-align: unset;">
-                  <a href="#" class="btn btn-primary">Thêm vào yêu
-                    thích</a>
-                  <a href="#" class="btn btn-primary">Đọc chương mới
+                  <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" id="btn1" name="btn-yeuthich" class="btn btn-primary">Thêm vào yêu
+                      thích</button>
+                  </form>
+                  <a href="chuong={{chuongdau.id}}/" class="btn btn-primary">Đọc từ đầu</a>
+
+                  <a href="chuong={{chuongmoinhat.id}}/" class="btn btn-primary">Đọc chương mới
                     nhất</a>
-                  <a href="#" class="btn btn-primary">Đọc từ đầu</a>
                   <a href="#" class="btn btn-primary">Đọc tiếp</a>
                 </div>
               </div>
