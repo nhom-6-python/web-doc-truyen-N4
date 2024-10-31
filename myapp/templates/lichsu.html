@@ -20,25 +20,24 @@
 			</form>
 			{% for date in lichsu_theo_ngay %}
 			<h2 class="font-bold" style="margin: 10px 0">
-				ngày 31/10/20224
+				Ngày {{date.0.thoigiandoc|date:'d/m/Y'}}
 			</h2>
 			<div class="inner-list my-0">
 				<div class="row">
 					{% for x in date %}
 					<div class="col-lg-2 col-md-3 col-sm-4 col-6">
 						<div class="image-container">
-							<a href="#">
-								<img src="assets/images/centuria.jpg" alt="Centuria" loading="lazy" width="320"
-									height="480">
+							<a href="/truyen_id={{x.idtruyen}}/chuong={{x.idchap}}/">
+								<img src="{{x.anhbia.url}}" alt="x.tentruyen" loading="lazy" width="320" height="480">
 							</a>
 							<div class="inner-name">
-								<a href="#">
+								<a href="/truyen_id={{x.idtruyen}}/chuong={{x.idchap}}/">
 									<h3>{{x.tentruyen}}
 									</h3>
 								</a>
-								<a href="">
+								<a href="/truyen_id={{x.idtruyen}}/chuong={{x.idchap}}/">
 									<h3 class="inner-chap">
-										C. 22
+										{{x.stt}}
 									</h3>
 								</a>
 							</div>
