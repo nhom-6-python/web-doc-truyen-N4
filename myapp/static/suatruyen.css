@@ -1,3 +1,123 @@
+/* NAV */
+.navbar-brand {
+  color: black;
+}
+
+.navbar-toggler {
+  color: #0000007d;
+
+}
+
+.navbar-toggler i {
+  font-size: 20px;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.dropdown-menu li .dropdown-item {
+  color: gray;
+  font-size: 1em;
+  padding: 0.5em 1em;
+} 
+
+.dropdown-menu {
+  border: none;
+  border-radius: 0;
+  padding: 0.7em;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+
+.dropdown-menu.show {
+  display: flex;
+}
+
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .dropdown:hover .dropdown-menu {
+    display: flex;
+  }
+
+  .dropdown-menu.show {
+    display: flex;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .dropdown-menu.show {
+    flex-wrap: wrap;
+    max-height: 350px;
+    overflow-y: scroll;
+  }
+
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1140px) {
+  .dropdown:hover .dropdown-menu {
+    width: 40vw;
+    flex-wrap: wrap;
+  }
+
+}
+
+/* thong bao */
+
+/* end thong bao */
+
+
+
+/* SEARCH */
+.d-flex {
+  height: 2rem;
+  align-items: center;
+}
+
+.d-flex .inner-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  --tw-bg-opacity: 0.1;
+  --tw-text-opacity: 0.7;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.d-flex .inner-button:hover {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  --tw-bg-opacity: 0.1;
+  --tw-text-opacity: 0.7;
+  background-color: rgb(154, 150, 150);
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+
+}
+
+.d-flex .inner-button i {
+  margin: -3px;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+  --tw-text-opacity: 0.7;
+  font-size: 10px;
+
+}
+
+/* END SEARCH */
+
 
 .bg-dark {
   background-color: #edeef0 !important;

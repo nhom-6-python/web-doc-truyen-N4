@@ -162,9 +162,8 @@ def theloai(request, theloai): # view tìm truyện theo thể loại
 	}
 	return render(request, 'theloai.html', context)
 	
-
-
-
+def test(request):
+	return render(request, 'lichsu.html')
 
 
 
