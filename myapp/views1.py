@@ -8,16 +8,17 @@ from django.utils import timezone
 from django.db.models import Sum,Q, Value
 from django.db.models.functions import Coalesce
 from .views2 import list_thong_bao
-from .views3 import checklogin
-
+from .views import get_nguoidung, checklogin
 # Create your views here.
 
 # chức năng trang home
 
-def top3_by_like(): # top 3 truyện có lượt yêu thích cao nhất( slider trang home)
+# top 3 truyện có lượt yêu thích cao nhất( slider trang home)
+def top3_by_like():
 	top3 = Truyen.objects.all().order_by('-luotthich')[:3]
 	return top3
 
+# top truyện mới tải lên chap mới
 def new_update():
 	chaps = Chap.objects.all().order_by('-thoigiandang')
 	new_update = list()
@@ -27,7 +28,8 @@ def new_update():
 	new_update = new_update[:12]
 	return new_update
 
-def top_view(time): # lọc ra truyện nhiều view nhất trong tuần/tháng/all
+# lọc ra truyện nhiều view nhất trong tuần/tháng/all
+def top_view(time): 
 	if time == 'tuan': # lọc theo tuần
 		today = datetime.today()
 		start_of_week = today - timedelta(days=today.weekday())
@@ -54,6 +56,7 @@ def top_view(time): # lọc ra truyện nhiều view nhất trong tuần/tháng/
 		)
 		return top_view
 
+# top nhóm dịch có lượt xem nhiều nhất
 def top_nhomdich(time):
 	if time == 'tuan': # lọc theo tuần
 		today = datetime.today()
@@ -82,17 +85,20 @@ def top_nhomdich(time):
 		return top_nhomdich
 	
 	#code t lm
-def list_thong_bao(request):
-	if checklogin(request):
-		ten_nguoi_dung=request.session.get('nguoidung',None)
-		nguoidung=Nguoidung()
-		nguoi_dungs= Nguoidung.objects.all()
-		for x in nguoi_dungs:
-			if x.ten==ten_nguoi_dung:
-				nguoidung=x
-		return nguoidung.thongbao.all()	
+# def list_thong_bao(request):
+# 	if checklogin(request):
+# 		ten_nguoi_dung=request.session.get('nguoidung',None)
+# 		print(ten_nguoi_dung)
+# 		nguoidung=Nguoidung()
+# 		nguoi_dungs= Nguoidung.objects.all()
+# 		for x in nguoi_dungs:
+# 			if x.ten==ten_nguoi_dung:
+# 				nguoidung=x
+# 				break
+# 		return nguoidung.thongbao.all()	
 
-def home(request): # view trang home
+# view trang home
+def home(request): 
 	top3 = top3_by_like()
 	list_new_update = new_update()
 	list_top_view = list()
@@ -122,16 +128,27 @@ def home(request): # view trang home
 	return render(request, 'home.html', context)
 
 def doctruyen(request, id): #view phan mota truyen
+	# xử lý view phần doctruyen
 	truyen = Truyen.objects.get(id=id)
 	nhomdich = Nguoidung.objects.get(truyendang=truyen)
 	sochuong = 0
-	allchuong = truyen.chap.all().order_by('stt')
+	allchuong = list(truyen.chap.all().order_by('stt'))
 	for x in truyen.chap.all():
 		sochuong+=1
 	truyen_cung_nhom_dich = nhomdich.truyendang.all()[:3]
 	truyen_de_xuat = top_view('tuan')[:3]
 	list_the_loai = truyen.theloai.split(",")
 	list_thong_baos = list_thong_bao(request)
+	# xử lý form khi người dùng thêm truyện vào yêu thích
+	if request.method == 'POST':
+		if 'btn-yeuthich' in request.POST:
+			if checklogin(request):
+				nguoidung = get_nguoidung(request)
+				if truyen not in nguoidung.yeuthich.all():
+					nguoidung.yeuthich.add(truyen)
+			else:
+				return redirect('login')
+
 	context = {
 		"truyen" : truyen,
 		'nhomdich' : nhomdich,
@@ -142,7 +159,9 @@ def doctruyen(request, id): #view phan mota truyen
 		'list_the_loai' : list_the_loai,
 		'list_thong_baos' : list_thong_baos,
 		'checklogin': checklogin(request),
-		'ten_nguoidung': request.session.get('nguoidung', None)
+		'ten_nguoidung': request.session.get('nguoidung', None),
+		'chuongdau': allchuong[0],
+		'chuongmoinhat': allchuong[-1],
 	}
 	return render(request, 'doctruyen.html', context)
 
@@ -163,7 +182,6 @@ def theloai(request, theloai): # view tìm truyện theo thể loại
 	return render(request, 'theloai.html', context)
 
 def view_docchuong(request, id_truyen, id_chap):
-	print("run")
 	truyen = Truyen.objects.get(id=id_truyen)
 	chap = Chap.objects.get(id=id_chap)
 	allchap = list(truyen.chap.all().order_by('stt'))
@@ -177,8 +195,6 @@ def view_docchuong(request, id_truyen, id_chap):
 	except:
 		chapsau = 'none'
 	alltrang = chap.trang.all().order_by('id')
-	print('chaptruoc ', chaptruoc)
-	print('chapsau ', chapsau)
 	context = {
 		'truyen': truyen,
 		'chap': chap,

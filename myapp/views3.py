@@ -9,14 +9,6 @@ from .views2 import list_thong_bao
 def index(request):
 	return render(request, 'index.html')
 
-# check dang nhap
-def checklogin(request):
-    ten_nguoidung = request.session.get('nguoidung', None)  # Kiểm tra session có chứa 'nguoidung'
-    if ten_nguoidung:
-        return True
-    else:
-        return False
-
 def registerPage(request):
     if request.method == 'POST':
         form = NguoidungForm(request.POST)
