@@ -118,25 +118,26 @@ def get_lichsu(request):
         }
         return render(request, 'lichsu.html', context)
         
-def add_chap_to_lichsu(request, id_truyen, id_chap): # thêm lịch sử chap khi đọc chap đó
-    idchap = id_chap
-    idtruyen = id_truyen
-    truyen = Truyen.objects.get(id=id_truyen)  
-    chap = Chap.objects.get(id=id_chap)
-    stt = chap.stt
-    tentruyen = truyen.ten
-    anhbia = truyen.anhbia
-    nguoidoc = get_nguoidung(request)
-    lichsu = Lichsu(
-        idchap = idchap,
-        idtruyen = idtruyen,
-        stt = stt,
-        tentruyen = tentruyen,
-        anhbia = anhbia,
-        nguoidoc = nguoidoc,
-    )
-    for x in Lichsu.objects.filter(idtruyen=idtruyen, idchap=idchap):
-        if x.thoigiandoc.date() == timezone.now().date():
-            x.delete()
-    lichsu.save()
+def add_chap_to_lichsu(request, id_truyen, id_chap):
+    if checklogin(request): # thêm lịch sử chap khi đọc chap đó
+        idchap = id_chap
+        idtruyen = id_truyen
+        truyen = Truyen.objects.get(id=id_truyen)  
+        chap = Chap.objects.get(id=id_chap)
+        stt = chap.stt
+        tentruyen = truyen.ten
+        anhbia = truyen.anhbia
+        nguoidoc = get_nguoidung(request)
+        lichsu = Lichsu(
+            idchap = idchap,
+            idtruyen = idtruyen,
+            stt = stt,
+            tentruyen = tentruyen,
+            anhbia = anhbia,
+            nguoidoc = nguoidoc,
+        )
+        for x in Lichsu.objects.filter(idtruyen=idtruyen, idchap=idchap):
+            if x.thoigiandoc.date() == timezone.now().date():
+                x.delete()
+        lichsu.save()                   
 

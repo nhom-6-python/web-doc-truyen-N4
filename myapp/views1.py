@@ -205,6 +205,7 @@ def view_docchuong(request, id_truyen, id_chap): #đọc theo chương
 		'chaptruoc': chaptruoc,
 		'chapsau': chapsau,
 		'ten_nguoidung': get_nguoidung(request).ten,
+		'checklogin': checklogin(request)
 	}
 	return render(request, 'docchuong.html', context)
 	
