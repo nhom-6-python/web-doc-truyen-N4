@@ -10,5 +10,5 @@ urlpatterns = [
     path('register/', views3.registerPage, name = 'register'),
     path('login/', views3.loginPage, name = 'login'),
     path('theloai=<str:theloai>/', views1.theloai, name='theloai'),
-
+    path('timkiem/', views1.timkiem, name='timkiem'),
 ]

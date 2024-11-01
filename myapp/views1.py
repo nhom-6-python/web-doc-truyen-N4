@@ -136,6 +136,8 @@ def theloai(request, theloai): # tìm truyện theo thể loại
 	return render(request, 'theloai.html', context)
 	
 
+def timkiem(request):
+	return render(request, 'timkiem.html')
 
 
 
