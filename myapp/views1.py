@@ -85,6 +85,22 @@ def top_nhomdich(time):
 		)
 		return top_nhomdich
 	
+def theloai(request, theloai): # view tìm truyện theo thể loại
+	truyens = Truyen.objects.all()
+	truyens_theo_the_loai = list()
+	for x in truyens:
+		if theloai in x.theloai:
+			truyens_theo_the_loai.append(x)
+	list_thong_baos = list_thong_bao(request)
+	context={
+		'theloai': theloai,
+		'truyens_theo_the_loai': truyens_theo_the_loai,
+		'list_thong_baos' : list_thong_baos,
+		'checklogin': checklogin(request),
+		'ten_nguoidung': get_nguoidung(request).ten,
+	}
+	return render(request, 'theloai.html', context)
+
 def home(request): # view trang home
 	top3 = top3_by_like()
 	list_new_update = new_update()
@@ -164,23 +180,7 @@ def doctruyen(request, id): #view phan mota truyen
 	}
 	return render(request, 'doctruyen.html', context)
 
-def theloai(request, theloai): # view tìm truyện theo thể loại
-	truyens = Truyen.objects.all()
-	truyens_theo_the_loai = list()
-	for x in truyens:
-		if theloai in x.theloai:
-			truyens_theo_the_loai.append(x)
-	list_thong_baos = list_thong_bao(request)
-	context={
-		'theloai': theloai,
-		'truyens_theo_the_loai': truyens_theo_the_loai,
-		'list_thong_baos' : list_thong_baos,
-		'checklogin': checklogin(request),
-		'ten_nguoidung': get_nguoidung(request).ten,
-	}
-	return render(request, 'theloai.html', context)
-
-def view_docchuong(request, id_truyen, id_chap):
+def view_docchuong(request, id_truyen, id_chap): #đọc theo chương
 	# hien thi
 	truyen = Truyen.objects.get(id=id_truyen)
 	chap = Chap.objects.get(id=id_chap)

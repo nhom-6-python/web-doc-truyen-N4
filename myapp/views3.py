@@ -59,6 +59,13 @@ def get_truyen_yeuthich(request):
             # Lấy danh sách truyện yêu thích
             truyen_yeuthich = nguoidung.yeuthich.all()
             # Trả về kết quả hiển thị
+            if request.method == 'POST':
+                if 'btn-delete' in request.POST:
+                    id_theodoi_xoa = request.POST['id_theodoi_xoa']
+                    for x in truyen_yeuthich:
+                        if str(x.id) == id_theodoi_xoa:
+                            x.delete()
+                return redirect('/theodoi/')
             list_thong_baos = list_thong_bao(request)
             context = {
                 'truyen_yeuthich': truyen_yeuthich,
@@ -82,15 +89,21 @@ def get_lichsu(request):
         dates = list() #luu tat ca ngay doc
         # xử lý theo lọc hoặc ko lọc
         if request.method == 'POST':
-            if 'btn-loc-ngay' in request.POST:
+            if 'btn-delete' in request.POST:
+                id_ls_xoa = request.POST['id_ls_xoa']
+                for x in alllichsu:
+                    if str(x.id) == id_ls_xoa:
+                        x.delete()
+                    elif x.thoigiandoc.date() not in dates:
+                        dates.append(x.thoigiandoc.date())
+            if 'btn-loc-ngay' in request.POST: # nút lọc
                 for x in alllichsu:
                     if x.thoigiandoc.date() not in dates and str(x.thoigiandoc.date()) >= request.POST['start-date'] and str(x.thoigiandoc.date()) <= request.POST['end-date']:
-                        dates.append(x.thoigiandoc.date())                
+                        dates.append(x.thoigiandoc.date())
         else:
             for x in alllichsu:
                 if x.thoigiandoc.date() not in dates:
                     dates.append(x.thoigiandoc.date())
-
         lichsu_theo_ngays = list() #luu tat ca cac truyen cua tung ngay
         for i in dates:
             history = []
@@ -98,7 +111,6 @@ def get_lichsu(request):
                 if lsu.thoigiandoc.date() == i:
                     history.append(lsu)
             lichsu_theo_ngays.append(history)
-
         context = {
             'lichsu_theo_ngay' : lichsu_theo_ngays,
             'ten_nguoidung': get_nguoidung(request).ten,
