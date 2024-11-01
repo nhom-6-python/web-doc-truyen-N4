@@ -85,21 +85,7 @@ def top_nhomdich(time):
 		)
 		return top_nhomdich
 	
-	#code t lm
-# def list_thong_bao(request):
-# 	if checklogin(request):
-# 		ten_nguoi_dung=request.session.get('nguoidung',None)
-# 		print(ten_nguoi_dung)
-# 		nguoidung=Nguoidung()
-# 		nguoi_dungs= Nguoidung.objects.all()
-# 		for x in nguoi_dungs:
-# 			if x.ten==ten_nguoi_dung:
-# 				nguoidung=x
-# 				break
-# 		return nguoidung.thongbao.all()	
-
-# view trang home
-def home(request): 
+def home(request): # view trang home
 	top3 = top3_by_like()
 	list_new_update = new_update()
 	list_top_view = list()
@@ -226,7 +212,20 @@ def test(request):
 	return render(request, 'lichsu.html')
 
 def timkiem(request):
-	return render(request, 'timkiem.html')
+	timkiems = list()
+	if request.method == 'POST':
+		if 'btn-search' in request.POST:
+			search_value = request.POST['search_value']
+			for x in Truyen.objects.all().order_by('ten'):
+				if search_value.strip().upper().replace(" ", "") in x.ten.upper().replace(" ", "") or x.ten.upper().replace(" ", "") in search_value.strip().upper().replace(" ", ""):
+					timkiems.append(x)
+	context = {
+		'timkiems': timkiems,
+		'search_value': request.POST['search_value'],
+		'checklogin': checklogin(request),
+		'ten_nguoidung': get_nguoidung(request).ten,
+	}
+	return render(request, 'timkiem.html', context)
 
 
 

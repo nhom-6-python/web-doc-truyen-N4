@@ -87,9 +87,11 @@
 					</li>
 
 				</ul>
-				<form class="d-flex">
-					<input class="form-control me-2" type="search" placeholder="Nhập tên truyện..." aria-label="Search">
-					<button class="btn inner-button" type="submit">
+				<form class="d-flex" action="{% url 'timkiem' %}" method="post">
+					{% csrf_token %}
+					<input class="form-control me-2" type="search" placeholder="Nhập tên truyện..." aria-label="Search"
+						name="search_value" required>
+					<button class="btn inner-button" type="submit" name="btn-search">
 						<i class="fa-solid fa-magnifying-glass"></i>
 					</button>
 				</form>
