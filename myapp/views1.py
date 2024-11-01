@@ -225,6 +225,12 @@ def view_docchuong(request, id_truyen, id_chap):
 def test(request):
 	return render(request, 'lichsu.html')
 
+def timkiem(request):
+	return render(request, 'timkiem.html')
+
+
+
+
 
 
 
