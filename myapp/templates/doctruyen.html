@@ -52,7 +52,11 @@
 
                   <a href="chuong={{chuongmoinhat.id}}/" class="btn btn-primary">Đọc chương mới
                     nhất</a>
-                  <a href="#" class="btn btn-primary">Đọc tiếp</a>
+                  {% if checklogin %}
+                  <a href="chuong={{chuong_gan_nhat.id}}/" class="btn btn-primary">Đọc tiếp</a>
+                  {% else %}
+                  <a href="/login/" class="btn btn-primary">Đọc tiếp</a>
+                  {% endif %}
                 </div>
               </div>
             </div>

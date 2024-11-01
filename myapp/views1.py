@@ -124,9 +124,20 @@ def home(request):
 		'list_top_nhomdich_moiluc' : list_top_nhomdich_moiluc,
 		'list_thong_baos' : list_thong_baos,
 		'checklogin': checklogin(request),
-		'ten_nguoidung': request.session.get('nguoidung', None)
+		'ten_nguoidung': get_nguoidung(request).ten,
 	}
 	return render(request, 'home.html', context)
+
+def doc_tiep(request, id_truyen): # lấy ra chap đọc gần đây nhất của truyện này
+	truyen = Truyen.objects.get(id=id_truyen)
+	allchuong = list(truyen.chap.all().order_by('stt'))
+	if checklogin(request):
+		nguoidung = get_nguoidung(request)
+		alllichsu = nguoidung.lichsu.all().order_by('-thoigiandoc')
+		for x in alllichsu:
+			if id_truyen == x.idtruyen:
+				return Chap.objects.get(id = x.idchap)
+		return allchuong[0]
 
 def doctruyen(request, id): #view phan mota truyen
 	# xử lý view phần doctruyen
@@ -149,7 +160,7 @@ def doctruyen(request, id): #view phan mota truyen
 					nguoidung.yeuthich.add(truyen)
 			else:
 				return redirect('login')
-
+	chuong_gan_nhat = doc_tiep(request, id)
 	context = {
 		"truyen" : truyen,
 		'nhomdich' : nhomdich,
@@ -160,9 +171,10 @@ def doctruyen(request, id): #view phan mota truyen
 		'list_the_loai' : list_the_loai,
 		'list_thong_baos' : list_thong_baos,
 		'checklogin': checklogin(request),
-		'ten_nguoidung': request.session.get('nguoidung', None),
+		'ten_nguoidung': get_nguoidung(request).ten,
 		'chuongdau': allchuong[0],
 		'chuongmoinhat': allchuong[-1],
+		'chuong_gan_nhat': chuong_gan_nhat,
 	}
 	return render(request, 'doctruyen.html', context)
 
@@ -178,7 +190,7 @@ def theloai(request, theloai): # view tìm truyện theo thể loại
 		'truyens_theo_the_loai': truyens_theo_the_loai,
 		'list_thong_baos' : list_thong_baos,
 		'checklogin': checklogin(request),
-		'ten_nguoidung': request.session.get('nguoidung', None)
+		'ten_nguoidung': get_nguoidung(request).ten,
 	}
 	return render(request, 'theloai.html', context)
 
@@ -206,12 +218,12 @@ def view_docchuong(request, id_truyen, id_chap):
 		'alltrang': alltrang,
 		'chaptruoc': chaptruoc,
 		'chapsau': chapsau,
+		'ten_nguoidung': get_nguoidung(request).ten,
 	}
 	return render(request, 'docchuong.html', context)
 	
 def test(request):
 	return render(request, 'lichsu.html')
-
 
 
 
