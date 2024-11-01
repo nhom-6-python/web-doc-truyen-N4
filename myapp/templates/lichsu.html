@@ -42,9 +42,12 @@
 									</h3>
 								</a>
 							</div>
-							<div class="delete-icon">
-								<button class="btndelete"><i class="fa-solid fa-trash"></i></button>
-							</div>
+							<form class="delete-icon" method="post">
+								{% csrf_token %}
+								<input type="text" name="id_ls_xoa" value="{{x.id}}" hidden>
+								<button class="btndelete" type="submit" name="btn-delete"><i
+										class="fa-solid fa-trash"></i></button>
+							</form>
 						</div>
 					</div>
 					{% endfor %}
