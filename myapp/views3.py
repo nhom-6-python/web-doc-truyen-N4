@@ -64,7 +64,7 @@ def get_truyen_yeuthich(request):
                     id_theodoi_xoa = request.POST['id_theodoi_xoa']
                     for x in truyen_yeuthich:
                         if str(x.id) == id_theodoi_xoa:
-                            x.delete()
+                            nguoidung.yeuthich.remove(x)
                 return redirect('/theodoi/')
             list_thong_baos = list_thong_bao(request)
             context = {
@@ -96,6 +96,7 @@ def get_lichsu(request):
                         x.delete()
                     elif x.thoigiandoc.date() not in dates:
                         dates.append(x.thoigiandoc.date())
+                return redirect('/lichsu/')
             if 'btn-loc-ngay' in request.POST: # nút lọc
                 for x in alllichsu:
                     if x.thoigiandoc.date() not in dates and str(x.thoigiandoc.date()) >= request.POST['start-date'] and str(x.thoigiandoc.date()) <= request.POST['end-date']:
