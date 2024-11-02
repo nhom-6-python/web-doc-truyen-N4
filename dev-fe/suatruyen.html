@@ -162,72 +162,92 @@
 
   <main>
     <div class="suatruyen">
-    <div class="trencung">
-      <div class="container">
-        
-        <div class="left">
-          <a class="chevron-left" href="#"><i class="fas fa-chevron-left"></i></a>
-          <div class="tieude"
-          <p>Thêm Thông Tin Truyện</p>
-          <h5>Truyện Chưa Có Tiêu Đề</h5>
-        </div>
-        </div>
+      <div class="trencung">
+        <div class="container">
+          <div class="left">
+            <a class="chevron-left" href="#"><i class="fas fa-chevron-left"></i></a>
+            <div class="tieude">
+              <p>Thêm Thông Tin Truyện</p>
+              <h5>Truyện Chưa Có Tiêu Đề</h5>
+            </div>
+          </div>
 
-        <div class="right">
-          <a href="#" class="buttonhuy">Hủy</a>
+          <div class="right">
+            <a href="#" class="buttonhuy">Hủy</a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="chinhsua">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-5 col-md-12 col-sm-12 col-12">
-            <div class="backgranh">
-              <div class="anh">
-                <a href="#">
-                  <i class="fa-regular fa-image"></i>
-                  <br>
-                  <p> Thêm trang bìa</p>
-                </a>
+      <div class="chinhsua">
+        <div class="container">
+          <form class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+              <div class="backgranh">
+                <div class="anh">
+                  <div class="custom-file-upload" onclick="document.getElementById('image_input1').click()">
+                    <i class="fa-regular fa-image"></i>
+                    <br>
+                    Chọn ảnh bìa
+                    <input type="file" id="image_input1" name="image_input1" accept="image/*"
+                      onchange="displayImage(event, 'uploaded_image1')">
+                  </div>
+                  <img id="uploaded_image1" class="uploaded_image" src="#" alt="Uploaded Image 1">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+              <div class="backgranh">
+                <div class="anh">
+                  <div class="custom-file-upload" onclick="document.getElementById('image_input2').click()">
+                    <i class="fa-regular fa-image"></i>
+                    <br>
+                    Chọn ảnh nền
+
+                    <input type="file" id="image_input2" name="image_input2" accept="image/*"
+                      onchange="displayImage(event, 'uploaded_image2')">
+                  </div>
+                  <img id="uploaded_image2" class="uploaded_image" src="#" alt="Uploaded Image 2">
+                </div>
+
               </div>
 
             </div>
+            <div class="col-lg-8 col-md-12 col-sm-12 col-12" style="margin-left: auto;margin-right: auto;">
+              <div class="chitiettruyen">
+                <h5>Chi Tiết Truyện</h5>
+              </div>
 
-          </div>
-          <div class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <div class="chitiettruyen">
-              <h5>Chi Tiết Truyện</h5>
+              <div class="content">
+                <h6>Tiêu đề</h6>
+                <input type="text" name="tieude" placeholder="Truyện chưa có tiêu đề">
+                <h6>Mô tả</h6>
+                <textarea id="paragraph" name="paragraph" class="paragraph-input"></textarea>
+                <h6>Tác giả</h6>
+                <input class="tacgia" type="text" name="tieude" placeholder="Name">
+                <h6>Thể loại</h6>
+                <div class="category-dropdown">
+                  <div class="category-dropdown-toggle" onclick="toggleDropdown()">Chọn thể loại</div>
+                  <div class="category-dropdown-menu">
+                    <label><input class="input" type="checkbox" name="theloai" value="Van ngao"
+                        onclick="event.stopPropagation()"> 1</label>
+                    <label><input class="input" type="checkbox" name="theloai" value="Ngao Van"
+                        onclick="event.stopPropagation()"> 2</label>
+                    <label><input class="input" type="checkbox" name="theloai" value="Messi"
+                        onclick="event.stopPropagation()"> 3</label>
+                    <label><input class="input" type="checkbox" name="theloai" value="Ronaldo"
+                        onclick="event.stopPropagation()"> 4</label>
+                  </div>
+                </div>
+                <h6>File truyện</h6>
+                <input type="file" id="file_input" name="file_input">
+              </div>
+              <div style="display: flex; justify-content: center;">
+                <button type="submit" class="submit btn-primary" value="Đăng truyện">Đăng truyện</button>
+              </div>
             </div>
-            
-            <div class="content">
-              <h6>Tiêu đề</h6>
-              <input type="text" name="tieude" placeholder="Truyện chưa có tiêu đề">
-              <h6>Mô tả</h6>
-              <textarea id="paragraph" name="paragraph" class="paragraph-input"></textarea>
-              <h6>Tác giả</h6>
-              <input class="tacgia" type="text" name="tieude" placeholder="Name">
-              <h6>Thể loại</h6>
-              <select id="cars" name="cars">
-                <option value="" selected disabled hidden>Chọn một thể loại</option>
-                <option value="Van ngao">Van ngao</option>
-                <option value="Ngao Van">Ngao Van</option>
-                <option value="Messi">Messi</option>
-                <option value="Ronaldo">Ronaldo</option>
-              </select>
-              <h6>File truyện</h6>
-              <select id="cars" name="cars">
-                <option value="" selected disabled hidden>Chọn một thể loại</option>
-                <option value="Van ngao">Van ngao</option>
-                <option value="Ngao Van">Ngao Van</option>
-                <option value="Messi">Messi</option>
-                <option value="Ronaldo">Ronaldo</option>
-              </select>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
-  </div>
   </main>
 
   <!-- FOOTER -->
@@ -236,7 +256,8 @@
     <div class="container">
       <div class="inner-text">
         <div class="inner-contact">Link Github của nhóm 6:
-          <a href="https://github.com/nhom-6-python/btl-python-n6.git" target="_blank"> GitHub <i class="fa-brands fa-github"></i></a>
+          <a href="https://github.com/nhom-6-python/btl-python-n6.git" target="_blank"> GitHub <i
+              class="fa-brands fa-github"></i></a>
         </div>
         <div class="inner-contact">
           Thành viên nhóm:
@@ -252,7 +273,30 @@
   </footer>
   <!-- END FOOTER -->
 
+  <script>
+    function toggleDropdown() {
+      document.querySelector('.category-dropdown-menu').classList.toggle('show');
+    }
 
+    document.addEventListener('click', function (event) {
+      if (!event.target.matches('.category-dropdown-toggle') && !event.target.closest('.category-dropdown-menu')) {
+        document.querySelector('.category-dropdown-menu').classList.remove('show');
+      }
+    });
+    document.querySelector('.custom-file-upload').addEventListener('click', function () {
+      document.querySelector('#image_input').click();
+    });
+
+    function displayImage(event, imgElementId) {
+      const image = document.getElementById(imgElementId);
+      image.src = URL.createObjectURL(event.target.files[0]);
+      image.style.display = 'block';
+      image.onload = function () {
+        URL.revokeObjectURL(image.src);
+      }
+    }
+  </script>
 </body>
+
 
 </html>
