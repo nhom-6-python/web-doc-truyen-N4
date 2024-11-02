@@ -179,7 +179,7 @@
       </div>
       <div class="chinhsua">
         <div class="container">
-          <div class="row">
+          <form class="row">
             <div class="col-lg-6 col-md-12 col-sm-12 col-12">
               <div class="backgranh">
                 <div class="anh">
@@ -187,9 +187,10 @@
                     <i class="fa-regular fa-image"></i>
                     <br>
                     Chọn ảnh bìa
-                    <input type="file" id="image_input1" name="image_input1" accept="image/*" onchange="displayImage(event, 'uploaded_image1')">
-                </div>
-                <img id="uploaded_image1" class="uploaded_image" src="#" alt="Uploaded Image 1">
+                    <input type="file" id="image_input1" name="image_input1" accept="image/*"
+                      onchange="displayImage(event, 'uploaded_image1')">
+                  </div>
+                  <img id="uploaded_image1" class="uploaded_image" src="#" alt="Uploaded Image 1">
                 </div>
               </div>
             </div>
@@ -201,9 +202,10 @@
                     <br>
                     Chọn ảnh nền
 
-                    <input type="file" id="image_input2" name="image_input2" accept="image/*" onchange="displayImage(event, 'uploaded_image2')">
-                </div>
-                <img id="uploaded_image2" class="uploaded_image" src="#" alt="Uploaded Image 2">
+                    <input type="file" id="image_input2" name="image_input2" accept="image/*"
+                      onchange="displayImage(event, 'uploaded_image2')">
+                  </div>
+                  <img id="uploaded_image2" class="uploaded_image" src="#" alt="Uploaded Image 2">
                 </div>
 
               </div>
@@ -222,29 +224,27 @@
                 <h6>Tác giả</h6>
                 <input class="tacgia" type="text" name="tieude" placeholder="Name">
                 <h6>Thể loại</h6>
-                <form action="" target="_blank" method="get" autocomplete="off">
-                  <div class="category-dropdown">
-                    <div class="category-dropdown-toggle" onclick="toggleDropdown()">Chọn thể loại</div>
-                    <div class="category-dropdown-menu">
-                      <label><input class="input" type="checkbox" name="theloai" value="Van ngao"
-                          onclick="event.stopPropagation()"> 1</label>
-                      <label><input class="input" type="checkbox" name="theloai" value="Ngao Van"
-                          onclick="event.stopPropagation()"> 2</label>
-                      <label><input class="input" type="checkbox" name="theloai" value="Messi"
-                          onclick="event.stopPropagation()"> 3</label>
-                      <label><input class="input" type="checkbox" name="theloai" value="Ronaldo"
-                          onclick="event.stopPropagation()"> 4</label>
-                    </div>
+                <div class="category-dropdown">
+                  <div class="category-dropdown-toggle" onclick="toggleDropdown()">Chọn thể loại</div>
+                  <div class="category-dropdown-menu">
+                    <label><input class="input" type="checkbox" name="theloai" value="Van ngao"
+                        onclick="event.stopPropagation()"> 1</label>
+                    <label><input class="input" type="checkbox" name="theloai" value="Ngao Van"
+                        onclick="event.stopPropagation()"> 2</label>
+                    <label><input class="input" type="checkbox" name="theloai" value="Messi"
+                        onclick="event.stopPropagation()"> 3</label>
+                    <label><input class="input" type="checkbox" name="theloai" value="Ronaldo"
+                        onclick="event.stopPropagation()"> 4</label>
                   </div>
-                </form>
+                </div>
                 <h6>File truyện</h6>
                 <input type="file" id="file_input" name="file_input">
               </div>
               <div style="display: flex; justify-content: center;">
-                <input type="submit" class="submit btn-primary" value="Đăng truyện">
+                <button type="submit" class="submit btn-primary" value="Đăng truyện">Đăng truyện</button>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -288,13 +288,13 @@
     });
 
     function displayImage(event, imgElementId) {
-            const image = document.getElementById(imgElementId);
-            image.src = URL.createObjectURL(event.target.files[0]);
-            image.style.display = 'block';
-            image.onload = function() {
-                URL.revokeObjectURL(image.src);
-            }
-        }
+      const image = document.getElementById(imgElementId);
+      image.src = URL.createObjectURL(event.target.files[0]);
+      image.style.display = 'block';
+      image.onload = function () {
+        URL.revokeObjectURL(image.src);
+      }
+    }
   </script>
 </body>
 
