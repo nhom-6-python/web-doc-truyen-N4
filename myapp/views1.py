@@ -173,7 +173,6 @@ def doctruyen(request, id): #view phan mota truyen
 	else:
 		chuongdau = allchuong[0]
 		chuongmoinhat = allchuong[-1]
-	
 	context = {
 		"truyen" : truyen,
 		'nhomdich' : nhomdich,
