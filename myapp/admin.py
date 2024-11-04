@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Truyen, Chap, Trang, Thongbao, Nguoidung, Lichsu
+from .models import Truyen, Chap, Trang, Thongbao, Nguoidung, Lichsu, Theloai
 # Register your models here.
 
 class TruyenAdmin(admin.ModelAdmin):
@@ -21,9 +21,13 @@ class NguoidungAdmin(admin.ModelAdmin):
 class LichsuAdmin(admin.ModelAdmin):
 	list_display = ('id','idchap', 'idtruyen', 'stt', 'tentruyen', 'anhbia','thoigiandoc')
 
+class TheloaiAdmin(admin.ModelAdmin):
+	list_display = ('id', 'theloai')
+
 admin.site.register(Truyen, TruyenAdmin)
 admin.site.register(Chap, ChapAdmin)
 admin.site.register(Trang, TrangAdmin)
 admin.site.register(Thongbao, ThongbaoAdmin)
 admin.site.register(Nguoidung, NguoidungAdmin)
 admin.site.register(Lichsu, LichsuAdmin)
+admin.site.register(Theloai, TheloaiAdmin)

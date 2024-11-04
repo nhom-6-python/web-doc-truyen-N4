@@ -1,7 +1,7 @@
 #Hung
 from django.shortcuts import render, redirect
 from .forms import NguoidungForm
-from .models import Nguoidung, Truyen, Chap, Lichsu
+from .models import Nguoidung, Truyen, Chap, Lichsu, Theloai
 from .views2 import list_thong_bao
 from .views import get_nguoidung, checklogin
 from django.utils import timezone
@@ -71,6 +71,7 @@ def get_truyen_yeuthich(request):
                 'truyen_yeuthich': truyen_yeuthich,
                 'list_thong_baos': list_thong_baos,
                 'nguoidung': get_nguoidung(request),
+                'list_the_loai': Theloai.objects.all().order_by('theloai'),
             }
             return render(request, 'theodoi.html', context)
         
@@ -115,6 +116,7 @@ def get_lichsu(request):
         context = {
             'lichsu_theo_ngay' : lichsu_theo_ngays,
             'nguoidung': get_nguoidung(request),
+            'list_the_loai': Theloai.objects.all().order_by('theloai'),
         }
         return render(request, 'lichsu.html', context)
         

@@ -69,3 +69,6 @@ class Lichsu(models.Model):
 	nguoidoc = models.ForeignKey(Nguoidung, on_delete=models.CASCADE, related_name='lichsu')
 	def formatted_time(self):
 		return self.thoigiandoc.strftime('%d/%m/%Y')	
+
+class Theloai(models.Model):
+	theloai = models.CharField(max_length=255)

@@ -1,6 +1,6 @@
 #Hai
 from django.shortcuts import render, redirect
-from .models import Truyen, Chap, Trang, Thongbao, Nguoidung
+from .models import Truyen, Chap, Trang, Thongbao, Nguoidung, Theloai
 from .forms import TruyenForm
 from datetime import datetime, timedelta
 from django.utils.timezone import make_aware
@@ -92,12 +92,14 @@ def theloai(request, theloai): # view tìm truyện theo thể loại
 		if theloai in x.theloai:
 			truyens_theo_the_loai.append(x)
 	list_thong_baos = list_thong_bao(request)
+
 	context={
 		'theloai': theloai,
 		'truyens_theo_the_loai': truyens_theo_the_loai,
 		'list_thong_baos' : list_thong_baos,
 		'checklogin': checklogin(request),
 		'nguoidung': get_nguoidung(request),
+		'list_the_loais': Theloai.objects.all().order_by('theloai'),
 	}
 	return render(request, 'theloai.html', context)
 
@@ -127,12 +129,15 @@ def home(request): # view trang home
 		'list_thong_baos' : list_thong_baos,
 		'checklogin': checklogin(request),
 		'nguoidung': get_nguoidung(request),
+		'list_the_loais': Theloai.objects.all().order_by('theloai'),
 	}
 	return render(request, 'home.html', context)
 
 def doc_tiep(request, id_truyen): # lấy ra chap đọc gần đây nhất của truyện này
 	truyen = Truyen.objects.get(id=id_truyen)
 	allchuong = list(truyen.chap.all().order_by('stt'))
+	if not allchuong:
+		return False
 	if checklogin(request):
 		nguoidung = get_nguoidung(request)
 		alllichsu = nguoidung.lichsu.all().order_by('-thoigiandoc')
@@ -162,7 +167,13 @@ def doctruyen(request, id): #view phan mota truyen
 					nguoidung.yeuthich.add(truyen)
 			else:
 				return redirect('login')
-	chuong_gan_nhat = doc_tiep(request, id)
+	chuong_gan_nhat = doc_tiep(request, id) #đọc chương gần nhất (trong lịch sử)
+	if not allchuong:
+		chuongdau = chuongmoinhat = False
+	else:
+		chuongdau = allchuong[0]
+		chuongmoinhat = allchuong[-1]
+	
 	context = {
 		"truyen" : truyen,
 		'nhomdich' : nhomdich,
@@ -174,9 +185,10 @@ def doctruyen(request, id): #view phan mota truyen
 		'list_thong_baos' : list_thong_baos,
 		'checklogin': checklogin(request),
 		'nguoidung': get_nguoidung(request),
-		'chuongdau': allchuong[0],
-		'chuongmoinhat': allchuong[-1],
+		'chuongdau': chuongdau,
+		'chuongmoinhat': chuongmoinhat,
 		'chuong_gan_nhat': chuong_gan_nhat,
+		'list_the_loais': Theloai.objects.all().order_by('theloai'),
 	}
 	return render(request, 'doctruyen.html', context)
 
@@ -205,7 +217,8 @@ def view_docchuong(request, id_truyen, id_chap): #đọc theo chương
 		'chaptruoc': chaptruoc,
 		'chapsau': chapsau,
 		'nguoidung': get_nguoidung(request),
-		'checklogin': checklogin(request)
+		'checklogin': checklogin(request),
+		'list_the_loais': Theloai.objects.all().order_by('theloai'),
 	}
 	return render(request, 'docchuong.html', context)
 	
@@ -225,6 +238,7 @@ def timkiem(request):
 		'search_value': request.POST['search_value'],
 		'checklogin': checklogin(request),
 		'nguoidung': get_nguoidung(request),
+		'list_the_loais': Theloai.objects.all().order_by('theloai'),
 	}
 	return render(request, 'timkiem.html', context)
 
