@@ -45,9 +45,9 @@
                 <div class="btn" style="text-align: unset;">
                   <form method="post">
                     {% csrf_token %}
-                    <button type="submit" id="btn1" name="btn-yeuthich" class="btn btn-primary">Thêm vào yêu
-                      thích</button>
+                    <button type="submit" id="btn1" name="btn-yeuthich" class="btn btn-primary">Theo dõi</button>
                   </form>
+                  {% if chuong_gan_nhat != False %}
                   <a href="chuong={{chuongdau.id}}/" class="btn btn-primary">Đọc từ đầu</a>
 
                   <a href="chuong={{chuongmoinhat.id}}/" class="btn btn-primary">Đọc chương mới
@@ -56,6 +56,10 @@
                   <a href="chuong={{chuong_gan_nhat.id}}/" class="btn btn-primary">Đọc tiếp</a>
                   {% else %}
                   <a href="/login/" class="btn btn-primary">Đọc tiếp</a>
+                  {% endif %}
+                  {% else %}
+                  <span>Hiện chưa có chap nào được đang tải, hãy bấm theo dõi để nhận
+                    thông tin sớm nhất</span>
                   {% endif %}
                 </div>
               </div>
