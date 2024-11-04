@@ -70,7 +70,7 @@ def get_truyen_yeuthich(request):
             context = {
                 'truyen_yeuthich': truyen_yeuthich,
                 'list_thong_baos': list_thong_baos,
-                'ten_nguoidung': get_nguoidung(request).ten,
+                'nguoidung': get_nguoidung(request),
             }
             return render(request, 'theodoi.html', context)
         
@@ -114,7 +114,7 @@ def get_lichsu(request):
             lichsu_theo_ngays.append(history)
         context = {
             'lichsu_theo_ngay' : lichsu_theo_ngays,
-            'ten_nguoidung': get_nguoidung(request).ten,
+            'nguoidung': get_nguoidung(request),
         }
         return render(request, 'lichsu.html', context)
         

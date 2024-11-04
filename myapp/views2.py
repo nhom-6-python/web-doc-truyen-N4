@@ -14,3 +14,15 @@ def list_thong_bao(request):
         nguoidung = get_nguoidung(request)
         print(nguoidung)
         return nguoidung.thongbao.all()
+
+def dangtruyen(request):
+    nguoidung = get_nguoidung(request)
+    if checklogin(request) :
+        context = {
+            'checklogin': checklogin(request),
+            'nguoidung': get_nguoidung(request),
+        }
+        return render(request, 'dangtruyen.html', context)
+    else:
+        return redirect('/login/')
+        

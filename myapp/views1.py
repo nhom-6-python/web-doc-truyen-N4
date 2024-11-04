@@ -97,7 +97,7 @@ def theloai(request, theloai): # view tìm truyện theo thể loại
 		'truyens_theo_the_loai': truyens_theo_the_loai,
 		'list_thong_baos' : list_thong_baos,
 		'checklogin': checklogin(request),
-		'ten_nguoidung': get_nguoidung(request).ten,
+		'nguoidung': get_nguoidung(request),
 	}
 	return render(request, 'theloai.html', context)
 
@@ -126,7 +126,7 @@ def home(request): # view trang home
 		'list_top_nhomdich_moiluc' : list_top_nhomdich_moiluc,
 		'list_thong_baos' : list_thong_baos,
 		'checklogin': checklogin(request),
-		'ten_nguoidung': get_nguoidung(request).ten,
+		'nguoidung': get_nguoidung(request),
 	}
 	return render(request, 'home.html', context)
 
@@ -173,7 +173,7 @@ def doctruyen(request, id): #view phan mota truyen
 		'list_the_loai' : list_the_loai,
 		'list_thong_baos' : list_thong_baos,
 		'checklogin': checklogin(request),
-		'ten_nguoidung': get_nguoidung(request).ten,
+		'nguoidung': get_nguoidung(request),
 		'chuongdau': allchuong[0],
 		'chuongmoinhat': allchuong[-1],
 		'chuong_gan_nhat': chuong_gan_nhat,
@@ -204,7 +204,7 @@ def view_docchuong(request, id_truyen, id_chap): #đọc theo chương
 		'alltrang': alltrang,
 		'chaptruoc': chaptruoc,
 		'chapsau': chapsau,
-		'ten_nguoidung': get_nguoidung(request).ten,
+		'nguoidung': get_nguoidung(request),
 		'checklogin': checklogin(request)
 	}
 	return render(request, 'docchuong.html', context)
@@ -224,7 +224,7 @@ def timkiem(request):
 		'timkiems': timkiems,
 		'search_value': request.POST['search_value'],
 		'checklogin': checklogin(request),
-		'ten_nguoidung': get_nguoidung(request).ten,
+		'nguoidung': get_nguoidung(request),
 	}
 	return render(request, 'timkiem.html', context)
 
