@@ -16,5 +16,6 @@ urlpatterns = [
     path('test/', views1.test, name='test'),
     path('lichsu/', views3.get_lichsu, name='lichsu'),
     path('timkiem/', views1.timkiem, name='timkiem'),
-    path('dangtruyen/', views2.dangtruyen, name='dangtruyen')
+    path('dangtruyen/', views2.dangtruyen, name='dangtruyen'),
+    path('truyencuaban/', views2.truyencuaban, name='truyencuaban'),
 ]

@@ -17,6 +17,9 @@ class Truyen(models.Model):
 	@property
 	def chapmoinhat(self):
 		return self.chap.order_by('-thoigiandang').first()
+	@property
+	def sochap(self):
+		return len(list(self.chap.all()))
 	
 class Chap(models.Model):
 	stt = models.FloatField(default=0)

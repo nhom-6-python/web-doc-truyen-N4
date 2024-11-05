@@ -9,7 +9,7 @@ from django.db.models import Sum,Q, Value
 from django.db.models.functions import Coalesce
 from .views import get_nguoidung, checklogin
 
-def list_thong_bao(request):
+def list_thong_bao(request): # trả về list thông báo
     if checklogin(request):
         nguoidung = get_nguoidung(request)
         print(nguoidung)
@@ -48,3 +48,16 @@ def dangtruyen(request): # chức năng đang truyện của nhóm dịch
     else:
         return redirect('/login/')
         
+def truyencuaban(request):
+    nhomdich = get_nguoidung(request)
+    list_truyencuaban = list(nhomdich.truyendang.all().order_by('ten'))
+    if request.method == 'POST':
+        if 'btn-delete' in request.POST:
+            id_theodoi_xoa = request.POST['id_theodoi_xoa']
+            truyen_xoa = Truyen.objects.get(id=id_theodoi_xoa)
+            nhomdich.truyendang.remove(truyen_xoa)
+        return redirect('/truyencuaban/')
+    context = {
+        'list_truyencuaban': list_truyencuaban,
+    }
+    return render(request, 'truyencuaban.html', context)
