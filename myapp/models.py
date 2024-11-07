@@ -11,8 +11,6 @@ class Truyen(models.Model):
 	luotthich = models.BigIntegerField(default=0)
 	anhbia = models.FileField(upload_to='anhbia/')
 	anhnen = models.FileField(upload_to='anhnen/')
-
-
 	@property
 	def luotxem(self):
 		return sum(x.luotxem for x in self.chap.all())
