@@ -97,7 +97,23 @@ def suatruyen(request, id):
     # list_truyencuaban = list(nhomdich.truyendang.all().order_by('ten'))
     truyensua = Truyen.objects.get(id=id)
     if request.method == 'POST':
-        return redirect('/home/')
+        if 'btn-save-sua' in request.POST:
+            try:
+                truyensua.anhnen = request.FILES['anhnen']
+            except:
+                pass
+            try:
+                truyensua.anhbia = request.FILES['anhbia']
+            except:
+                pass
+            truyensua.tacgia = request.POST['tacgia']
+            truyensua.ten = request.POST['ten']
+            truyensua.theloai = ""
+            for x in request.POST.getlist('theloais'):
+                truyensua.theloai += x + ','
+            truyensua.mota = request.POST['mota']
+            truyensua.save()
+            return redirect(f'/truyen_id={truyensua.id}/')
     if truyensua in nhomdich.truyendang.all(): #check xem bạn có phải nhóm dịch truyện này ko?
         sochuong = 0
         allchuong = list(truyensua.chap.all().order_by('stt'))

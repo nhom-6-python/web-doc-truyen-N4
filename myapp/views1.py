@@ -165,6 +165,8 @@ def doctruyen(request, id): #view phan mota truyen
 				nguoidung = get_nguoidung(request)
 				if truyen not in nguoidung.yeuthich.all():
 					nguoidung.yeuthich.add(truyen)
+				truyen.luotthich = truyen.yeuthich.count()
+				truyen.save()
 			else:
 				return redirect('login')
 	chuong_gan_nhat = doc_tiep(request, id) #đọc chương gần nhất (trong lịch sử)

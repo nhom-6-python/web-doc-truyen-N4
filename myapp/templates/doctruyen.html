@@ -30,7 +30,7 @@
                     <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
                     <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
                   </svg>
-                  <span> 22 phút trước</span>
+                  <span>cập nhật gần nhất: {{chuongmoinhat.thoigiandang|naturaltime}}</span>
                 </div>
                 <div class="cactheloai">
                   {% for x in list_the_loai %}
@@ -60,6 +60,9 @@
                   {% else %}
                   <span>Hiện chưa có chap nào được đang tải, hãy bấm theo dõi để nhận
                     thông tin sớm nhất</span>
+                  {% endif %}
+                  {% if nguoidung.vaitro == 'nhomdich' %}
+                  <a href="/suatruyen_id={{truyen.id}}/" class="btn btn-primary">Sửa truyện</a>
                   {% endif %}
                 </div>
               </div>
@@ -97,6 +100,7 @@
                         <h6>THÔNG TIN THÊM</h6>
                         <p><span class="bold">{{sochuong}}</span> chương đã đăng</p>
                         <p><span class="bold">{{truyen.luotxem|intcomma}}</span> lượt xem</p>
+                        <p><span class="bold">{{truyen.luotthich|intcomma}}</span> lượt thích</p>
                       </div>
                     </div>
                   </div>

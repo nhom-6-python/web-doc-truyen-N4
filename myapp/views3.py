@@ -65,6 +65,9 @@ def get_truyen_yeuthich(request):
                     for x in truyen_yeuthich:
                         if str(x.id) == id_theodoi_xoa:
                             nguoidung.yeuthich.remove(x)
+                    truyen = Truyen.objects.get(id=id_theodoi_xoa)
+                    truyen.luotthich = truyen.yeuthich.count()
+                    truyen.save()
                 return redirect('/theodoi/')
             list_thong_baos = list_thong_bao(request)
             context = {

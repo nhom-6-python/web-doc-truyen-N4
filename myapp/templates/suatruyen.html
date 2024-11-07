@@ -11,12 +11,12 @@
 					<div class="container">
 						<div class="anhnen" style="background-image: url('{{truyen.anhnen.url}}');">
 							<button class="">đổi ảnh nền</button>
-							<input type="file" class="" name="anhnen" value="{{truyen.anhbia}}">
+							<input type="file" class="" name="anhnen">
 							<div class="row">
 								<div class="col-12">
 									<img src="{{truyen.anhbia.url}}" alt="anh1">
 									<button class="">đổi ảnh bìa</button>
-									<input type="file" class="" name="anhbia" value="{{truyen.anhbia}}">
+									<input type="file" class="" name="anhbia">
 									<h2>
 										<span style="font-size: medium; opacity:0.6;"><input type="text" name="tacgia"
 												value="{{truyen.tacgia}}" class=""
@@ -73,6 +73,9 @@
 
 									{% if chuong_gan_nhat != False %}
 									<a href="/truyen_id={{truyen.id}}/chuong={{chuongdau.id}}/"
+										class="btn btn-primary">Theo dõi</a>
+
+									<a href="/truyen_id={{truyen.id}}/chuong={{chuongdau.id}}/"
 										class="btn btn-primary">Đọc
 										từ đầu</a>
 
@@ -89,6 +92,7 @@
 									<span>Hiện chưa có chap nào được đang tải, hãy bấm theo dõi để nhận
 										thông tin sớm nhất</span>
 									{% endif %}
+									<button type="submit" name="btn-save-sua" class="btn btn-primary">Save</button>
 								</div>
 							</div>
 						</div>
@@ -127,6 +131,8 @@
 												<h6>THÔNG TIN THÊM</h6>
 												<p><span class="bold">{{sochuong}}</span> chương đã đăng</p>
 												<p><span class="bold">{{truyen.luotxem|intcomma}}</span> lượt xem</p>
+												<p><span class="bold">{{truyen.luotthich|intcomma}}</span> lượt thích
+												</p>
 											</div>
 										</div>
 									</div>
@@ -149,7 +155,6 @@
 										</div>
 									</a>
 									{% endfor %}
-									<button type="submit" name="btn-save-sua">Save</button>
 								</div>
 							</div>
 							<div class="col-lg-3 col-md-12 col-sm-12 col-12">
