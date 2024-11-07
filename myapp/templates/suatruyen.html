@@ -1,0 +1,260 @@
+{% extends "index.html" %}
+{% block content %}
+{% load humanize %}
+
+<body>
+	<main>
+		<div class="doctruyen">
+			<form class="container" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="intro">
+					<div class="container">
+						<div class="anhnen" style="background-image: url('{{truyen.anhnen.url}}');">
+							<button class="">đổi ảnh nền</button>
+							<input type="file" class="" name="anhnen" value="{{truyen.anhbia}}">
+							<div class="row">
+								<div class="col-12">
+									<img src="{{truyen.anhbia.url}}" alt="anh1">
+									<button class="">đổi ảnh bìa</button>
+									<input type="file" class="" name="anhbia" value="{{truyen.anhbia}}">
+									<h2>
+										<span style="font-size: medium; opacity:0.6;"><input type="text" name="tacgia"
+												value="{{truyen.tacgia}}" class=""
+												placeholder="Đổi tên tác giả"></input></span>
+										<br>
+										<input type="text" class="" name="ten" value="{{truyen.ten}}"
+											placeholder="đổi tên truyện">
+									</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="container">
+						<div class="info">
+							<div class="desc">
+								<div class="thoigian">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+										class="bi bi-clock" viewBox="0 0 16 16">
+										<path
+											d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
+										<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
+									</svg>
+									<span> 22 phút trước</span>
+								</div>
+								<div class="cactheloai">
+									{% for x in list_the_loai %}
+									<a href="/theloai={{x}}/">
+										<div class="theloai">
+											<span style="font-weight: bold;">{{x}}</span>
+										</div>
+									</a>
+									{% endfor %}
+									<div class="category-dropdown">
+										<div class="category-dropdown-toggle" onclick="toggleDropdown()">chỉnh sửa thể
+											loại
+										</div>
+										<div class="category-dropdown-menu">
+											{% for i in list_the_loais %}
+											{% if i.theloai in truyen.theloai %}
+											<label><input class="input" type="checkbox" name="theloais"
+													value="{{i.theloai}}" onclick="event.stopPropagation()" checked>
+												{{i.theloai}} </label>
+											{% else %}
+											<label><input class="input" type="checkbox" name="theloais"
+													value="{{i.theloai}}" onclick="event.stopPropagation()">
+												{{i.theloai}} </label>
+											{% endif %}
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+
+								<div class="btn" style="text-align: unset;">
+
+									{% if chuong_gan_nhat != False %}
+									<a href="/truyen_id={{truyen.id}}/chuong={{chuongdau.id}}/"
+										class="btn btn-primary">Đọc
+										từ đầu</a>
+
+									<a href="/truyen_id={{truyen.id}}/chuong={{chuongmoinhat.id}}/"
+										class="btn btn-primary">Đọc chương mới
+										nhất</a>
+									{% if checklogin %}
+									<a href="/truyen_id={{truyen.id}}/chuong={{chuong_gan_nhat.id}}/"
+										class="btn btn-primary">Đọc tiếp</a>
+									{% else %}
+									<a href="/login/" class="btn btn-primary">Đọc tiếp</a>
+									{% endif %}
+									{% else %}
+									<span>Hiện chưa có chap nào được đang tải, hãy bấm theo dõi để nhận
+										thông tin sớm nhất</span>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="content">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-9 col-md-12 col-sm-12 col-12">
+								<div class="thongtin">
+									<div class="row">
+										<div>
+											<a class="user" href="#">
+												<div class="circle-icon">
+													ND
+												</div>
+												<div>
+													<h6>{{nhomdich.ten}}</h6>
+													<p>{{nhomdich.sotruyendadang}} truyện đã đăng</p>
+												</div>
+											</a>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<p><input type="textarea" class="paragraph-input" name="mota"
+													value="{{truyen.mota}}"></p>
+
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-12 ">
+											<div class="trangchinhthuc">
+												<h6>THÔNG TIN THÊM</h6>
+												<p><span class="bold">{{sochuong}}</span> chương đã đăng</p>
+												<p><span class="bold">{{truyen.luotxem|intcomma}}</span> lượt xem</p>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<br>
+								<div class="allchuong ">
+									{% for x in allchuong %}
+									<a href="/truyen_id={{truyen.id}}/chuong={{x.id}}/">
+										<div class="chuong">
+											<div class="chuongtrai">
+												<div>
+													<h4 class="tenchuong">Chương {{x.stt}}</h4>
+												</div>
+												<div style="padding-left:15px;">
+													<p class="noidungchuong">{{x.ten}}</p>
+													<p>{{x.thoigiandang|naturaltime}}</p>
+												</div>
+											</div>
+										</div>
+									</a>
+									{% endfor %}
+									<button type="submit" name="btn-save-sua">Save</button>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-12 col-sm-12 col-12">
+								<div class="dexuat">
+									<div class="row">
+										<div>
+											<h6>CÙNG NHÓM DỊCH</h6>
+											{% for x in truyen_cung_nhom_dich %}
+											<a href="/truyen_id={{x.id}}/">
+												<div class="truyendexuat">
+													<img src="{{x.anhbia.url}}" alt="{{x.ten}}">
+													<div class="detail">
+														<div class="noidung" style="color:red">
+															{{x.ten}}
+														</div>
+														<div>
+															<span class="sochuong">C.{{x.chapmoinhat.stt}}</span>
+															<span>{{x.chapmoinhat.thoigiandang|naturaltime}}</span>
+														</div>
+													</div>
+
+												</div>
+											</a>
+											{% endfor %}
+											<h6>ĐỀ XUẤT</h6>
+											{% for x in truyen_de_xuat %}
+											<a href="/truyen_id={{x.id}}/">
+												<div class="truyendexuat">
+													<img src="{{x.anhbia.url}}" alt="{{x.ten}}">
+													<div class="detail">
+														<div class="noidung" style="color:red;">
+															{{x.ten}}
+														</div>
+														<div>
+															<span class="sochuong">C.{{x.chapmoinhat.stt}}</span>
+															<span>{{x.chapmoinhat.thoigiandang|naturaltime}}</span>
+														</div>
+													</div>
+
+												</div>
+											</a>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+	</main>
+	<!-- FOOTER -->
+	<footer class="footer">
+		<!-- <p class="float-end"><a href="#">Back to top</a></p> -->
+		<div class="container">
+			<div class="inner-text">
+				<div class="inner-contact">Link Github của nhóm 6:
+					<a href="github.com" target="_blank">github.com</a>
+				</div>
+				<div class="inner-contact">
+					Thành viên nhóm:
+				</div>
+				<div class="inner-member">B22DCCN261 - Hoàng Sơn Hải</div>
+				<div class="inner-member">B22DCKH131 - Hoàng Khánh Văn</div>
+				<div class="inner-member">B22DCKH129 - Nguyễn Hữu Trường</div>
+				<div class="inner-member">B22DCCN633 - Thái Hữu Phúc</div>
+				<div class="inner-member">B22DCCN371 - Trịnh Mạnh Hùng</div>
+			</div>
+		</div>
+
+	</footer>
+	<!-- END FOOTER -->
+
+
+	<script src="/docs/5.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+
+</body>
+
+<script>
+	function toggleDropdown() {
+		document.querySelector('.category-dropdown-menu').classList.toggle('show');
+	}
+
+	document.addEventListener('click', function (event) {
+		if (!event.target.matches('.category-dropdown-toggle') && !event.target.closest('.category-dropdown-menu')) {
+			document.querySelector('.category-dropdown-menu').classList.remove('show');
+		}
+	});
+	document.querySelector('.custom-file-upload').addEventListener('click', function () {
+		document.querySelector('#image_input').click();
+	});
+
+	function displayImage(event, imgElementId) {
+		const image = document.getElementById(imgElementId);
+		image.src = URL.createObjectURL(event.target.files[0]);
+		image.style.display = 'block';
+		image.onload = function () {
+			URL.revokeObjectURL(image.src);
+		}
+	}
+</script>
+
+{% endblock %}
