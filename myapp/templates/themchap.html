@@ -1,0 +1,77 @@
+{% extends "index.html" %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block content %}
+{% load humanize %}
+
+<main>
+	<div class="suatruyen">
+		<div class="trencung">
+			<div class="container">
+				<div class="left">
+					<a class="chevron-left" href="#"><i class="fas fa-chevron-left"></i></a>
+					<div class="tieude">
+						<p>Thêm một chương mới cho truyên:</p>
+						<h5>{{truyen.ten}}</h5>
+					</div>
+				</div>
+
+				<div class="right">
+					<a href="#" class="buttonhuy">Hủy</a>
+				</div>
+			</div>
+		</div>
+		<div class="chinhsua">
+			<div class="container">
+				<form class="row" method="post" enctype="multipart/form-data"
+					action="{% url 'previewchap' id=truyen.id %}">
+					{% csrf_token %}
+					<div class="col-lg-8 col-md-12 col-sm-12 col-12" style="margin-left: auto;margin-right: auto;">
+						<div class="chitiettruyen">
+							<h5>Mô tả chương</h5>
+						</div>
+						<div class="content">
+							<h6>Số thứ tự chương</h6>
+							<input type="number" step="any" name="stt" placeholder="Truyện chưa có tiêu đề">
+							<h6>Tên chương</h6>
+							<input id="paragraph" name="ten" class="paragraph-input" type="text"></input>
+							<h6>Tải lên chương (chọn file hoặc thư mục):</h6>
+							<input type="file" name="alltrang" webkitdirectory multiple />
+						</div>
+						<div style="display: flex; justify-content: center;">
+							<button type="submit" class="submit btn-primary" name="btn-dangtruyen">Xem trước</button>
+							<button type="submit" class="submit btn-primary" name="btn-savechap">Save</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</main>
+
+<script>
+	function toggleDropdown() {
+		document.querySelector('.category-dropdown-menu').classList.toggle('show');
+	}
+
+	document.addEventListener('click', function (event) {
+		if (!event.target.matches('.category-dropdown-toggle') && !event.target.closest('.category-dropdown-menu')) {
+			document.querySelector('.category-dropdown-menu').classList.remove('show');
+		}
+	});
+	document.querySelector('.custom-file-upload').addEventListener('click', function () {
+		document.querySelector('#image_input').click();
+	});
+
+	function displayImage(event, imgElementId) {
+		const image = document.getElementById(imgElementId);
+		image.src = URL.createObjectURL(event.target.files[0]);
+		image.style.display = 'block';
+		image.onload = function () {
+			URL.revokeObjectURL(image.src);
+		}
+	}
+</script>
+
+{% endblock %}

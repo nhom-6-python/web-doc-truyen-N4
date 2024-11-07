@@ -19,4 +19,6 @@ urlpatterns = [
     path('dangtruyen/', views2.dangtruyen, name='dangtruyen'),
     path('truyencuaban/', views2.truyencuaban, name='truyencuaban'),
     path('suatruyen_id=<int:id>/', views2.suatruyen, name='suatruyen'),
-]
+    path('themchap_truyen_id=<int:id>/', views2.themchap, name='themchap'),
+    path('themchap_truyen_id=<int:id>/previewchap/', views2.previewchap, name='previewchap'),
+] 

@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.db.models import Sum,Q, Value
 from django.db.models.functions import Coalesce
 from .views import get_nguoidung, checklogin
+import base64
 
 def list_thong_bao(request): # trả về list thông báo
     if checklogin(request):
@@ -42,7 +43,7 @@ def dangtruyen(request): # chức năng đang truyện của nhóm dịch
         context = {
             'checklogin': checklogin(request),
             'nguoidung': get_nguoidung(request),
-            'list_the_loai': Theloai.objects.all().order_by('theloai'),
+            'list_the_loais': Theloai.objects.all().order_by('theloai'),
         }
         return render(request, 'dangtruyen.html', context)
     else:
@@ -61,7 +62,7 @@ def truyencuaban(request): # trang quản lý truyện đã đăng
         'list_truyencuaban': list_truyencuaban,
 		'checklogin': checklogin(request),
 		'nguoidung': get_nguoidung(request),
-
+        'list_the_loais': Theloai.objects.all().order_by('theloai'),
     }
     return render(request, 'truyencuaban.html', context)
 
@@ -92,7 +93,7 @@ def top_view(time):
 		)
 		return top_view
 
-def suatruyen(request, id):
+def suatruyen(request, id): #trang sửa thông tin truyện
     nhomdich = get_nguoidung(request)
     # list_truyencuaban = list(nhomdich.truyendang.all().order_by('ten'))
     truyensua = Truyen.objects.get(id=id)
@@ -132,6 +133,7 @@ def suatruyen(request, id):
             'truyen_de_xuat' : truyen_de_xuat,
             'list_the_loai' : list_the_loai,
             'list_thong_baos' : list_thong_baos,
+            # thanh nav
             'checklogin': checklogin(request),
             'nguoidung': get_nguoidung(request),
             'list_the_loais': Theloai.objects.all().order_by('theloai'),
@@ -139,3 +141,56 @@ def suatruyen(request, id):
         return render(request, 'suatruyen.html', context)
     else:
         return redirect('/login/')
+
+def themchap(request, id): # thêm chap mới
+    nguoidung = get_nguoidung(request)
+    truyen = Truyen.objects.get(id=id)
+    if truyen in nguoidung.truyendang.all():
+        context = {
+            'truyen': truyen,
+            # thanh nav
+            'nguoidung': get_nguoidung(request),
+            'checklogin': checklogin(request),
+            'list_the_loais': Theloai.objects.all().order_by('theloai'),
+        }
+        return render(request, 'themchap.html', context)
+    else:
+        return redirect('/login/')
+
+def previewchap(request, id):
+    if request.method == 'POST':
+            if 'btn-dangtruyen' in request.POST:
+                truyen = Truyen.objects.get(id=id)
+                stt = request.POST['stt']
+                ten = request.POST['ten']
+                chap = Chap(stt = stt, ten=ten, truyen = truyen)
+                alltrang_files = request.FILES.getlist('alltrang')
+                alltrang_files.sort(key=lambda x: x.name) 
+                # Lưu các file ảnh vào một danh sách để hiển thị
+                alltrang = list()
+                for x in alltrang_files:
+                    anh = base64.b64encode(x.read()).decode('utf-8')
+                    alltrang.append(anh)
+                context = {
+                    'alltrang' : alltrang,
+                    'chap': chap,
+                    'truyen': truyen,
+                                # thanh nav
+                    'nguoidung': get_nguoidung(request),
+                    'checklogin': checklogin(request),
+                    'list_the_loais': Theloai.objects.all().order_by('theloai'),
+                }
+                return render(request, 'previewchap.html', context)
+            if 'btn-savechap' in request.POST:
+                truyen = Truyen.objects.get(id=id)
+                stt = request.POST['stt']
+                ten = request.POST['ten']
+                chap = Chap(stt = stt, ten=ten, truyen = truyen)
+                chap.save()
+                alltrang_files = request.FILES.getlist('alltrang')
+                alltrang_files.sort(key=lambda x: x.name) 
+                for x in alltrang_files:
+                    Trang.objects.create(chap=chap, anh = x)
+                return redirect(f'/truyen_id={truyen.id}/chuong={chap.id}/')
+    else:
+        return redirect('/home/')

@@ -120,10 +120,25 @@
                           <p>{{x.thoigiandang|naturaltime}}</p>
                         </div>
                       </div>
+                      <div class="chuongphai">
+                        <button class="circular-btn">
+                          <a href="/home/" class=""><i class="fa-solid fa-pen-to-square"></i></i></a>
+                        </button>
+                      </div>
                     </div>
                   </a>
-
                   {% endfor %}
+                  {% if nguoidung == nhomdich %}
+                  <a href="/themchap_truyen_id={{truyen.id}}/">
+                    <div class="chuong">
+                      <div class="chuongtrai">
+                        <div>
+                          <h4 class="tenchuong">thêm chương</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                  {% endif %}
                 </div>
               </div>
               <div class="col-lg-3 col-md-12 col-sm-12 col-12">
