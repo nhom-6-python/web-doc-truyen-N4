@@ -106,4 +106,5 @@ body {
 .carousel-control-next,
 .carousel-control-prev {
   width: 10%;
+  bottom: -60px;
 }
