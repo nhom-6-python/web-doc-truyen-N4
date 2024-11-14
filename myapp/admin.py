@@ -12,11 +12,11 @@ class TrangAdmin(admin.ModelAdmin):
 	list_display = ('id', 'anh', 'chap')
 
 class ThongbaoAdmin(admin.ModelAdmin):
-	list_display = ('id','theloai','noidung')
+	list_display = ('id','theloai', 'noidung','chap')
 
 class NguoidungAdmin(admin.ModelAdmin):
 	list_display = ('id','ten', 'matkhau', 'vaitro', 'luotxem')
-	filter_horizontal = ('yeuthich', 'thongbao', 'truyendang', )
+	filter_horizontal = ('yeuthich', 'thongbao', 'truyendang')
 
 class LichsuAdmin(admin.ModelAdmin):
 	list_display = ('id','idchap', 'idtruyen', 'stt', 'tentruyen', 'anhbia','thoigiandoc')

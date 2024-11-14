@@ -38,9 +38,8 @@ class Trang(models.Model):
 class Thongbao(models.Model):
 	theloai = models.CharField(max_length=255, default="Thông báo mới!!")
 	noidung = models.CharField(max_length=255)
-
+	chap = models.ForeignKey(Chap, on_delete=models.CASCADE, related_name='chap', default=None)
 class Nguoidung(models.Model):
-
     ten = models.CharField(max_length=255)
     matkhau = models.CharField(max_length=255)
     # Sử dụng choices đúng cấu trúc
