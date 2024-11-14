@@ -1,7 +1,7 @@
 {% extends "index.html" %}
 {% block content %}
 {% load humanize %}
-
+ 
 <body>
   <main>
     <div class="doctruyen">
@@ -45,24 +45,24 @@
                 <div class="btn" style="text-align: unset;">
                   <form method="post">
                     {% csrf_token %}
-                    <button type="submit" id="btn1" name="btn-yeuthich" class="btn btn-primary">Theo dõi</button>
+                    <button type="submit" id="btn1" name="btn-yeuthich" class="btndoctruyen" style='margin-top:21px;'>Theo dõi</button>
                   </form>
                   {% if chuong_gan_nhat != False %}
-                  <a href="chuong={{chuongdau.id}}/" class="btn btn-primary">Đọc từ đầu</a>
+                  <a href="chuong={{chuongdau.id}}/" class="btndoctruyen">Đọc từ đầu</a>
 
-                  <a href="chuong={{chuongmoinhat.id}}/" class="btn btn-primary">Đọc chương mới
+                  <a href="chuong={{chuongmoinhat.id}}/" class="btndoctruyen">Đọc chương mới
                     nhất</a>
                   {% if checklogin %}
-                  <a href="chuong={{chuong_gan_nhat.id}}/" class="btn btn-primary">Đọc tiếp</a>
+                  <a href="chuong={{chuong_gan_nhat.id}}/" class="btndoctruyen">Đọc tiếp</a>
                   {% else %}
-                  <a href="/login/" class="btn btn-primary">Đọc tiếp</a>
+                  <a href="/login/" class="btndoctruyen">Đọc tiếp</a>
                   {% endif %}
                   {% else %}
                   <span>Hiện chưa có chap nào được đang tải, hãy bấm theo dõi để nhận
                     thông tin sớm nhất</span>
                   {% endif %}
                   {% if nguoidung.vaitro == 'nhomdich' %}
-                  <a href="/suatruyen_id={{truyen.id}}/" class="btn btn-primary">Sửa truyện</a>
+                  <a href="/suatruyen_id={{truyen.id}}/" class="btndoctruyen">Sửa truyện</a>
                   {% endif %}
                 </div>
               </div>
@@ -113,9 +113,9 @@
                     <div class="chuong">
                       <div class="chuongtrai">
                         <div>
-                          <h4 class="tenchuong">Chương {{x.stt}}</h4>
+                          <h4 class="tenchuong" style="color:#2f2d2d;">Chương {{x.stt}}</h4>
                         </div>
-                        <div style="padding-left:15px;">
+                        <div style="padding-left:15px; color:#2f2d2d;">
                           <p class="noidungchuong">{{x.ten}}</p>
                           <p>{{x.thoigiandang|naturaltime}}</p>
                         </div>
