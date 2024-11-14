@@ -9,27 +9,26 @@
 	<section id="truyentheodoi">
 		<div class="container">
 			<div class="inner-title font-bold">
-				TÌM VỚI TỪ KHÓA <span style="color:blue;">"{{search_value}}" </span> ({{timkiems|length}} kết quả)
+				TÌM VỚI TỪ KHÓA <span style="color:rgba(0, 85, 255, 0.634);">"{{search_value}}" </span>
+				({{timkiems|length}} kết quả)
 			</div>
 			<div class="inner-list">
 				<div class="row">
 					{% for x in timkiems %}
 					<div class="col-lg-2 col-md-2 col-sm-3 col-4">
-						<div class="image-container">
+						<a href="/truyen_id={{x.id}}/">
+							<img src="{{x.anhbia.url}}" alt="{{x.ten}}" loading="lazy" width="320" height="480">
+						</a>
+						<div class="inner-name">
 							<a href="/truyen_id={{x.id}}/">
-								<img src="{{x.anhbia.url}}" alt="{{x.ten}}" loading="lazy" width="320" height="480">
+								<h3>{{x.ten}}
+								</h3>
 							</a>
-							<div class="inner-name">
-								<a href="/truyen_id={{x.id}}/">
-									<h3>{{x.ten}}
-									</h3>
-								</a>
-								<a href="/truyen_id={{x.id}}/">
-									<h3 class="inner-chap">
-										Ch.{{x.chapmoinhat.stt}}
-									</h3>
-								</a>
-							</div>
+							<a href="/truyen_id={{x.id}}/">
+								<h3 class="inner-chap">
+									Ch.{{x.chapmoinhat.stt}}
+								</h3>
+							</a>
 						</div>
 					</div>
 					{% endfor %}

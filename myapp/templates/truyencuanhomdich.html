@@ -8,7 +8,7 @@
 <main>
 	<div class="truyentheodoi">
 		<div class="container">
-			<h3>Truyện của người dịch: {{nhomdich.ten}}</h3>
+			<h3>Truyện của nhóm dịch: {{nhomdich.ten}}</h3>
 			<div class="truyen">
 				<div class="row">
 					{% for x in truyen_da_dang %}
@@ -22,12 +22,6 @@
 									<div class="description">{{x.ten}} - Ch.{{x.chapmoinhat.stt}}</div>
 								</a>
 							</div>
-							<form class="delete-icon" method="post">
-								{% csrf_token %}
-								<input type="text" name="id_theodoi_xoa" value="{{x.id}}" hidden>
-								<button class="btndelete" type="submit" name="btn-delete"><i
-										class="fa-solid fa-trash"></i></button>
-							</form>
 						</div>
 					</div>
 					{% endfor %}

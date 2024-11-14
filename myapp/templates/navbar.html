@@ -18,11 +18,13 @@
 							Thể loại
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<div class="d-flex "> <!-- Use flexbox for horizontal layout -->
+							<div class=" "> <!-- Use flexbox for horizontal layout -->
 								{% for x in list_the_loais %}
-								<a class="dropdown-item px-2" style="display: inline-block;"
-									href="/theloai={{ x.theloai }}/">{{ x.theloai }}</a>
+								<p style="float: left;
+								width: 140px;"><a class="dropdown-item px-2" style="display: inline-block;"
+										href="/theloai={{ x.theloai }}/">{{x.theloai }}</a></p>
 								{% endfor %}
+								<br>
 							</div>
 						</div>
 					</li>
@@ -43,10 +45,10 @@
 					<div class="dropdown">
 						{% for x in list_thong_baos %}
 						<div class="notify_item">
-							<div class="notify_info">
-								<a href="#">{{ x.theloai}}</a>
+							<a href="/truyen_id={{x.chap.truyen.id}}/chuong={{x.chap.id}}/" class="notify_info">
+								<p href="#" style="color: blue;">{{ x.theloai}}</p>
 								<p>{{ x.noidung }}</p>
-							</div>
+							</a>
 						</div>
 						{% endfor %}
 
@@ -57,7 +59,7 @@
 				{% else %}
 				<div class="user-wrap">
 					<div class="user-icon">
-						<i style="font-weight: 600;">{{nguoidung.ten|slice:":1"}}</i>
+						<i style="font-weight: 600; text-transform: uppercase;">{{nguoidung.ten|slice:":1"}}</i>
 					</div>
 					<div class="dropdown-user">
 						<div class="dropdown-item">
@@ -65,20 +67,27 @@
 							<br>
 							<a href="#"><strong>{{nguoidung.ten}}</strong></a>
 						</div>
+						{% if nguoidung.vaitro == "nhomdich" %}
 						<div class="dropdown-item">
-							{% if nguoidung.vaitro == "nhomdich" %}
 							<a href="/truyencuaban/">
-								<p>Quản lý truyện của bạn</p>
+								<span>Quản lý truyện của bạn</span>
 							</a>
-							{% endif %}
+						</div>
+						{% endif %}
+						<div class="dropdown-item">
 							<a href="/theodoi/">
-								<p>Danh sách theo dõi</p>
+								<span>Danh sách theo dõi</span>
 							</a>
+						</div>
+						<div class="dropdown-item">
 							<a href="/lichsu/">
-								<p>Lịch sử đọc truyện</p>
+								<span>Lịch sử đọc truyện</span>
 							</a>
+						</div>
+						<div class="dropdown-item">
+
 							<a href="/logout/">
-								<p>Đăng xuất</p>
+								<span>Đăng xuất</span>
 							</a>
 						</div>
 					</div>

@@ -197,6 +197,8 @@ def view_docchuong(request, id_truyen, id_chap): #đọc theo chương
 	# hien thi
 	truyen = Truyen.objects.get(id=id_truyen)
 	chap = Chap.objects.get(id=id_chap)
+	chap.luotxem = chap.luotxem + 1
+	chap.save()
 	allchap = list(truyen.chap.all().order_by('stt'))
 	chap_index = allchap.index(chap)
 	try:

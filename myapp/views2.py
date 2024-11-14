@@ -10,6 +10,17 @@ from django.db.models.functions import Coalesce
 from .views import get_nguoidung, checklogin
 import base64
 
+def post_thongbao(chap): # tạo thông báo
+    thongbao = Thongbao()
+    thongbao.theloai = "chương mới cập nhật!!"
+    thongbao.noidung = f'chương {chap.stt} của truyện {chap.truyen.ten} đã được cập nhật, xem ngay'
+    thongbao.chap = chap
+    thongbao.save()
+    nguoidungs = Nguoidung.objects.all()
+    for x in nguoidungs:
+        if chap.truyen in x.yeuthich.all():
+            x.thongbao.add(thongbao)
+
 def list_thong_bao(request): # trả về list thông báo
     if checklogin(request):
         nguoidung = get_nguoidung(request)
@@ -191,6 +202,7 @@ def previewchap(request, id):
                 alltrang_files.sort(key=lambda x: x.name) 
                 for x in alltrang_files:
                     Trang.objects.create(chap=chap, anh = x)
+                post_thongbao(chap)
                 return redirect(f'/truyen_id={truyen.id}/chuong={chap.id}/')
     else:
         return redirect('/home/')

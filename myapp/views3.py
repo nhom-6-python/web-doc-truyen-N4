@@ -152,5 +152,8 @@ def get_truyen_cua_nhomdich(request, ten):
     context = {
         'truyen_da_dang' : truyen_da_dang,
         'nhomdich': nhomdich,
+        'nguoidung': get_nguoidung(request),
+        'checklogin': checklogin(request),
+        'list_the_loais': Theloai.objects.all().order_by('theloai'),
     }
     return render(request, 'truyencuanhomdich.html', context)
