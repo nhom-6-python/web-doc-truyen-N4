@@ -45,10 +45,10 @@
 					<div class="dropdown">
 						{% for x in list_thong_baos %}
 						<div class="notify_item">
-							<div class="notify_info">
-								<a href="#">{{ x.theloai}}</a>
+							<a href="/truyen_id={{x.chap.truyen.id}}/chuong={{x.chap.id}}/" class="notify_info">
+								<p href="#" style="color: blue;">{{ x.theloai}}</p>
 								<p>{{ x.noidung }}</p>
-							</div>
+							</a>
 						</div>
 						{% endfor %}
 
