@@ -6,7 +6,7 @@
 {% load humanize %}
  
 <main>
-	<div class="suatruyen">
+	<div class="suatruyen" style="padding-bottom:100px;">
 		<div class="trencung">
 			<div class="container">
 				<div class="left">
@@ -73,7 +73,7 @@
 							<h6>Thể loại</h6>
 							<div class="category-dropdown">
 								<div class="category-dropdown-toggle" onclick="toggleDropdown()">Chọn thể loại</div>
-								<div class="category-dropdown-menu">
+								<div class="category-dropdown-menu" >
 									{% for x in list_the_loais %}
 									<label><input class="input" type="checkbox" name="theloais" value="{{x.theloai}}"
 											onclick="event.stopPropagation()"> {{x.theloai}} </label>
@@ -83,7 +83,7 @@
 						</div>
 						<div style="display: flex; justify-content: center;">
 							<button type="submit" class="submit btn-primary" value="Đăng truyện"
-								name="btn-dangtruyen">Đăng truyện</button>
+								name="btn-dangtruyen" style="background-color:blue; padding:7px 10px;">Đăng truyện</button>
 						</div>
 					</div>
 				</form>

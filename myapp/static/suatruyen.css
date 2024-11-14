@@ -756,4 +756,18 @@
   /* Initially hidden */
 }
 
+.anhnen .doianhnen{
+  position: relative;
+  bottom: -450px;
+  right: -1000px;
+  width: 600px;
+  z-index: 1;
+}
+.anhnen .doianhbia{
+  position: relative;
+  bottom: -670px;
+  left:300px;
+  width: 600px;
+  z-index: 1;
+}
 /* END  Add theo thể loại*/
