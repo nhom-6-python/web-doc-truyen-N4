@@ -21,7 +21,8 @@
 							<div class=" "> <!-- Use flexbox for horizontal layout -->
 								{% for x in list_the_loais %}
 								<p style="float: left;
-								width: 140px;"><a class="dropdown-item px-2" style="display: inline-block;" href="/theloai={{ x.theloai }}/">{{ x.theloai }}</a></p>
+								width: 140px;"><a class="dropdown-item px-2" style="display: inline-block;"
+										href="/theloai={{ x.theloai }}/">{{x.theloai }}</a></p>
 								{% endfor %}
 								<br>
 							</div>
@@ -66,29 +67,29 @@
 							<br>
 							<a href="#"><strong>{{nguoidung.ten}}</strong></a>
 						</div>
-							{% if nguoidung.vaitro == "nhomdich" %}
-							<div class="dropdown-item">
-								<a href="/truyencuaban/">
-									<span>Quản lý truyện của bạn</span>
-								</a>
-							</div>
-							{% endif %}
-							<div class="dropdown-item">
-								<a href="/theodoi/">
-									<span>Danh sách theo dõi</span>
-								</a>
-							</div>
-							<div class="dropdown-item">
-								<a href="/lichsu/">
-									<span>Lịch sử đọc truyện</span>
-								</a>
-							</div>
-							<div class="dropdown-item">
+						{% if nguoidung.vaitro == "nhomdich" %}
+						<div class="dropdown-item">
+							<a href="/truyencuaban/">
+								<span>Quản lý truyện của bạn</span>
+							</a>
+						</div>
+						{% endif %}
+						<div class="dropdown-item">
+							<a href="/theodoi/">
+								<span>Danh sách theo dõi</span>
+							</a>
+						</div>
+						<div class="dropdown-item">
+							<a href="/lichsu/">
+								<span>Lịch sử đọc truyện</span>
+							</a>
+						</div>
+						<div class="dropdown-item">
 
 							<a href="/logout/">
 								<span>Đăng xuất</span>
 							</a>
-							</div>
+						</div>
 					</div>
 				</div>
 				{% endif %}
