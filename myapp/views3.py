@@ -146,3 +146,14 @@ def add_chap_to_lichsu(request, id_truyen, id_chap):
                 x.delete()
         lichsu.save()                   
 
+def get_truyen_cua_nhomdich(request, ten):
+    nhomdich = Nguoidung.objects.get(ten = ten)
+    truyen_da_dang = nhomdich.truyendang.all()
+    context = {
+        'truyen_da_dang' : truyen_da_dang,
+        'nhomdich': nhomdich,
+        'nguoidung': get_nguoidung(request),
+        'checklogin': checklogin(request),
+        'list_the_loais': Theloai.objects.all().order_by('theloai'),
+    }
+    return render(request, 'truyencuanhomdich.html', context)

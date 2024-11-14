@@ -126,12 +126,12 @@
               <div class="container-snap">
                 <div class="row">
                   {% for x in list_top_view_tuan %}
-                  
-                  <a class="col-lg-4 col-md-4 col-sm-6 col-md-6 col-12" href="/truyen_id={{x.id}}/" >
+
+                  <a class="col-lg-4 col-md-4 col-sm-6 col-md-6 col-12" href="/truyen_id={{x.id}}/">
                     <img src="{{x.anhbia.url}}" alt="{{x.ten}}">
                     <div class="inner-content">
-                        <h3>{{x.ten}} </h3>
-                        <span>Chương {{x.chapmoinhat.stt}}</span>
+                      <h3>{{x.ten}} </h3>
+                      <span>Chương {{x.chapmoinhat.stt}}</span>
                       <div class="inner-text" style="margin: 0;">{{x.total_views|intcomma}} LƯỢT XEM</div>
                     </div>
                     <div class="inner-stt">
@@ -147,11 +147,11 @@
               <div class="container-snap">
                 <div class="row">
                   {% for x in list_top_view_thang %}
-                  <a class="col-lg-4 col-md-4 col-sm-6 col-md-6 col-12" href="/truyen_id={{x.id}}/" >
+                  <a class="col-lg-4 col-md-4 col-sm-6 col-md-6 col-12" href="/truyen_id={{x.id}}/">
                     <img src="{{x.anhbia.url}}" alt="{{x.ten}}">
                     <div class="inner-content">
-                        <h3>{{x.ten}} </h3>
-                        <span>Chương {{x.chapmoinhat.stt}}</span>
+                      <h3>{{x.ten}} </h3>
+                      <span>Chương {{x.chapmoinhat.stt}}</span>
                       <div class="inner-text" style="margin: 0;">{{x.total_views|intcomma}} LƯỢT XEM</div>
                     </div>
                     <div class="inner-stt">
@@ -170,8 +170,8 @@
                   <div class="col-lg-4 col-md-4 col-sm-6 col-md-6 col-12" href="/truyen_id={{x.id}}/">
                     <img src="{{x.anhbia.url}}" alt="{{x.ten}}">
                     <div class="inner-content">
-                        <h3>{{x.ten}} </h3>
-                        <span>Chương {{x.chapmoinhat.stt}}</span>
+                      <h3>{{x.ten}} </h3>
+                      <span>Chương {{x.chapmoinhat.stt}}</span>
                       <div class="inner-text" style="margin: 0;">{{x.total_views|intcomma}} LƯỢT XEM</div>
                     </div>
                     <div class="inner-stt">
@@ -218,8 +218,8 @@
               <div class="container">
                 <div class="inner-list">
                   {% for x in list_top_nhomdich_tuan %}
-                  <a class="inner-content" href="" >
-                    <div class="inner-icon">
+                  <a class="inner-content" href="{% url 'truyencuanhomdich' ten=x.ten %}">
+                    <div class=" inner-icon">
                       ND
                     </div>
                     <div class="inner-desc">

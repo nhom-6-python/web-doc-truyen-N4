@@ -21,4 +21,5 @@ urlpatterns = [
     path('suatruyen_id=<int:id>/', views2.suatruyen, name='suatruyen'),
     path('themchap_truyen_id=<int:id>/', views2.themchap, name='themchap'),
     path('themchap_truyen_id=<int:id>/previewchap/', views2.previewchap, name='previewchap'),
+    path('truyencuanhomdich/ten=<str:ten>/', views3.get_truyen_cua_nhomdich, name='truyencuanhomdich'),
 ] 
