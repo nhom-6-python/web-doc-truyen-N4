@@ -67,7 +67,7 @@
   text-decoration: underline;
 }
 
-.form input.button {
+.form input .button {
   color: #fff;
   background: #0d6efd;
   font-size: 1.2rem;
@@ -106,4 +106,11 @@ select {
   border-radius: 6px;
   outline: none;
   color: #757575;
+}
+.registration button{
+  background-color: blue;
+}
+.registration button:hover{
+  background-color: blue;
+  background-color: #1b5dc1;
 }

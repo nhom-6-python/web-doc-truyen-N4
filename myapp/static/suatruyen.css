@@ -759,9 +759,10 @@
 .anhnen .doianhnen{
   position: relative;
   bottom: -450px;
-  right: -1000px;
-  width: 600px;
+  right: -730px;
+  width: 430px;
   z-index: 1;
+ 
 }
 .anhnen .doianhbia{
   position: relative;
@@ -770,4 +771,5 @@
   width: 600px;
   z-index: 1;
 }
+
 /* END  Add theo thể loại*/
