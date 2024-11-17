@@ -8,16 +8,16 @@
 <main>
 	<section id="truyentheodoi">
 		<div class="container">
-			<h1 class="font-bold">
+			<h1 class="font-bold" style="margin-top:-80px;">
 				Lịch sử đọc truyện
 			</h1>
-			<form class="date-form" method="post">
+			<form class="date-form" method="post" >
 				{% csrf_token %}
-				<label for="start-date"> duyệt theo ngày theo ngày:</label><br>
+				<label for="start-date"> Duyệt theo ngày theo ngày:</label><br>
 				<span>từ: </span><input type="date" id="start-date" name="start-date" class="date-picker" required>
 				<label for="end-date">đến:</label>
 				<input type="date" id="end-date" name="end-date" class="date-picker" required>
-				<button type="submit" name="btn-loc-ngay">lọc</button>
+				<button type="submit" name="btn-loc-ngay" style="background-color:gray; color:white;">lọc</button>
 			</form>
 			{% for date in lichsu_theo_ngay %}
 			<h2 class="font-bold" style="margin: 10px 0">
@@ -29,7 +29,7 @@
 					<div class="col-lg-2 col-md-3 col-sm-4 col-6">
 						<div class="image-container">
 							<a href="/truyen_id={{x.idtruyen}}/chuong={{x.idchap}}/">
-								<img src="{{x.anhbia.url}}" alt="x.tentruyen" loading="lazy" width="320" height="480">
+								<img class="hover-shadow" style="width:170px; height:250px;" src="{{x.anhbia.url}}" alt="x.tentruyen" loading="lazy" width="320" height="480">
 							</a>
 							<div class="inner-name">
 								<a href="/truyen_id={{x.idtruyen}}/chuong={{x.idchap}}/">

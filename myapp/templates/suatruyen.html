@@ -10,14 +10,19 @@
 				<div class="intro">
 					<div class="container">
 						<div class="anhnen" style="background-image: url('{{truyen.anhnen.url}}');">
-							<button class="">đổi ảnh nền</button>
-							<input type="file" class="" name="anhnen">
+
+							<div class="doianhnen" >
+								<button style="padding:3px 3px;">Đổi ảnh nền</button>
+							    <input type="file" class="" name="anhnen" >
+							</div>
 							<div class="row">
 								<div class="col-12">
 									<img src="{{truyen.anhbia.url}}" alt="anh1">
-									<button class="">đổi ảnh bìa</button>
-									<input type="file" class="" name="anhbia">
-									<h2>
+									<div class="doianhbia">
+										<button class="">đổi ảnh bìa</button>
+									    <input type="file" class="" name="anhbia">
+									</div>
+									<h2 style="margin-left:25px;">
 										<span style="font-size: medium; opacity:0.6;"><input type="text" name="tacgia"
 												value="{{truyen.tacgia}}" class=""
 												placeholder="Đổi tên tác giả"></input></span>
@@ -50,10 +55,10 @@
 									</a>
 									{% endfor %}
 									<div class="category-dropdown">
-										<div class="category-dropdown-toggle" onclick="toggleDropdown()">chỉnh sửa thể
+										<div class="category-dropdown-toggle" onclick="toggleDropdown()" style="width:300px;">chỉnh sửa thể
 											loại
 										</div>
-										<div class="category-dropdown-menu">
+										<div class="category-dropdown-menu" style="width:300px;" >
 											{% for i in list_the_loais %}
 											{% if i.theloai in truyen.theloai %}
 											<label><input class="input" type="checkbox" name="theloais"
@@ -73,32 +78,32 @@
 
 									{% if chuong_gan_nhat != False %}
 									<a href="/truyen_id={{truyen.id}}/chuong={{chuongdau.id}}/"
-										class="btn btn-primary">Theo dõi</a>
+										class="btndoctruyen">Theo dõi</a>
 
 									<a href="/truyen_id={{truyen.id}}/chuong={{chuongdau.id}}/"
-										class="btn btn-primary">Đọc
+										class="btndoctruyen">Đọc
 										từ đầu</a>
 
 									<a href="/truyen_id={{truyen.id}}/chuong={{chuongmoinhat.id}}/"
-										class="btn btn-primary">Đọc chương mới
+										class="btndoctruyen">Đọc chương mới
 										nhất</a>
 									{% if checklogin %}
 									<a href="/truyen_id={{truyen.id}}/chuong={{chuong_gan_nhat.id}}/"
-										class="btn btn-primary">Đọc tiếp</a>
+										class="btndoctruyen">Đọc tiếp</a>
 									{% else %}
-									<a href="/login/" class="btn btn-primary">Đọc tiếp</a>
+									<a href="/login/" class="btndoctruyen">Đọc tiếp</a>
 									{% endif %}
 									{% else %}
 									<span>Hiện chưa có chap nào được đang tải, hãy bấm theo dõi để nhận
 										thông tin sớm nhất</span>
 									{% endif %}
-									<button type="submit" name="btn-save-sua" class="btn btn-primary">Save</button>
+									<button type="submit" name="btn-save-sua" class="btndoctruyen" style="margin-left:0px;">Save</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
+ 
 
 				<div class="content">
 					<div class="container">
@@ -120,8 +125,8 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<p><input type="textarea" class="paragraph-input" name="mota"
-													value="{{truyen.mota}}"></p>
+											<p><textarea class="paragraph-input1" name="mota"
+													value="{{truyen.mota}}"  style="width:100%; height:200px; font-size:20px;">{{truyen.mota}}</textarea></p>
 
 										</div>
 									</div>

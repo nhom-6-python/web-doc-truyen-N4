@@ -131,27 +131,7 @@
   font-size: 14px;
 }
 
-.chinhsua .col-6 .content .paragraph-input {
-  width: 100%;
-  /* Full width */
-  height: 200px;
-  /* Height of the textarea */
-  padding: 10px;
-  /* Padding inside the textarea */
-  border: 1px solid #ccc;
-  /* Border style */
-  border-radius: 4px;
-  /* Rounded corners */
-  box-sizing: border-box;
-  /* Include padding and border in the element's total width and height */
-  font-family: Arial, sans-serif;
-  /* Font style */
-  font-size: 16px;
-  /* Font size */
-  resize: vertical;
-  /* Allow vertical resizing */
 
-}
 
 .chinhsua .content select {
 
@@ -475,6 +455,22 @@
   height: auto;
   display: none;
   /* Initially hidden */
+}
+
+.anhnen .doianhnen{
+  position: relative;
+  bottom: -450px;
+  right: -730px;
+  width: 430px;
+  z-index: 1;
+ 
+}
+.anhnen .doianhbia{
+  position: relative;
+  bottom: -670px;
+  left:300px;
+  width: 600px;
+  z-index: 1;
 }
 
 /* END  Add theo thể loại*/

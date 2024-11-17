@@ -6,7 +6,7 @@
 {% load humanize %}
 
 <main>
-	<div class="suatruyen">
+	<div class="suatruyen" style="margin-top:0px;">
 		<div class="trencung">
 			<div class="container">
 				<div class="left">
@@ -35,13 +35,13 @@
 							<h6>Số thứ tự chương</h6>
 							<input type="number" step="any" name="stt" placeholder="Truyện chưa có tiêu đề">
 							<h6>Tên chương</h6>
-							<input id="paragraph" name="ten" class="paragraph-input" type="text"></input>
+							<input id="paragraph" name="ten" class="paragraph-input" placeholder="Nhập tên chương" type="text" style="height:35px;"></input>
 							<h6>Tải lên chương (chọn file hoặc thư mục):</h6>
 							<input type="file" name="alltrang" webkitdirectory multiple />
 						</div>
 						<div style="display: flex; justify-content: center;">
-							<button type="submit" class="submit btn-primary" name="btn-dangtruyen">Xem trước</button>
-							<button type="submit" class="submit btn-primary" name="btn-savechap">Save</button>
+							<button type="submit" class="submit btn-primary" name="btn-dangtruyen" style="background-color:blue;">Xem trước</button>
+							<button type="submit" class="submit btn-primary" name="btn-savechap" style="background-color:blue;">Save</button>
 						</div>
 					</div>
 				</form>

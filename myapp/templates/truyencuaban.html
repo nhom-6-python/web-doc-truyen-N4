@@ -4,49 +4,53 @@
 {% bootstrap_javascript %}
 {% block content %}
 {% load humanize %}
-
+<style> .hover-shadow { width: 200px; height: 100px; background-color: lightblue; transition: box-shadow 0.3s ease; } .hover-shadow:hover { box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Tạo bóng tối khi hover */ } </style>
 <main>
-	<div class="truyentheodoi">
+	<div class="truyentheodoi" style="margin-top:30px;">
 		<div class="container">
 			<h3>Truyện của bạn</h3>
 			<div class="truyen">
 				<div class="row">
 					{% for x in list_truyencuaban %}
-					<div class="col-lg-2 col-md-4 col-sm-6 col-12" style="padding-bottom: 200px;">
+					<div class="col-lg-2 col-md-4 col-sm-6 col-12" style="padding-bottom: 50px; ">
 						<div class="image-container">
 							<a href="/truyen_id={{x.id}}/">
-								<img src="{{x.anhbia.url}}" alt="{{x.ten}}" loading="lazy" width="320" height="480">
+								<img class="hover-shadow" src="{{x.anhbia.url}}" alt="{{x.ten}}" loading="lazy" style="width:100%; height:250px; border-radius:0px;">
 							</a>
-							<div class="inner-name">
-								<a href="/truyen_id={{x.id}}/">
-									<div class="description">Tên: {{x.ten}} </div>
-								</a>
-							</div>
-							<div class="inner-name">
-								<a href="/truyen_id={{x.id}}/">
-									<div class="description">Số chap: {{x.sochap|intcomma}}</div>
-								</a>
-							</div>
-							<div class="inner-name">
-								<a href="/truyen_id={{x.id}}/">
-									<div class="description">Lượt xem: {{x.luotxem|intcomma}} </div>
-								</a>
-							</div>
-							<div class="inner-name">
-								<a href="/truyen_id={{x.id}}/">
-									<div class="description">Lượt thích: {{x.luotthich|intcomma}} </div>
-								</a>
+							<div style="background-color:rgb(0 0 0 / 11%); padding: 10px 10px; padding-top:20px; margin-top:-20px; height:200px;">
+								<div class="inner-name">
+									<a href="/truyen_id={{x.id}}/">
+										<div class="description">Tên: {{x.ten}} </div>
+									</a>
+								</div>
+								<div class="inner-name">
+									<a href="/truyen_id={{x.id}}/">
+										<div class="description">Số chap: {{x.sochap|intcomma}}</div>
+									</a>
+								</div>
+								<div class="inner-name">
+									<a href="/truyen_id={{x.id}}/">
+										<div class="description">Lượt xem: {{x.luotxem|intcomma}} </div>
+									</a>
+								</div>
+								<div class="inner-name">
+									<a href="/truyen_id={{x.id}}/">
+										<div class="description">Lượt thích: {{x.luotthich|intcomma}} </div>
+									</a>
+								</div>
 							</div>
 							<div class="inner-name">
 								<a href="/suatruyen_id={{x.id}}/">
-									<div class="description btn">sửa thông tin truyện</div>
+									<button class="circular-btn" style="position: absolute;top:-8px; left:5px;">
+										<i class="fa-solid fa-pen-to-square"></i></i>
+									</button>
 								</a>
 							</div>
 							<div class="inner-name">
 								<form method="post">
 									{% csrf_token %}
 									<input type="number" name="id_theodoi_xoa" value="{{x.id}}" hidden>
-									<button type="submit" name="btn-delete"> xóa truyện<i
+									<button type="submit" name="btn-delete" class="btndelete" style="position: absolute;top:10px; right:5px;"><i
 											class="fa-solid fa-trash"></i></button>
 								</form>
 							</div>

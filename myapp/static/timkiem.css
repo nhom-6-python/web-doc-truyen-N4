@@ -3,35 +3,35 @@
 #new-update {
 	padding-top: 4rem;
 	padding-bottom: 4rem;
-  }
-  
-  #new-update .inner-title {
+}
+
+#new-update .inner-title {
 	text-transform: uppercase;
 	font-size: 30px;
 	margin-bottom: 45px;
-  }
-  
-  #new-update a {
+}
+
+#new-update a {
 	overflow: hidden;
-  
-  }
-  
-  #new-update a img {
+
+}
+
+#new-update a img {
 	width: 100%;
 	height: 80%;
 	border-radius: 8px;
-  }
-  
-  #new-update a img:hover {
+}
+
+#new-update a img:hover {
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  }
-  
-  #new-update .row .col-lg-2 {
+}
+
+#new-update .row .col-lg-2 {
 	max-width: 100%;
 	margin-bottom: 30px;
-  }
-  
-  #new-update .inner-name h3 {
+}
+
+#new-update .inner-name h3 {
 	margin: 0;
 	margin-top: 8px;
 	font-size: 1rem;
@@ -44,9 +44,9 @@
 	/* Số dòng hiển thị */
 	overflow: hidden;
 	text-overflow: ellipsis;
-  }
-  
-  #new-update .inner-name .inner-chap {
+}
+
+#new-update .inner-name .inner-chap {
 	margin: 0;
 	font-size: 0.8rem;
 	line-height: 1.25rem;
@@ -58,22 +58,22 @@
 	/* Số dòng hiển thị */
 	overflow: hidden;
 	text-overflow: ellipsis;
-  }
-  
-  
-  .inner-nextpage {
+}
+
+
+.inner-nextpage {
 	display: flex;
 	align-items: center;
 	float: right;
-  
+
 	margin-bottom: 15px;
-  }
-  
-  .inner-nextpage span {
+}
+
+.inner-nextpage span {
 	padding-left: 5px;
-  }
-  
-  /* end new update */
+}
+
+/* end new update */
 /*main*/
 body {
 	background-color: #D1D4DD;
@@ -95,6 +95,7 @@ body {
 #truyentheodoi a {
 	overflow: hidden;
 }
+
 .button {
 	display: inline-flex;
 	align-items: center;
@@ -121,8 +122,8 @@ body {
 
 #truyentheodoi a img {
 	width: 100%;
-  height: 80%;
-  border-radius: 8px;
+	height: 200px;
+	border-radius: 8px;
 }
 
 #truyentheodoi a img:hover {
