@@ -56,7 +56,7 @@ def truyencuaban(request): # trang quản lý truyện đã đăng
         if 'btn-delete' in request.POST:
             id_theodoi_xoa = request.POST['id_theodoi_xoa']
             truyen_xoa = Truyen.objects.get(id=id_theodoi_xoa)
-            nhomdich.truyendang.remove(truyen_xoa)
+            truyen_xoa.delete()
         return redirect('/truyencuaban/')
     context = {
         'list_truyencuaban': list_truyencuaban,
