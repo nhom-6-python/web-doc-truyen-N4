@@ -61,7 +61,7 @@
 						{% endfor %}
 						{% if list_thong_baos %}
 						<div class="notify_item">
-							<form method="post" style="margin-bottom: 0;">
+							<form method="post" style="margin-bottom: 0; width: 100%">
 								{% csrf_token %}
 								<button type="submit" name="btn-delete-noti" class="btn btn-danger">Xóa tất
 									cả</button>
@@ -115,7 +115,7 @@
 				{% endif %}
 				{% if nguoidung.vaitro == 'nhomdich' %}
 				<span class="" style="color: green;">nhóm dịch</span>
-				{% else %}
+				{% elif nguoidung.vaitro == 'nguoidoc' %}
 				<span class="" style="color: green;">người dùng</span>
 				{% endif %}
 			</div>

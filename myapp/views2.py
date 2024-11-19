@@ -27,6 +27,15 @@ def list_thong_bao(request): # trả về list thông báo
         print(nguoidung)
         return nguoidung.thongbao.all()
 
+def xoa_thong_bao(request):
+    if request.method == 'POST': # xóa thông báo
+        if 'btn-delete-noti' in request.POST:
+            print('xoa thong bao')
+            for x in list_thong_bao(request):
+                print(x.chap.ten)
+                x.delete()
+    return 0
+
 def dangtruyen(request): # chức năng đang truyện của nhóm dịch
     nguoidung = get_nguoidung(request)
     if checklogin(request) :

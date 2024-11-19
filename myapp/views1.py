@@ -7,7 +7,7 @@ from django.utils.timezone import make_aware
 from django.utils import timezone
 from django.db.models import Sum,Q, Value
 from django.db.models.functions import Coalesce
-from .views2 import list_thong_bao
+from .views2 import list_thong_bao,xoa_thong_bao
 from .views import get_nguoidung, checklogin
 from .views3 import add_chap_to_lichsu
 # Create your views here.
@@ -101,12 +101,7 @@ def theloai(request, theloai): # view tìm truyện theo thể loại
 	return render(request, 'theloai.html', context)
 
 def home(request): # view trang home
-	if request.method == 'POST':
-		if 'btn-delete-noti' in request.POST:
-			print('xoa thong bao')
-			for x in list_thong_bao(request):
-				print(x.chap.ten)
-				x.delete()
+	xoa_thong_bao(request)
 	context = { # truyền vào html
 		'top3' : top3_by_like(), # lấy ra 3 truyện có lượt thích cao nhất
 		'list_new_update' : new_update(), # lấy ra các truyện có thời gian cập nhật gần đây
