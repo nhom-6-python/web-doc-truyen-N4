@@ -23,7 +23,10 @@
             <option value="nguoidoc">Người đọc</option>
             <option value="nhomdich">Nhóm dịch</option>
           </select>
-          <button class="btn btn-primary" type="submit" style="margin-top:20px;">Đăng ký</button>
+          {% if register_failed == True %}
+          <p style="color:red;">(form đăng ký không hợp lệ)</p>
+          {% endif %}
+          <button class="btn btn-primary" type="submit" style="margin-top:20px; width:100%">Đăng ký</button>
         </form>
         <div class="signup">
           <span class="signup">Đã có tài khoản?
@@ -39,25 +42,6 @@
 
 
 <!-- FOOTER -->
-<footer class="footer">
-  <!-- <p class="float-end"><a href="#">Back to top</a></p> -->
-  <div class="container">
-    <div class="inner-text">
-      <div class="inner-contact">Link Github của nhóm 6:
-        <a href="https://github.com/nhom-6-python/btl-python-n6.git" target="_blank"> GitHub <i
-            class="fa-brands fa-github"></i></a>
-      </div>
-      <div class="inner-contact">
-        Thành viên nhóm:
-      </div>
-      <div class="inner-member">B22DCCN261 - Hoàng Sơn Hải</div>
-      <div class="inner-member">B22DCKH131 - Hoàng Khánh Văn</div>
-      <div class="inner-member">B22DCKH129 - Nguyễn Hữu Trường</div>
-      <div class="inner-member">B22DCCN633 - Thái Hữu Phúc</div>
-      <div class="inner-member">B22DCCN371 - Trịnh Mạnh Hùng</div>
-    </div>
-  </div>
-
-</footer>
+{% include 'footer.html' %}
 <!-- END FOOTER -->
 {% endblock %}
