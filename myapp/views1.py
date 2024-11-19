@@ -14,13 +14,11 @@ from .views3 import add_chap_to_lichsu
 
 # chức năng trang home
 
-# top 3 truyện có lượt yêu thích cao nhất( slider trang home)
-def top3_by_like():
-	top3 = Truyen.objects.all().order_by('-luotthich')[:3]
+def top3_by_like(): # top 3 truyện có lượt yêu thích cao nhất( slider trang home)
+	top3 = Truyen.objects.all().order_by('-luotthich')[:3] #lấy ra theo lượt thích
 	return top3
 
-# top truyện mới tải lên chap mới
-def new_update():
+def new_update(): # top truyện mới tải lên chap mới
 	chaps = Chap.objects.all().order_by('-thoigiandang')
 	new_update = list()
 	for x in chaps:
@@ -49,11 +47,11 @@ def top_view(time):
 			.order_by('-total_views')[:10] # Lấy 9 truyện có lượt xem cao nhất trong tháng
 		)
 		return top_view
-	elif time == 'moiluc':
+	elif time == 'moiluc': # lọc theo mọi lúc
 		top_view = (
 			Truyen.objects
 			.annotate(total_views=Coalesce(Sum('chap__luotxem'),Value(0)))
-			.order_by('-total_views')[:10]
+			.order_by('-total_views')[:10]  # Lấy 9 truyện có lượt xem cao nhất trong mọi lúc
 		)
 		return top_view
 
@@ -77,7 +75,7 @@ def top_nhomdich(time):
 			.order_by('-total_views')[:5] # Lấy 9 truyện có lượt xem cao nhất trong tháng
 		)
 		return top_nhomdich
-	elif time == 'moiluc':
+	elif time == 'moiluc': # lọc theo mọi lúc
 		top_nhomdich = (
 			Nguoidung.objects.filter(vaitro='nhomdich')
 			.annotate(total_views=Coalesce(Sum('truyendang__chap__luotxem'),Value(0)))
@@ -89,10 +87,9 @@ def theloai(request, theloai): # view tìm truyện theo thể loại
 	truyens = Truyen.objects.all()
 	truyens_theo_the_loai = list()
 	for x in truyens:
-		if theloai in x.theloai:
+		if theloai in x.theloai: 
 			truyens_theo_the_loai.append(x)
 	list_thong_baos = list_thong_bao(request)
-
 	context={
 		'theloai': theloai,
 		'truyens_theo_the_loai': truyens_theo_the_loai,
@@ -104,29 +101,23 @@ def theloai(request, theloai): # view tìm truyện theo thể loại
 	return render(request, 'theloai.html', context)
 
 def home(request): # view trang home
-	top3 = top3_by_like()
-	list_new_update = new_update()
-	list_top_view = list()
-	list_top_nhomdich = list()
-	list_top_view_tuan = top_view('tuan')
-	list_top_view_thang = top_view('thang')
-	list_top_view_moiluc = top_view('moiluc')
-	list_top_nhomdich_tuan = top_nhomdich('tuan')
-	list_top_nhomdich_thang = top_nhomdich('thang')
-	list_top_nhomdich_moiluc = top_nhomdich('moiluc')
-	list_thong_baos = list_thong_bao(request)
-	context = {
-		'top3' : top3,
-		'list_new_update': list_new_update,
-		'list_top_view': list_top_view,
-		'list_top_nhomdich': list_top_nhomdich,
-		'list_top_view_tuan' : list_top_view_tuan,
-		'list_top_view_thang' : list_top_view_thang,
-		'list_top_view_moiluc' : list_top_view_moiluc,
-		'list_top_nhomdich_tuan' : list_top_nhomdich_tuan,
-		'list_top_nhomdich_thang' : list_top_nhomdich_thang,
-		'list_top_nhomdich_moiluc' : list_top_nhomdich_moiluc,
-		'list_thong_baos' : list_thong_baos,
+	if request.method == 'POST':
+		if 'btn-delete-noti' in request.POST:
+			print('xoa thong bao')
+			for x in list_thong_bao(request):
+				print(x.chap.ten)
+				x.delete()
+	context = { # truyền vào html
+		'top3' : top3_by_like(), # lấy ra 3 truyện có lượt thích cao nhất
+		'list_new_update' : new_update(), # lấy ra các truyện có thời gian cập nhật gần đây
+		'list_top_view_tuan' : top_view('tuan'), # truyện view theo tuần, tháng, mọi lúc
+		'list_top_view_thang' : top_view('thang'), 
+		'list_top_view_moiluc' : top_view('moiluc'), 
+		'list_top_nhomdich_tuan' : top_nhomdich('tuan'), # nhóm dịch có tổng số view cao nhất theo tuần, tháng, mọi lúc
+		'list_top_nhomdich_thang' : top_nhomdich('thang'),
+		'list_top_nhomdich_moiluc' : top_nhomdich('moiluc'),
+		'list_thong_baos' : list_thong_bao(request),
+		# thanh nav
 		'checklogin': checklogin(request),
 		'nguoidung': get_nguoidung(request),
 		'list_the_loais': Theloai.objects.all().order_by('theloai'),
@@ -245,3 +236,9 @@ def timkiem(request):
 	}
 	return render(request, 'timkiem.html', context)
 
+def truyenmoicapnhat(request): # trang truyen moi cap nhat
+	list_new_update = new_update()
+	context = {
+		'list_new_update': list_new_update,
+	}
+	return render(request, 'truyenmoicapnhat.html', context)

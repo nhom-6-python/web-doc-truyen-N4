@@ -89,9 +89,9 @@
           {% endfor %}
         </div>
       </div>
-      <a href="#" class="inner-nextpage">
+      <a href="/truyenmoicapnhat/" class="inner-nextpage">
         <i class="fa-solid fa-angle-right"></i>
-        <span>Xem danh sách truyện</span>
+        <span>Xem toàn bộ truyện</span>
       </a>
     </div>
   </section>
@@ -293,8 +293,9 @@
     <!-- <p class="float-end"><a href="#">Back to top</a></p> -->
     <div class="container">
       <div class="inner-text">
-        <div class="inner-contact">Link Github của nhóm 6:
-          <a href="github.com" target="_blank">github.com</a>
+        <div class="inner-contact">Link Github của nhóm 4:
+          <a href="https://github.com/nhom-6-python/web-doc-truyen-N6" target="_blank"><i
+              class="fa-brands fa-github"></i> web-doc-truyen-N6</a>
         </div>
         <div class="inner-contact">
           Thành viên nhóm:
@@ -310,16 +311,4 @@
   </footer>
   <!-- END FOOTER -->
 </main>
-<!-- giữ nguyên vị trí cuộn -->
-<script>
-  window.onbeforeunload = function () {
-    localStorage.setItem('scrollPosition', window.scrollY);  // Lưu vị trí cuộn vào localStorage
-  };
-
-  window.onload = function () {
-    if (localStorage.getItem('scrollPosition') !== null) {
-      window.scrollTo(0, localStorage.getItem('scrollPosition'));  // Cuộn lại vị trí đã lưu
-    }
-  };
-</script>
 {% endblock %}
