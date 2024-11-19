@@ -43,15 +43,35 @@
 						<i class="fa-regular fa-bell"></i>
 					</div>
 					<div class="dropdown">
+						{% if checklogin == False %}
+						<div class="notify_item">
+							<a href="/login/" class="notify_info">
+								<p href="#" style="color: blue;">Đăng nhập ngay để nhận thông báo!!</p>
+							</a>
+						</div>
+						{% endif %}
 						{% for x in list_thong_baos %}
 						<div class="notify_item">
 							<a href="/truyen_id={{x.chap.truyen.id}}/chuong={{x.chap.id}}/" class="notify_info">
 								<p href="#" style="color: blue;">{{ x.theloai}}</p>
-								<p>{{ x.noidung }}</p>
+								<p>{{ x.noidung }}
+								</p>
 							</a>
 						</div>
 						{% endfor %}
-
+						{% if list_thong_baos %}
+						<div class="notify_item">
+							<form method="post" style="margin-bottom: 0;">
+								{% csrf_token %}
+								<button type="submit" name="btn-delete-noti" class="btn btn-danger">Xóa tất
+									cả</button>
+							</form>
+						</div>
+						{% else %}
+						<div class="notify_item">
+							<button class="btn btn-success">không có thông báo mới</button>
+						</div>
+						{% endif %}
 					</div>
 				</div>
 				{% if checklogin == False %}
@@ -95,6 +115,8 @@
 				{% endif %}
 				{% if nguoidung.vaitro == 'nhomdich' %}
 				<span class="" style="color: green;">nhóm dịch</span>
+				{% else %}
+				<span class="" style="color: green;">người dùng</span>
 				{% endif %}
 			</div>
 		</div>
