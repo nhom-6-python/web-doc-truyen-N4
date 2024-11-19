@@ -22,10 +22,14 @@ def registerPage(request):
         if form.is_valid() and mk == nhaplaimk and ten not in nguoiDungList: # kiểm tra mật khẩu có đung ko?
             form.save()
             return redirect('/login/')  # Chuyển hướng về login sau khi đăng ký thành công
+        else: 
+            context = {
+                'register_failed': True,
+            }
+            return render(request, 'register.html', context)
     else:
         form = NguoidungForm()
     context = {
-        'register_failed': True,
         # thanh nav
         'checklogin': checklogin(request),
         'nguoidung': get_nguoidung(request),
