@@ -4,19 +4,32 @@
 {% bootstrap_javascript %}
 {% block content %}
 {% load humanize %}
-<style> .hover-shadow { width: 200px; height: 100px; background-color: lightblue; transition: box-shadow 0.3s ease; } .hover-shadow:hover { box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Tạo bóng tối khi hover */ } </style>
+<style>
+	.hover-shadow {
+		width: 200px;
+		height: 100px;
+		background-color: lightblue;
+		transition: box-shadow 0.3s ease;
+	}
+
+	.hover-shadow:hover {
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+		/* Tạo bóng tối khi hover */
+	}
+</style>
 
 <main>
 	<div class="truyentheodoi">
 		<div class="container">
-			<h3>Truyện thể loại {{theloai}}</h3>
+			<h3>Truyện thể loại <span style="color:#0d6efd;">"{{theloai}}"</span> </h3>
 			<div class="truyen">
 				<div class="row">
 					{% for x in truyens_theo_the_loai %}
 					<div class="col-lg-2 col-md-4 col-sm-6 col-12 ">
 						<div class="image-container">
 							<a href="/truyen_id={{x.id}}/">
-								<img class="hover-shadow" src="{{x.anhbia.url}}" alt="{{x.ten}}" loading="lazy" style="width:100%; height:250px">
+								<img class="hover-shadow" src="{{x.anhbia.url}}" alt="{{x.ten}}" loading="lazy"
+									style="width:100%; height:250px">
 							</a>
 						</div>
 						<div class=" inner-name">
