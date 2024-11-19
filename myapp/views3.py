@@ -13,23 +13,28 @@ def index(request):
 	return render(request, 'index.html')
 
 def registerPage(request):
-    if request.method == 'POST':
+    if request.method == 'POST': # nhận vào form đăng ký 
         form = NguoidungForm(request.POST)
         ten = request.POST['ten']
         mk = request.POST['matkhau']
         nhaplaimk = request.POST['nhaplaimk']
         nguoiDungList = Nguoidung.objects.values_list('ten', flat = True)
-        
-        if form.is_valid() and mk == nhaplaimk and ten not in nguoiDungList:
+        if form.is_valid() and mk == nhaplaimk and ten not in nguoiDungList: # kiểm tra mật khẩu có đung ko?
             form.save()
-            return redirect('login')  # Chuyển hướng về login sau khi đăng ký thành công
-
+            return redirect('/login/')  # Chuyển hướng về login sau khi đăng ký thành công
     else:
         form = NguoidungForm()
-    return render(request, 'register.html', {'form': form})
+    context = {
+        'register_failed': True,
+        # thanh nav
+        'checklogin': checklogin(request),
+        'nguoidung': get_nguoidung(request),
+        'list_the_loais': Theloai.objects.all().order_by('theloai'),
+    }    
+    return render(request, 'register.html', context)
  
 def loginPage(request):
-    if request.method == 'POST':
+    if request.method == 'POST': # nhận form đăng nhập
         form = NguoidungForm(request.POST)
             # Lấy dữ liệu từ form
         ten = request.POST['ten']
@@ -38,12 +43,25 @@ def loginPage(request):
         # Lưu tên người dùng vào session để theo dõi trạng thái đăng nhập
         if (ten, matkhau) in nguoiDungList:
             request.session['nguoidung'] = ten
-            
             return redirect('home')  # Chuyển hướng về trang chủ sau khi đăng nhập thành công
+        else:
+            context = {
+                'login_failed': True,
+                # thanh nav
+                'checklogin': checklogin(request),
+                'nguoidung': get_nguoidung(request),
+                'list_the_loais': Theloai.objects.all().order_by('theloai'),
+            }
+            return render(request, 'login.html', context)
     else:
         form = NguoidungForm()
-
-    return render(request, 'login.html', {'form': form})
+    context = {
+                # thanh nav
+                'checklogin': checklogin(request),
+                'nguoidung': get_nguoidung(request),
+                'list_the_loais': Theloai.objects.all().order_by('theloai'),
+            }
+    return render(request, 'login.html', context)
 
 def dang_xuat(request):
     request.session.flush()  # Xóa tất cả session
