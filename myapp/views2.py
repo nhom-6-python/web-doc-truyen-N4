@@ -1,6 +1,6 @@
 #Phuc
 from django.shortcuts import render, redirect
-from .models import Truyen, Chap, Trang, Thongbao, Nguoidung, Theloai
+from .models import Truyen, Chap, Trang, Thongbao, Nguoidung, Theloai, Lichsu
 from .forms import TruyenForm
 from datetime import datetime, timedelta
 from django.utils.timezone import make_aware
@@ -13,7 +13,7 @@ import base64
 def post_thongbao(chap): # tạo thông báo
     thongbao = Thongbao()
     thongbao.theloai = "chương mới cập nhật!!"
-    thongbao.noidung = f'chương {chap.stt} của truyện {chap.truyen.ten} đã được cập nhật, xem ngay'
+    thongbao.noidung = f'chương {chap.stt} của truyện {chap.truyen.ten} đã được cập nhật, xem ngay !!!'
     thongbao.chap = chap
     thongbao.save()
     nguoidungs = Nguoidung.objects.all()
@@ -31,41 +31,47 @@ def xoa_thong_bao(request):
     if request.method == 'POST': # xóa thông báo
         if 'btn-delete-noti' in request.POST:
             print('xoa thong bao')
+            nguoidung = get_nguoidung(request)
             for x in list_thong_bao(request):
                 print(x.chap.ten)
-                x.delete()
+                nguoidung.thongbao.remove(x)
     return 0
 
 def dangtruyen(request): # chức năng đang truyện của nhóm dịch
     nguoidung = get_nguoidung(request)
-    if checklogin(request) :
-        if request.method == 'POST':
-            if 'btn-dangtruyen' in request.POST:
-                theloais = request.POST.getlist('theloais')
-                theloai = ""
-                for x in theloais:
-                    theloai += x + ","
-                truyen = Truyen(
-                    ten = request.POST['ten'],
-                    theloai= theloai,
-                    mota = request.POST['mota'],
-                    tacgia = request.POST['tacgia'],
-                    luotthich=0,
-                    anhbia = request.FILES['anhbia'],
-                    anhnen = request.FILES['anhnen'],
-                )
+    if nguoidung.vaitro == 'nhomdich':
+        if checklogin(request) :
+            if request.method == 'POST':
                 try:
-                    truyen.save()
+                    if 'btn-dangtruyen' in request.POST:
+                        theloais = request.POST.getlist('theloais')
+                        theloai = ""
+                        for x in theloais:
+                            theloai += x + ","
+                        truyen = Truyen(
+                            ten = request.POST['ten'],
+                            theloai= theloai,
+                            mota = request.POST['mota'],
+                            tacgia = request.POST['tacgia'],
+                            luotthich=0,
+                            anhbia = request.FILES['anhbia'],
+                            anhnen = request.FILES['anhnen'],
+                        )
+                        try:
+                            truyen.save()
+                        except:
+                            redirect('/dangtruyen/') 
+                        nguoidung.truyendang.add(truyen)
                 except:
                     redirect('/dangtruyen/') 
-                nguoidung.truyendang.add(truyen)
-
-        context = {
-            'checklogin': checklogin(request),
-            'nguoidung': get_nguoidung(request),
-            'list_the_loais': Theloai.objects.all().order_by('theloai'),
-        }
-        return render(request, 'dangtruyen.html', context)
+            context = {
+                #thanh nav
+                'nguoidung': get_nguoidung(request),
+                'checklogin': checklogin(request),
+                'list_the_loais': Theloai.objects.all().order_by('theloai'),
+                'list_thong_baos' : list_thong_bao(request),
+            }
+            return render(request, 'dangtruyen.html', context)
     else:
         return redirect('/login/')
         
@@ -115,8 +121,9 @@ def top_view(time):
 
 def suatruyen(request, id): #trang sửa thông tin truyện
     nhomdich = get_nguoidung(request)
-    # list_truyencuaban = list(nhomdich.truyendang.all().order_by('ten'))
     truyensua = Truyen.objects.get(id=id)
+    if truyensua not in nhomdich.truyendang.all():
+        return redirect('/login/')
     if request.method == 'POST':
         if 'btn-save-sua' in request.POST:
             try:
@@ -127,36 +134,53 @@ def suatruyen(request, id): #trang sửa thông tin truyện
                 truyensua.anhbia = request.FILES['anhbia']
             except:
                 pass
-            truyensua.tacgia = request.POST['tacgia']
-            truyensua.ten = request.POST['ten']
-            truyensua.theloai = ""
+            try:
+                truyensua.tacgia = request.POST['tacgia']
+            except:
+                pass
+            try:
+                truyensua.ten = request.POST['ten']
+            except:
+                pass
+            try:
+                truyensua.theloai = ""
+            except:
+                pass
             for x in request.POST.getlist('theloais'):
                 truyensua.theloai += x + ','
-            truyensua.mota = request.POST['mota']
+            try:
+                truyensua.mota = request.POST['mota']
+            except:
+                pass
+            try:
+                print('xoatruyen')
+                idchapxoas = request.POST.getlist('idchapxoas')
+                print(idchapxoas)
+                for x in idchapxoas:
+                    chap=Chap.objects.get(id=x)
+                    chap.delete()
+                    Lichsu.objects.filter(idchap=x).delete()
+            except:
+                pass
             truyensua.save()
             return redirect(f'/truyen_id={truyensua.id}/')
     if truyensua in nhomdich.truyendang.all(): #check xem bạn có phải nhóm dịch truyện này ko?
         sochuong = 0
-        allchuong = list(truyensua.chap.all().order_by('stt'))
         for x in truyensua.chap.all():
             sochuong+=1
-        truyen_cung_nhom_dich = nhomdich.truyendang.all()[:3]
-        truyen_de_xuat = top_view('tuan')[:3]
-        list_the_loai = truyensua.theloai.split(",")
-        list_thong_baos = list_thong_bao(request)
         context = {
             "truyen" : truyensua,
             'nhomdich' : nhomdich,
             'sochuong' : sochuong,
-            'allchuong' : allchuong,
-            'truyen_cung_nhom_dich': truyen_cung_nhom_dich,
-            'truyen_de_xuat' : truyen_de_xuat,
-            'list_the_loai' : list_the_loai,
-            'list_thong_baos' : list_thong_baos,
+            'allchuong' : list(truyensua.chap.all().order_by('stt')),
+            'truyen_cung_nhom_dich': nhomdich.truyendang.all()[:3],
+            'truyen_de_xuat' :top_view('tuan')[:3],
+            'list_the_loai' : truyensua.theloai.split(","),
             # thanh nav
             'checklogin': checklogin(request),
             'nguoidung': get_nguoidung(request),
             'list_the_loais': Theloai.objects.all().order_by('theloai'),
+            'list_thong_baos' : list_thong_bao(request),
         }
         return render(request, 'suatruyen.html', context)
     else:
@@ -165,13 +189,20 @@ def suatruyen(request, id): #trang sửa thông tin truyện
 def themchap(request, id): # thêm chap mới
     nguoidung = get_nguoidung(request)
     truyen = Truyen.objects.get(id=id)
+    try:
+        sttchap = truyen.chap.all().order_by('-stt').first().stt
+        sttchap = sttchap + 1
+    except:
+        sttchap = 1
     if truyen in nguoidung.truyendang.all():
         context = {
             'truyen': truyen,
+            'sttchap': sttchap,
             # thanh nav
             'nguoidung': get_nguoidung(request),
             'checklogin': checklogin(request),
             'list_the_loais': Theloai.objects.all().order_by('theloai'),
+            'list_thong_baos' : list_thong_bao(request),
         }
         return render(request, 'themchap.html', context)
     else:
@@ -195,10 +226,11 @@ def previewchap(request, id):
                     'alltrang' : alltrang,
                     'chap': chap,
                     'truyen': truyen,
-                                # thanh nav
+                    #thanh nav
                     'nguoidung': get_nguoidung(request),
                     'checklogin': checklogin(request),
                     'list_the_loais': Theloai.objects.all().order_by('theloai'),
+                    'list_thong_baos' : list_thong_bao(request),
                 }
                 return render(request, 'previewchap.html', context)
             if 'btn-savechap' in request.POST:

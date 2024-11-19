@@ -140,8 +140,11 @@ def get_lichsu(request):
             lichsu_theo_ngays.append(history)
         context = {
             'lichsu_theo_ngay' : lichsu_theo_ngays,
+            #thanh nav
             'nguoidung': get_nguoidung(request),
-            'list_the_loai': Theloai.objects.all().order_by('theloai'),
+            'checklogin': checklogin(request),
+            'list_the_loais': Theloai.objects.all().order_by('theloai'),
+            'list_thong_baos' : list_thong_bao(request),
         }
         return render(request, 'lichsu.html', context)
         
@@ -174,8 +177,10 @@ def get_truyen_cua_nhomdich(request, ten):
     context = {
         'truyen_da_dang' : truyen_da_dang,
         'nhomdich': nhomdich,
-        'nguoidung': get_nguoidung(request),
-        'checklogin': checklogin(request),
-        'list_the_loais': Theloai.objects.all().order_by('theloai'),
+		#thanh nav
+		'nguoidung': get_nguoidung(request),
+		'checklogin': checklogin(request),
+		'list_the_loais': Theloai.objects.all().order_by('theloai'),
+		'list_thong_baos' : list_thong_bao(request),
     }
     return render(request, 'truyencuanhomdich.html', context)

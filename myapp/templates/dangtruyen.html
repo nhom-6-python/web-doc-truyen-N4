@@ -4,13 +4,14 @@
 {% bootstrap_javascript %}
 {% block content %}
 {% load humanize %}
- 
+
 <main>
 	<div class="suatruyen" style="padding-bottom:100px;">
 		<div class="trencung">
 			<div class="container">
 				<div class="left">
-					<a class="chevron-left" href="#"><i class="fas fa-chevron-left"></i></a>
+					<a class="chevron-left" href="#" onclick="window.history.back(); return false;"><i
+							class="fas fa-chevron-left"></i></a>
 					<div class="tieude">
 						<p>Thêm Thông Tin Truyện</p>
 						<h5>Truyện Chưa Có Tiêu Đề</h5>
@@ -67,13 +68,14 @@
 							<h6>Tiêu đề</h6>
 							<input type="text" name="ten" placeholder="Truyện chưa có tiêu đề">
 							<h6>Mô tả</h6>
-							<textarea id="paragraph" name="mota" class="paragraph-input1" placeholder="Nhập mô tả" style='height:200px ;width:100%;' ></textarea>
+							<textarea id="paragraph" name="mota" class="paragraph-input1" placeholder="Nhập mô tả"
+								style='height:200px ;width:100%;'></textarea>
 							<h6>Tác giả</h6>
 							<input class="tacgia" type="text" name="tacgia" placeholder="Name">
 							<h6>Thể loại</h6>
 							<div class="category-dropdown">
 								<div class="category-dropdown-toggle" onclick="toggleDropdown()">Chọn thể loại</div>
-								<div class="category-dropdown-menu" >
+								<div class="category-dropdown-menu">
 									{% for x in list_the_loais %}
 									<label><input class="input" type="checkbox" name="theloais" value="{{x.theloai}}"
 											onclick="event.stopPropagation()"> {{x.theloai}} </label>
@@ -82,14 +84,15 @@
 							</div>
 						</div>
 						<div style="display: flex; justify-content: center;">
-							<button type="submit" class="submit btn-primary" value="Đăng truyện"
-								name="btn-dangtruyen" style="background-color:blue; padding:7px 10px;">Đăng truyện</button>
+							<button type="submit" class="submit btn-primary" value="Đăng truyện" name="btn-dangtruyen"
+								style="background-color:blue; padding:7px 10px;">Đăng truyện</button>
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
+	{% include "footer.html" %}
 </main>
 
 <script>

@@ -10,17 +10,20 @@
 				<div class="intro">
 					<div class="container">
 						<div class="anhnen" style="background-image: url('{{truyen.anhnen.url}}');">
+							<div class="doianhnen">
+								<label for="file-input" class="custom-button btn btn-primary"
+									style="width:fit-content;">Đổi ảnh nền <input type="file" id="file-input"
+										name="anhnen"></label>
 
-							<div class="doianhnen" >
-								<button style="padding:3px 3px;">Đổi ảnh nền</button>
-							    <input type="file" class="" name="anhnen" >
 							</div>
 							<div class="row">
 								<div class="col-12">
 									<img src="{{truyen.anhbia.url}}" alt="anh1">
 									<div class="doianhbia">
-										<button class="">đổi ảnh bìa</button>
-									    <input type="file" class="" name="anhbia">
+										<label for="file-input2" class="custom-button btn btn-primary"
+											style="width:fit-content;">Đổi ảnh bìa <input type="file" id="file-input2"
+												name="anhbia"></label>
+
 									</div>
 									<h2 style="margin-left:25px;">
 										<span style="font-size: medium; opacity:0.6;"><input type="text" name="tacgia"
@@ -47,7 +50,7 @@
 									<span> 22 phút trước</span>
 								</div>
 								<div class="cactheloai">
-									{% for x in list_the_loai %}
+									{% for x in list_the_loai|slice:":-1" %}
 									<a href="/theloai={{x}}/">
 										<div class="theloai">
 											<span style="font-weight: bold;">{{x}}</span>
@@ -55,10 +58,11 @@
 									</a>
 									{% endfor %}
 									<div class="category-dropdown">
-										<div class="category-dropdown-toggle" onclick="toggleDropdown()" style="width:300px;">chỉnh sửa thể
+										<div class="category-dropdown-toggle" onclick="toggleDropdown()"
+											style="width:300px;">chỉnh sửa thể
 											loại
 										</div>
-										<div class="category-dropdown-menu" style="width:300px;" >
+										<div class="category-dropdown-menu" style="width:300px;">
 											{% for i in list_the_loais %}
 											{% if i.theloai in truyen.theloai %}
 											<label><input class="input" type="checkbox" name="theloais"
@@ -74,36 +78,33 @@
 									</div>
 								</div>
 
-								<div class="btn" style="text-align: unset;">
+								<div class="btn" style="text-align: unset; justify-content: start;">
 
 									{% if chuong_gan_nhat != False %}
-									<a href="/truyen_id={{truyen.id}}/chuong={{chuongdau.id}}/"
-										class="btndoctruyen">Theo dõi</a>
-
-									<a href="/truyen_id={{truyen.id}}/chuong={{chuongdau.id}}/"
-										class="btndoctruyen">Đọc
+									{% if truyen not in list_yeu_thich %}
+									<a class="btndoctruyen">Theo dõi</a>
+									{% else %}
+									<a class="btndoctruyen">Theo dõi</a>
+									{% endif %}
+									<a class="btndoctruyen">Đọc
 										từ đầu</a>
-
-									<a href="/truyen_id={{truyen.id}}/chuong={{chuongmoinhat.id}}/"
-										class="btndoctruyen">Đọc chương mới
+									<a class="btndoctruyen">Đọc chương mới
 										nhất</a>
 									{% if checklogin %}
-									<a href="/truyen_id={{truyen.id}}/chuong={{chuong_gan_nhat.id}}/"
-										class="btndoctruyen">Đọc tiếp</a>
+									<a class="btndoctruyen">Đọc tiếp</a>
 									{% else %}
-									<a href="/login/" class="btndoctruyen">Đọc tiếp</a>
+									<a class="btndoctruyen">Đọc tiếp</a>
 									{% endif %}
 									{% else %}
 									<span>Hiện chưa có chap nào được đang tải, hãy bấm theo dõi để nhận
 										thông tin sớm nhất</span>
 									{% endif %}
-									<button type="submit" name="btn-save-sua" class="btndoctruyen" style="margin-left:0px;">Save</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
- 
+
 
 				<div class="content">
 					<div class="container">
@@ -113,8 +114,8 @@
 									<div class="row">
 										<div>
 											<a class="user" href="#">
-												<div class="circle-icon">
-													ND
+												<div class="circle-icon" style="text-transform: uppercase;">
+													{{nhomdich.ten|slice:":1"}}
 												</div>
 												<div>
 													<h6>{{nhomdich.ten}}</h6>
@@ -125,8 +126,9 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<p><textarea class="paragraph-input1" name="mota"
-													value="{{truyen.mota}}"  style="width:100%; height:200px; font-size:20px;">{{truyen.mota}}</textarea></p>
+											<p><textarea class="paragraph-input1" name="mota" value="{{truyen.mota}}"
+													style="width:100%; height:200px; font-size:20px;">{{truyen.mota}}</textarea>
+											</p>
 
 										</div>
 									</div>
@@ -146,20 +148,35 @@
 								<br>
 								<div class="allchuong ">
 									{% for x in allchuong %}
-									<a href="/truyen_id={{truyen.id}}/chuong={{x.id}}/">
+									<a href="/truyen_id={{truyen.id}}/chuong={{x.id}}/" style="width:100%">
 										<div class="chuong">
 											<div class="chuongtrai">
 												<div>
-													<h4 class="tenchuong">Chương {{x.stt}}</h4>
+													<h4 class="tenchuong" style="color:#2f2d2d;">Chương {{x.stt}}</h4>
 												</div>
-												<div style="padding-left:15px;">
+												<div style="padding-left:15px; color:#2f2d2d;">
 													<p class="noidungchuong">{{x.ten}}</p>
 													<p>{{x.thoigiandang|naturaltime}}</p>
 												</div>
 											</div>
+											<div class="chuongphai">
+												<button class="circular-btn" type="submit" name="btn-save-sua">
+													<input type="checkbox" value="{{x.id}}" name="idchapxoas">
+													<i class="fa-solid fa-trash" style="color: #ff0000;"></i>
+												</button>
+											</div>
 										</div>
 									</a>
 									{% endfor %}
+									<a href="/themchap_truyen_id={{truyen.id}}/">
+										<div class="chuong">
+											<div class="chuongtrai">
+												<div>
+													<h4 class="tenchuong">thêm chương</h4>
+												</div>
+											</div>
+										</div>
+									</a>
 								</div>
 							</div>
 							<div class="col-lg-3 col-md-12 col-sm-12 col-12">
@@ -209,30 +226,14 @@
 						</div>
 					</div>
 				</div>
+				<div class="chapter-control">
+					<button class="btn btn-success" class="" type="submit" name="btn-save-sua">lưu chỉnh sửa</button>
+				</div>
 			</form>
 		</div>
-
 	</main>
 	<!-- FOOTER -->
-	<footer class="footer">
-		<!-- <p class="float-end"><a href="#">Back to top</a></p> -->
-		<div class="container">
-			<div class="inner-text">
-				<div class="inner-contact">Link Github của nhóm 6:
-					<a href="github.com" target="_blank">github.com</a>
-				</div>
-				<div class="inner-contact">
-					Thành viên nhóm:
-				</div>
-				<div class="inner-member">B22DCCN261 - Hoàng Sơn Hải</div>
-				<div class="inner-member">B22DCKH131 - Hoàng Khánh Văn</div>
-				<div class="inner-member">B22DCKH129 - Nguyễn Hữu Trường</div>
-				<div class="inner-member">B22DCCN633 - Thái Hữu Phúc</div>
-				<div class="inner-member">B22DCCN371 - Trịnh Mạnh Hùng</div>
-			</div>
-		</div>
-
-	</footer>
+	{% include "footer.html" %}
 	<!-- END FOOTER -->
 
 

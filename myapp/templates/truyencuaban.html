@@ -4,20 +4,34 @@
 {% bootstrap_javascript %}
 {% block content %}
 {% load humanize %}
-<style> .hover-shadow { width: 200px; height: 100px; background-color: lightblue; transition: box-shadow 0.3s ease; } .hover-shadow:hover { box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Tạo bóng tối khi hover */ } </style>
+<style>
+	.hover-shadow {
+		width: 200px;
+		height: 100px;
+		background-color: lightblue;
+		transition: box-shadow 0.3s ease;
+	}
+
+	.hover-shadow:hover {
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+		/* Tạo bóng tối khi hover */
+	}
+</style>
 <main>
 	<div class="truyentheodoi" style="margin-top:30px;">
 		<div class="container">
-			<h3>Truyện của bạn</h3>
+			<h3>Truyện của bạn ({{list_truyencuaban|length}} đã đăng)</h3>
 			<div class="truyen">
 				<div class="row">
 					{% for x in list_truyencuaban %}
 					<div class="col-lg-2 col-md-4 col-sm-6 col-12" style="padding-bottom: 50px; ">
 						<div class="image-container">
 							<a href="/truyen_id={{x.id}}/">
-								<img class="hover-shadow" src="{{x.anhbia.url}}" alt="{{x.ten}}" loading="lazy" style="width:100%; height:250px; border-radius:0px;">
+								<img class="hover-shadow" src="{{x.anhbia.url}}" alt="{{x.ten}}" loading="lazy"
+									style="width:100%; height:250px; border-radius:0px;">
 							</a>
-							<div style="background-color:rgb(0 0 0 / 11%); padding: 10px 10px; padding-top:20px; margin-top:-20px; height:200px;">
+							<div
+								style="background-color:rgb(0 0 0 / 11%); padding: 10px 10px; padding-top:20px; margin-top:-20px; height:200px;">
 								<div class="inner-name">
 									<a href="/truyen_id={{x.id}}/">
 										<div class="description">Tên: {{x.ten}} </div>
@@ -50,7 +64,8 @@
 								<form method="post">
 									{% csrf_token %}
 									<input type="number" name="id_theodoi_xoa" value="{{x.id}}" hidden>
-									<button type="submit" name="btn-delete" class="btndelete" style="position: absolute;top:10px; right:5px;"><i
+									<button type="submit" name="btn-delete" class="btndelete"
+										style="position: absolute;top:10px; right:5px;"><i
 											class="fa-solid fa-trash"></i></button>
 								</form>
 							</div>
@@ -68,25 +83,7 @@
 </main>
 
 <!-- FOOTER -->
-<footer class="footer">
-	<!-- <p class="float-end"><a href="#">Back to top</a></p> -->
-	<div class="container">
-		<div class="inner-text">
-			<div class="inner-contact">Link Github của nhóm 6:
-				<a href="github.com" target="_blank">github.com</a>
-			</div>
-			<div class="inner-contact">
-				Thành viên nhóm:
-			</div>
-			<div class="inner-member">B22DCCN261 - Hoàng Sơn Hải</div>
-			<div class="inner-member">B22DCKH131 - Hoàng Khánh Văn</div>
-			<div class="inner-member">B22DCKH129 - Nguyễn Hữu Trường</div>
-			<div class="inner-member">B22DCCN633 - Thái Hữu Phúc</div>
-			<div class="inner-member">B22DCCN371 - Trịnh Mạnh Hùng</div>
-		</div>
-	</div>
-
-</footer>
+{% include 'footer.html' %}
 <!-- END FOOTER -->
 
 

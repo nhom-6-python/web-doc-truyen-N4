@@ -135,7 +135,7 @@
 }
 
 .intro .info .desc button {
-  background-color: blue;
+  background-color: #0d6efd;
 
   border: none;
   color: white;
@@ -153,7 +153,7 @@
 }
 
 .intro .info .desc button:hover {
-  background-color: rgb(21, 21, 175);
+  background-color: #4991fd;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -267,7 +267,7 @@
 
 .allchuong .chuong .chuongtrai {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   /* Căn giữa theo chiều ngang */
   align-items: center;
   /* Căn giữa theo chiều dọc */
@@ -341,7 +341,7 @@
 }
 
 .doctruyen .btn {
-  margin-left: -30px;
+  margin-left: -10px;
 }
 
 .doctruyen .btn button {
@@ -354,7 +354,7 @@
   width: 180px;
   height: 41px;
   color: white;
-  background-color: blue;
+  background-color: #0d6efd;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -363,7 +363,7 @@
 
 .doctruyen .btn .btndoctruyen:hover {
 
-  background-color: rgb(78, 26, 168);
+  background-color: #4991fd;
 
 }
 

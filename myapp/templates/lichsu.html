@@ -8,10 +8,10 @@
 <main>
 	<section id="truyentheodoi">
 		<div class="container">
-			<h1 class="font-bold" style="margin-top:-80px;">
+			<h1 class="font-bold">
 				Lịch sử đọc truyện
 			</h1>
-			<form class="date-form" method="post" >
+			<form class=" date-form" method="post">
 				{% csrf_token %}
 				<label for="start-date"> Duyệt theo ngày theo ngày:</label><br>
 				<span>từ: </span><input type="date" id="start-date" name="start-date" class="date-picker" required>
@@ -29,7 +29,8 @@
 					<div class="col-lg-2 col-md-3 col-sm-4 col-6">
 						<div class="image-container">
 							<a href="/truyen_id={{x.idtruyen}}/chuong={{x.idchap}}/">
-								<img class="hover-shadow" style="width:170px; height:250px;" src="{{x.anhbia.url}}" alt="x.tentruyen" loading="lazy" width="320" height="480">
+								<img class="hover-shadow" style="width:170px; height:250px;" src="{{x.anhbia.url}}"
+									alt="x.tentruyen" loading="lazy" width="320" height="480">
 							</a>
 							<div class="inner-name">
 								<a href="/truyen_id={{x.idtruyen}}/chuong={{x.idchap}}/">
@@ -63,25 +64,7 @@
 </main>
 
 <!-- FOOTER -->
-<footer class="footer">
-	<!-- <p class="float-end"><a href="#">Back to top</a></p> -->
-	<div class="container">
-		<div class="inner-text">
-			<div class="inner-contact">Link Github của nhóm 6:
-				<a href="github.com" target="_blank">github.com</a>
-			</div>
-			<div class="inner-contact">
-				Thành viên nhóm:
-			</div>
-			<div class="inner-member">B22DCCN261 - Hoàng Sơn Hải</div>
-			<div class="inner-member">B22DCKH131 - Hoàng Khánh Văn</div>
-			<div class="inner-member">B22DCKH129 - Nguyễn Hữu Trường</div>
-			<div class="inner-member">B22DCCN633 - Thái Hữu Phúc</div>
-			<div class="inner-member">B22DCCN371 - Trịnh Mạnh Hùng</div>
-		</div>
-	</div>
-
-</footer>
+{% include "footer.html" %}
 <!-- END FOOTER -->
 
 

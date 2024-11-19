@@ -40,7 +40,11 @@
 				</form>
 				<div class="notification_wrap">
 					<div class="notification_icon">
+						{% if not list_thong_baos %}
 						<i class="fa-regular fa-bell"></i>
+						{% else %}
+						<i class="fa-solid fa-bell" style="color: #ff0000;"></i>
+						{% endif %}
 					</div>
 					<div class="dropdown">
 						{% if checklogin == False %}
@@ -83,9 +87,9 @@
 					</div>
 					<div class="dropdown-user">
 						<div class="dropdown-item">
-							<a href="#" style="text-transform: uppercase;">Chào mừng quay trở lại: </a>
+							<a style="text-transform: uppercase;">Chào mừng quay trở lại: </a>
 							<br>
-							<a href="#"><strong>{{nguoidung.ten}}</strong></a>
+							<a><strong>{{nguoidung.ten}}</strong></a>
 						</div>
 						{% if nguoidung.vaitro == "nhomdich" %}
 						<div class="dropdown-item">

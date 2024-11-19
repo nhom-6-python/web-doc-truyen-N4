@@ -13,12 +13,12 @@
 					<a class="chevron-left" href="#"><i class="fas fa-chevron-left"></i></a>
 					<div class="tieude">
 						<p>Thêm một chương mới cho truyên:</p>
-						<h5>{{truyen.ten}}</h5>
+						<h5><a href="/truyen_id={{truyen.id}}">{{truyen.ten}}</a></h5>
 					</div>
 				</div>
 
 				<div class="right">
-					<a href="#" class="buttonhuy">Hủy</a>
+					<a href="#" class="buttonhuy" onclick="location.reload()">Hủy</a>
 				</div>
 			</div>
 		</div>
@@ -33,21 +33,26 @@
 						</div>
 						<div class="content">
 							<h6>Số thứ tự chương</h6>
-							<input type="number" step="any" name="stt" placeholder="Truyện chưa có tiêu đề">
+							<input type="number" step="any" name="stt" placeholder="Truyện chưa có tiêu đề"
+								value="{{sttchap}}" required>
 							<h6>Tên chương</h6>
-							<input id="paragraph" name="ten" class="paragraph-input" placeholder="Nhập tên chương" type="text" style="height:35px;"></input>
-							<h6>Tải lên chương (chọn file hoặc thư mục):</h6>
+							<input id="paragraph" name="ten" class="paragraph-input" placeholder="Nhập tên chương"
+								type="text" style="height:35px;" required></input>
+							<h6>Tải lên chương (chọn thư mục chứa chương của bạn):</h6>
 							<input type="file" name="alltrang" webkitdirectory multiple />
 						</div>
 						<div style="display: flex; justify-content: center;">
-							<button type="submit" class="submit btn-primary" name="btn-dangtruyen" style="background-color:blue;">Xem trước</button>
-							<button type="submit" class="submit btn-primary" name="btn-savechap" style="background-color:blue;">Save</button>
+							<button type="submit" class="submit btn-primary" name="btn-dangtruyen"
+								style="background-color:blue;">Xem trước</button>
+							<button type="submit" class="submit btn-primary" name="btn-savechap"
+								style="background-color:blue;">Save</button>
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
+	{% include 'footer.html' %}
 </main>
 
 <script>

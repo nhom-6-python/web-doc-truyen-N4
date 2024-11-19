@@ -140,10 +140,6 @@ def doctruyen(request, id): #view phan mota truyen
 	allchuong = list(truyen.chap.all().order_by('stt'))
 	for x in truyen.chap.all():
 		sochuong+=1
-	truyen_cung_nhom_dich = nhomdich.truyendang.all()[:3]
-	truyen_de_xuat = top_view('tuan')[:3]
-	list_the_loai = truyen.theloai.split(",")
-	list_thong_baos = list_thong_bao(request)
 	# xử lý form khi người dùng thêm truyện vào yêu thích
 	if request.method == 'POST':
 		if 'btn-yeuthich' in request.POST:
@@ -155,26 +151,37 @@ def doctruyen(request, id): #view phan mota truyen
 				truyen.save()
 			else:
 				return redirect('login')
-	chuong_gan_nhat = doc_tiep(request, id) #đọc chương gần nhất (trong lịch sử)
+		elif 'btn-huy-yeuthich' in request.POST:
+			nguoidung = get_nguoidung(request)
+			if truyen in nguoidung.yeuthich.all():
+				nguoidung.yeuthich.remove(truyen)
+			truyen.luotthich = truyen.yeuthich.count()
+			truyen.save()
 	if not allchuong:
 		chuongdau = chuongmoinhat = False
 	else:
 		chuongdau = allchuong[0]
 		chuongmoinhat = allchuong[-1]
+	if checklogin(request):
+		list_yeu_thich = get_nguoidung(request).yeuthich.all()
+	else:
+		list_yeu_thich = list()
 	context = {
 		"truyen" : truyen,
 		'nhomdich' : nhomdich,
 		'sochuong' : sochuong,
-		'allchuong' : allchuong,
-		'truyen_cung_nhom_dich': truyen_cung_nhom_dich,
-		'truyen_de_xuat' : truyen_de_xuat,
-		'list_the_loai' : list_the_loai,
-		'list_thong_baos' : list_thong_baos,
-		'checklogin': checklogin(request),
-		'nguoidung': get_nguoidung(request),
+		'allchuong' : list(truyen.chap.all().order_by('stt')),
+		'truyen_cung_nhom_dich': nhomdich.truyendang.all()[:3],
+		'truyen_de_xuat' : top_view('tuan')[:3],
+		'list_the_loai' : truyen.theloai.split(","),
 		'chuongdau': chuongdau,
 		'chuongmoinhat': chuongmoinhat,
-		'chuong_gan_nhat': chuong_gan_nhat,
+		'chuong_gan_nhat': doc_tiep(request, id),#đọc chương gần nhất (trong lịch sử)
+		'list_yeu_thich': list_yeu_thich,
+		# thanh nav
+		'nguoidung': get_nguoidung(request),
+		'checklogin': checklogin(request),
+		'list_thong_baos' : list_thong_bao(request),
 		'list_the_loais': Theloai.objects.all().order_by('theloai'),
 	}
 	return render(request, 'doctruyen.html', context)
@@ -198,16 +205,19 @@ def view_docchuong(request, id_truyen, id_chap): #đọc theo chương
 	alltrang = chap.trang.all().order_by('id')
 	# thêm vào lịch sử
 	add_chap_to_lichsu(request, id_truyen, id_chap)
-
 	context = {
 		'truyen': truyen,
 		'chap': chap,
 		'alltrang': alltrang,
 		'chaptruoc': chaptruoc,
 		'chapsau': chapsau,
+		'allchuong': list(truyen.chap.all().order_by('stt')),
+		'nhomdich': Nguoidung.objects.get(truyendang=truyen),
+		#thanh nav
 		'nguoidung': get_nguoidung(request),
 		'checklogin': checklogin(request),
 		'list_the_loais': Theloai.objects.all().order_by('theloai'),
+		'list_thong_baos' : list_thong_bao(request),
 	}
 	return render(request, 'docchuong.html', context)
 	
@@ -225,9 +235,11 @@ def timkiem(request):
 	context = {
 		'timkiems': timkiems,
 		'search_value': request.POST['search_value'],
-		'checklogin': checklogin(request),
+		#thanh nav
 		'nguoidung': get_nguoidung(request),
+		'checklogin': checklogin(request),
 		'list_the_loais': Theloai.objects.all().order_by('theloai'),
+		'list_thong_baos' : list_thong_bao(request),
 	}
 	return render(request, 'timkiem.html', context)
 
@@ -235,5 +247,10 @@ def truyenmoicapnhat(request): # trang truyen moi cap nhat
 	list_new_update = new_update()
 	context = {
 		'list_new_update': list_new_update,
+				#thanh nav
+		'nguoidung': get_nguoidung(request),
+		'checklogin': checklogin(request),
+		'list_the_loais': Theloai.objects.all().order_by('theloai'),
+		'list_thong_baos' : list_thong_bao(request),
 	}
 	return render(request, 'truyenmoicapnhat.html', context)

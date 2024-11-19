@@ -457,18 +457,18 @@
   /* Initially hidden */
 }
 
-.anhnen .doianhnen{
+.anhnen .doianhnen {
   position: relative;
   bottom: -450px;
   right: -730px;
   width: 430px;
   z-index: 1;
- 
+
 }
-.anhnen .doianhbia{
+
+.anhnen .doianhbia {
   position: relative;
   bottom: -670px;
-  left:300px;
   width: 600px;
   z-index: 1;
 }
