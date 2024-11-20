@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect
 from .forms import NguoidungForm
 from .models import Nguoidung, Truyen, Chap, Lichsu, Theloai
-from .views2 import list_thong_bao
+from .views2 import list_thong_bao, xoa_thong_bao
 from .views import get_nguoidung, checklogin
 from django.utils import timezone
 
@@ -13,6 +13,7 @@ def index(request):
 	return render(request, 'index.html')
 
 def registerPage(request):
+    xoa_thong_bao(request)
     if request.method == 'POST': # nhận vào form đăng ký 
         form = NguoidungForm(request.POST)
         ten = request.POST['ten']
@@ -38,6 +39,7 @@ def registerPage(request):
     return render(request, 'register.html', context)
  
 def loginPage(request):
+    xoa_thong_bao(request)
     if request.method == 'POST': # nhận form đăng nhập
         form = NguoidungForm(request.POST)
             # Lấy dữ liệu từ form
@@ -72,6 +74,7 @@ def dang_xuat(request):
     return redirect('home')
 
 def get_truyen_yeuthich(request):
+    xoa_thong_bao(request)
     # Lấy tên người dùng từ session
     ten_nguoidung = request.session.get('nguoidung', None)  # Kiểm tra session có chứa 'nguoidung'
     if ten_nguoidung:
@@ -106,6 +109,7 @@ def get_truyen_yeuthich(request):
         return redirect('login')
 
 def get_lichsu(request):
+    xoa_thong_bao(request)
     #kiểm tra xem đã đăng nhập chưa
     if checklogin(request) == False:
         return redirect('login')
@@ -172,6 +176,7 @@ def add_chap_to_lichsu(request, id_truyen, id_chap):
         lichsu.save()                   
 
 def get_truyen_cua_nhomdich(request, ten):
+    xoa_thong_bao(request)
     nhomdich = Nguoidung.objects.get(ten = ten)
     truyen_da_dang = nhomdich.truyendang.all()
     context = {

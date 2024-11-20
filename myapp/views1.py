@@ -30,13 +30,14 @@ def new_update(): # top truyện mới tải lên chap mới
 # lọc ra truyện nhiều view nhất trong tuần/tháng/all
 def top_view(time): 
 	if time == 'tuan': # lọc theo tuần
-		today = datetime.today()
+		today = datetime.today() 
 		start_of_week = today - timedelta(days=today.weekday())
 		end_of_week = start_of_week + timedelta(days=6)
 		top_view = (
 			Truyen.objects
-			.annotate(total_views=Coalesce(Sum('chap__luotxem', filter=Q(chap__thoigiandang__gte=start_of_week) & Q(chap__thoigiandang__lte=end_of_week)),Value(0)))
-			.order_by('-total_views')[:10]  # Lấy 9 truyện có lượt xem cao nhất trong tuần
+			.annotate(total_views=Coalesce(Sum('chap__luotxem', filter=Q(chap__thoigiandang__gte=start_of_week) 
+			& Q(chap__thoigiandang__lte=end_of_week)),Value(0)))
+			.order_by('-total_views')[:9]  # Lấy 9 truyện có lượt xem cao nhất trong tuần
 		)
 		return top_view
 	elif time == 'thang': # lọc theo tháng
@@ -44,14 +45,14 @@ def top_view(time):
 		top_view = (
 			Truyen.objects
 			.annotate(total_views=Coalesce(Sum('chap__luotxem', filter=Q(chap__thoigiandang__month=this_month)),Value(0)))
-			.order_by('-total_views')[:10] # Lấy 9 truyện có lượt xem cao nhất trong tháng
+			.order_by('-total_views')[:9] # Lấy 9 truyện có lượt xem cao nhất trong tháng
 		)
 		return top_view
 	elif time == 'moiluc': # lọc theo mọi lúc
 		top_view = (
 			Truyen.objects
 			.annotate(total_views=Coalesce(Sum('chap__luotxem'),Value(0)))
-			.order_by('-total_views')[:10]  # Lấy 9 truyện có lượt xem cao nhất trong mọi lúc
+			.order_by('-total_views')[:9]  # Lấy 9 truyện có lượt xem cao nhất trong mọi lúc
 		)
 		return top_view
 
@@ -63,7 +64,8 @@ def top_nhomdich(time):
 		end_of_week = start_of_week + timedelta(days=6)
 		top_nhomdich = (
 			Nguoidung.objects.filter(vaitro='nhomdich')
-			.annotate(total_views=Coalesce(Sum('truyendang__chap__luotxem', filter=Q(truyendang__chap__thoigiandang__gte=start_of_week) & Q(truyendang__chap__thoigiandang__lte=end_of_week)),Value(0)))
+			.annotate(total_views=Coalesce(Sum('truyendang__chap__luotxem', filter=Q(truyendang__chap__thoigiandang__gte=start_of_week) 
+			& Q(truyendang__chap__thoigiandang__lte=end_of_week)),Value(0)))
 			.order_by('-total_views')[:5]  # Lấy 5 người dùng có lượt xem cao nhất
 		)
 		return top_nhomdich
@@ -84,10 +86,11 @@ def top_nhomdich(time):
 		return top_nhomdich
 	
 def theloai(request, theloai): # view tìm truyện theo thể loại
+	xoa_thong_bao(request)
 	truyens = Truyen.objects.all()
 	truyens_theo_the_loai = list()
 	for x in truyens:
-		if theloai in x.theloai: 
+		if theloai in x.theloai: # kiểm tra xem thể loại từ request có nằm trong truyện
 			truyens_theo_the_loai.append(x)
 	list_thong_baos = list_thong_bao(request)
 	context={
@@ -133,6 +136,7 @@ def doc_tiep(request, id_truyen): # lấy ra chap đọc gần đây nhất củ
 		return allchuong[0]
 
 def doctruyen(request, id): #view phan mota truyen
+	xoa_thong_bao(request)
 	# xử lý view phần doctruyen
 	truyen = Truyen.objects.get(id=id)
 	nhomdich = Nguoidung.objects.get(truyendang=truyen)
@@ -187,6 +191,7 @@ def doctruyen(request, id): #view phan mota truyen
 	return render(request, 'doctruyen.html', context)
 
 def view_docchuong(request, id_truyen, id_chap): #đọc theo chương
+	xoa_thong_bao(request)
 	# hien thi
 	truyen = Truyen.objects.get(id=id_truyen)
 	chap = Chap.objects.get(id=id_chap)
@@ -221,10 +226,9 @@ def view_docchuong(request, id_truyen, id_chap): #đọc theo chương
 	}
 	return render(request, 'docchuong.html', context)
 	
-def test(request):
-	return render(request, 'lichsu.html')
 
 def timkiem(request):
+	xoa_thong_bao(request)
 	timkiems = list()
 	if request.method == 'POST':
 		if 'btn-search' in request.POST:
@@ -244,6 +248,7 @@ def timkiem(request):
 	return render(request, 'timkiem.html', context)
 
 def truyenmoicapnhat(request): # trang truyen moi cap nhat
+	xoa_thong_bao(request)
 	list_new_update = new_update()
 	context = {
 		'list_new_update': list_new_update,

@@ -77,6 +77,7 @@ def dangtruyen(request): # chức năng đang truyện của nhóm dịch
         return redirect('/login/')
         
 def truyencuaban(request): # trang quản lý truyện đã đăng
+    xoa_thong_bao(request)
     nhomdich = get_nguoidung(request)
     list_truyencuaban = list(nhomdich.truyendang.all().order_by('ten'))
     if request.method == 'POST':
@@ -101,22 +102,7 @@ def top_view(time):
 		top_view = (
 			Truyen.objects
 			.annotate(total_views=Coalesce(Sum('chap__luotxem', filter=Q(chap__thoigiandang__gte=start_of_week) & Q(chap__thoigiandang__lte=end_of_week)),Value(0)))
-			.order_by('-total_views')[:10]  # Lấy 9 truyện có lượt xem cao nhất trong tuần
-		)
-		return top_view
-	elif time == 'thang': # lọc theo tháng
-		this_month = datetime.today().month
-		top_view = (
-			Truyen.objects
-			.annotate(total_views=Coalesce(Sum('chap__luotxem', filter=Q(chap__thoigiandang__month=this_month)),Value(0)))
-			.order_by('-total_views')[:10] # Lấy 9 truyện có lượt xem cao nhất trong tháng
-		)
-		return top_view
-	elif time == 'moiluc':
-		top_view = (
-			Truyen.objects
-			.annotate(total_views=Coalesce(Sum('chap__luotxem'),Value(0)))
-			.order_by('-total_views')[:10]
+			.order_by('-total_views')[:9]  # Lấy 9 truyện có lượt xem cao nhất trong tuần
 		)
 		return top_view
 
@@ -166,6 +152,7 @@ def suatruyen(request, id): #trang sửa thông tin truyện
             truyensua.save()
             return redirect(f'/truyen_id={truyensua.id}/')
     if truyensua in nhomdich.truyendang.all(): #check xem bạn có phải nhóm dịch truyện này ko?
+        xoa_thong_bao(request)
         sochuong = 0
         for x in truyensua.chap.all():
             sochuong+=1
@@ -188,6 +175,7 @@ def suatruyen(request, id): #trang sửa thông tin truyện
         return redirect('/login/')
 
 def themchap(request, id): # thêm chap mới
+    xoa_thong_bao(request)
     nguoidung = get_nguoidung(request)
     truyen = Truyen.objects.get(id=id)
     try:
@@ -210,6 +198,7 @@ def themchap(request, id): # thêm chap mới
         return redirect('/login/')
 
 def previewchap(request, id):
+    xoa_thong_bao(request)
     if request.method == 'POST':
             if 'btn-dangtruyen' in request.POST:
                 truyen = Truyen.objects.get(id=id)
