@@ -64,6 +64,7 @@ def dangtruyen(request): # chức năng đang truyện của nhóm dịch
                         nguoidung.truyendang.add(truyen)
                 except:
                     redirect('/dangtruyen/') 
+                return redirect(f'/truyen_id={truyen.id}/')
             context = {
                 #thanh nav
                 'nguoidung': get_nguoidung(request),
